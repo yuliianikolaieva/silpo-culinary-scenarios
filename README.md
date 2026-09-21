@@ -7,7 +7,8 @@ Internal decision page for Silpo ready-meals / culinary launch: own couriers, Bo
 
 ## Recommendation
 
-- Own couriers: **8%** (floor 7%)
+- Own couriers without DF: **8%** (floor 7%)
+- Own couriers with 7-month DF campaign (MOV ₴600, discount ₴50): **10%** (economic floor ≈9.1%)
 - Bolt couriers: **12%** (floor 11%; 10% is not steady state)
 - Bolt Plus: **14%** + Plus-only DF with a budget cap
 - One rate for culinary + DK/resto: **13.5–14%** if Silpo delivers, **16%** if Bolt delivers

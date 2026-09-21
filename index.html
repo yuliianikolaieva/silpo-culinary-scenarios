@@ -186,8 +186,8 @@
         <button class="tab" role="tab" aria-selected="true" data-tab="rec">Рекомендація</button>
         <button class="tab" role="tab" aria-selected="false" data-tab="own">1. Курʼєри Сільпо</button>
         <button class="tab" role="tab" aria-selected="false" data-tab="bolt">2. Курʼєри Bolt</button>
-        <button class="tab" role="tab" aria-selected="false" data-tab="mkt">Маркетинг і Plus</button>
         <button class="tab" role="tab" aria-selected="false" data-tab="blend">3. Спільна ставка</button>
+        <button class="tab" role="tab" aria-selected="false" data-tab="mkt">Маркетинг і Plus</button>
       </div>
     </nav>
 
@@ -195,12 +195,12 @@
       <div class="recommendation">
         <div>
           <div class="kicker">Позиція для переговорів</div>
-          <div class="headline">8% на курʼєрах Сільпо або 12% на курʼєрах Bolt. Bolt Plus — лише за 14%.</div>
-          <p>Не опускатися нижче <b>7% / 11%</b>, навіть якщо списувати лише cash launch €10k. Якщо оцінювати весь media package, floors стають 7.55% / 11.71% — тобто практично 8% / 12%.</p>
+          <div class="headline">8% на курʼєрах Сільпо без DF; 10% із 7-міс. DF campaign. На курʼєрах Bolt — 12%, Bolt Plus — 14%.</div>
+          <p>Для базового пакета не опускатися нижче <b>7% / 11%</b>. Якщо own-courier offer включає безкоштовну доставку від ₴600 зі знижкою ₴50 протягом 7 місяців, бюджет ≈€33.0k і економічний floor зростає до <b>9.1%</b>.</p>
         </div>
         <div class="talk-track">
           <strong>Одним реченням</strong>
-          <p>6% і 10% не є нормальними steady-state ставками: 6% майже в нулі, 10% уже збиткові до маркетингу.</p>
+          <p>8% працюють лише без DF subsidy. Для own-courier + DF потрібні 10%; для Bolt courier базова ставка залишається 12%.</p>
         </div>
       </div>
 
@@ -211,8 +211,8 @@
       <div class="grid four">
         <article class="card"><div class="label">Own courier breakeven</div><div class="value">5.97%</div><div class="sub">до маркетингу</div></article>
         <article class="card"><div class="label">Bolt courier breakeven</div><div class="value">10.14%</div><div class="sub">до маркетингу, з CPO €2.20</div></article>
-        <article class="card"><div class="label">Cash launch</div><div class="value">€10.0k</div><div class="sub">єдина зовнішня витрата Bolt</div></article>
-        <article class="card"><div class="label">Launch + media value</div><div class="value compact">€22.4k</div><div class="sub">якщо оцінювати in-kind inventory</div></article>
+        <article class="card"><div class="label">Own-courier DF campaign</div><div class="value">€33.0k</div><div class="sub">7/12 міс. · MOV ₴600 · discount ₴50</div></article>
+        <article class="card"><div class="label">Demand incentives level</div><div class="value compact">2.31%</div><div class="sub">DF budget / товарний GMV</div></article>
       </div>
 
       <div class="section-head">
@@ -228,7 +228,8 @@
             </tr>
           </thead>
           <tbody>
-            <tr class="ok"><td>Курʼєри Сільпо</td><td class="profit">8%</td><td>Не нижче 7%. 6% лише короткий ramp з auto step-up</td></tr>
+            <tr class="ok"><td>Курʼєри Сільпо · без DF</td><td class="profit">8%</td><td>Не нижче 7%. 6% лише короткий ramp</td></tr>
+            <tr class="ok"><td>Курʼєри Сільпо · з DF 7 міс.</td><td class="profit">10%</td><td>9% майже в нулі після Public launch + DF</td></tr>
             <tr class="ok"><td>Курʼєри Bolt</td><td class="profit">12%</td><td>Не нижче 11%. 10% не steady state</td></tr>
             <tr><td>Bolt Plus</td><td>14% + Plus-only DF</td><td>6 міс., budget cap, не free DF для всіх</td></tr>
             <tr class="warn"><td>Одна ставка · own courier</td><td>13.5–14% effective</td><td>Revenue-neutral 13.2%</td></tr>
@@ -241,18 +242,23 @@
     <section class="panel" id="own">
       <div class="section-head">
         <div><div class="kicker">Сценарій 1</div><h2>Курʼєри Сільпо</h2></div>
-        <p>CPO = €0. Кожен 1 в.п. комісії ≈ €14.3k річної Pre-HQ EBITDA за незмінного GMV.</p>
+        <p>CPO = €0. У кожному rate-сценарії: 95,076 orders і €1.426m товарного GMV. Кожен 1 в.п. ≈ €14.3k річної Pre-HQ EBITDA.</p>
       </div>
-      <div class="grid two">
+      <div class="grid three">
         <article class="card recommended">
-          <div class="label">Нормальний сценарій</div>
+          <div class="label">Без DF campaign</div>
           <div class="value green">8%</div>
-          <div class="sub">€28.9k core · €18.9k після cash launch · €6.5k після full media</div>
+          <div class="sub">CP L1 €43.6k · EBITDA €28.9k · €18.9k з Public launch cost</div>
         </article>
         <article class="card warning">
-          <div class="label">Нижня межа</div>
-          <div class="value">7%</div>
-          <div class="sub">€14.6k core · €4.6k після cash. Після media package вже −€7.8k</div>
+          <div class="label">З DF campaign · minimum</div>
+          <div class="value">9%</div>
+          <div class="sub">€43.2k core · лише €0.2k після Public launch + DF</div>
+        </article>
+        <article class="card recommended">
+          <div class="label">З DF campaign · safe offer</div>
+          <div class="value green">10%</div>
+          <div class="sub">CP L1 €72.2k · €14.5k після Public launch + DF</div>
         </article>
       </div>
       <div class="table-wrap" style="margin-top:16px">
@@ -260,36 +266,42 @@
           <thead>
             <tr>
               <th>Комісія</th>
+              <th class="num">Orders</th>
+              <th class="num">GMV</th>
+              <th class="num">CP L1</th>
               <th class="num">Core EBITDA</th>
-              <th class="num">Після €10k cash</th>
-              <th class="num">Після €22.4k package</th>
+              <th class="num">З Public launch cost</th>
+              <th class="num">З Public launch + other marketing tools</th>
+              <th class="num">DF campaign cost</th>
+              <th class="num">Після Public launch + DF</th>
               <th>Рішення</th>
             </tr>
           </thead>
           <tbody>
-            <tr class="bad"><td>6%</td><td class="num">€0.4k</td><td class="num neg">−€9.6k</td><td class="num neg">−€22.0k</td><td>Нижче floor</td></tr>
-            <tr class="warn"><td>7%</td><td class="num">€14.6k</td><td class="num">€4.6k</td><td class="num neg">−€7.8k</td><td>Абсолютний minimum</td></tr>
-            <tr class="ok"><td>8%</td><td class="num profit">€28.9k</td><td class="num profit">€18.9k</td><td class="num profit">€6.5k</td><td>Рекомендований anchor</td></tr>
-            <tr><td>9%</td><td class="num">€43.2k</td><td class="num">€33.2k</td><td class="num">€20.8k</td><td>Upside / tradeable</td></tr>
+            <tr class="bad"><td>6%</td><td class="num">95,076</td><td class="num">€1.426m</td><td class="num">€15.1k</td><td class="num">€0.4k</td><td class="num neg">−€9.6k</td><td class="num neg">−€22.0k</td><td class="num">€33.0k</td><td class="num neg">−€42.6k</td><td>Нижче floor</td></tr>
+            <tr class="warn"><td>7%</td><td class="num">95,076</td><td class="num">€1.426m</td><td class="num">€29.4k</td><td class="num">€14.6k</td><td class="num">€4.6k</td><td class="num neg">−€7.8k</td><td class="num">€33.0k</td><td class="num neg">−€28.3k</td><td>Minimum лише без DF</td></tr>
+            <tr><td>8%</td><td class="num">95,076</td><td class="num">€1.426m</td><td class="num profit">€43.6k</td><td class="num profit">€28.9k</td><td class="num profit">€18.9k</td><td class="num profit">€6.5k</td><td class="num">€33.0k</td><td class="num neg">−€14.1k</td><td>Anchor без DF</td></tr>
+            <tr class="warn"><td>9%</td><td class="num">95,076</td><td class="num">€1.426m</td><td class="num">€57.9k</td><td class="num">€43.2k</td><td class="num">€33.2k</td><td class="num">€20.8k</td><td class="num">€33.0k</td><td class="num">€0.2k</td><td>Floor із DF</td></tr>
+            <tr class="ok"><td>10%</td><td class="num">95,076</td><td class="num">€1.426m</td><td class="num profit">€72.2k</td><td class="num profit">€57.4k</td><td class="num profit">€47.4k</td><td class="num profit">€35.0k</td><td class="num">€33.0k</td><td class="num profit">€14.5k</td><td>Safe offer із DF</td></tr>
           </tbody>
         </table>
       </div>
-      <div class="callout">
+      <div class="callout red">
         <span class="dot"></span>
-        <div><b>6% не показувати як робочу ставку.</b> До маркетингу прибуток майже нульовий. Це лише короткостроковий ramp, якщо є автоматичний step-up до 8%.</div>
+        <div><b>DF campaign не самоокупний при 8%.</b> Proxy eligibility = 60.9% замовлень із кошиком ≥₴600; ₴50 = €0.98 за фактичним FX 51.26. За 7 місяців budget ≈€33.0k, DI level = 2.31% GMV. Навіть приріст orders не виправляє unit economics при 8%, тому campaign треба продавати разом із 10% або жорстким budget cap.</div>
       </div>
     </section>
 
     <section class="panel" id="bolt">
       <div class="section-head">
         <div><div class="kicker">Сценарій 2</div><h2>Курʼєри Bolt</h2></div>
-        <p>CPO €2.20 зʼїдає більшу частину вищої виручки. Buffer тонший, ніж на курʼєрах Сільпо.</p>
+        <p>CPO €2.20 зʼїдає більшу частину вищої виручки. У кожному базовому сценарії: 95,076 orders, товарний GMV €1.426m; model DI ≈€1.0k / 0.06% GMV.</p>
       </div>
       <div class="grid two">
         <article class="card recommended">
           <div class="label">Нормальний сценарій</div>
           <div class="value green">12%</div>
-          <div class="sub">€26.5k core · €16.5k після cash · €4.1k після full media</div>
+          <div class="sub">CP L1 €52.5k · €26.5k core · €16.5k з Public launch cost</div>
         </article>
         <article class="card danger">
           <div class="label">Не steady state</div>
@@ -302,18 +314,22 @@
           <thead>
             <tr>
               <th>Комісія</th>
+              <th class="num">Orders</th>
+              <th class="num">GMV</th>
+              <th class="num">CP L1</th>
+              <th class="num">Demand incentives</th>
               <th class="num">Core EBITDA</th>
-              <th class="num">Після €10k cash</th>
-              <th class="num">Після €22.4k package</th>
+              <th class="num">З Public launch cost</th>
+              <th class="num">З Public launch + other marketing tools</th>
               <th>Рішення</th>
             </tr>
           </thead>
           <tbody>
-            <tr class="bad"><td>10%</td><td class="num neg">−€2.0k</td><td class="num neg">−€12.0k</td><td class="num neg">−€24.4k</td><td>Не погоджувати steady state</td></tr>
-            <tr class="warn"><td>11%</td><td class="num">€12.2k</td><td class="num">€2.2k</td><td class="num neg">−€10.2k</td><td>Технічний minimum</td></tr>
-            <tr class="ok"><td>12%</td><td class="num profit">€26.5k</td><td class="num profit">€16.5k</td><td class="num profit">€4.1k</td><td>Рекомендований anchor</td></tr>
-            <tr><td>13%</td><td class="num">€40.7k</td><td class="num">€30.7k</td><td class="num">€18.3k</td><td>Покращений buffer</td></tr>
-            <tr><td>14%</td><td class="num">€55.0k</td><td class="num">€45.0k</td><td class="num">€32.6k</td><td>Bolt Plus package</td></tr>
+            <tr class="bad"><td>10%</td><td class="num">95,076</td><td class="num">€1.426m</td><td class="num">€24.0k</td><td class="num">€1.0k / 0.06%</td><td class="num neg">−€2.0k</td><td class="num neg">−€12.0k</td><td class="num neg">−€24.4k</td><td>Не steady state</td></tr>
+            <tr class="warn"><td>11%</td><td class="num">95,076</td><td class="num">€1.426m</td><td class="num">€38.2k</td><td class="num">€1.0k / 0.06%</td><td class="num">€12.2k</td><td class="num">€2.2k</td><td class="num neg">−€10.2k</td><td>Технічний minimum</td></tr>
+            <tr class="ok"><td>12%</td><td class="num">95,076</td><td class="num">€1.426m</td><td class="num profit">€52.5k</td><td class="num">€1.0k / 0.06%</td><td class="num profit">€26.5k</td><td class="num profit">€16.5k</td><td class="num profit">€4.1k</td><td>Рекомендований anchor</td></tr>
+            <tr><td>13%</td><td class="num">95,076</td><td class="num">€1.426m</td><td class="num">€66.7k</td><td class="num">€1.0k / 0.06%</td><td class="num">€40.7k</td><td class="num">€30.7k</td><td class="num">€18.3k</td><td>Покращений buffer</td></tr>
+            <tr><td>14%</td><td class="num">95,076</td><td class="num">€1.426m</td><td class="num">€81.0k</td><td class="num">Plus DF окремо</td><td class="num">€55.0k</td><td class="num">€45.0k</td><td class="num">€32.6k</td><td>Bolt Plus package</td></tr>
           </tbody>
         </table>
       </div>
@@ -326,11 +342,11 @@
     <section class="panel" id="mkt">
       <div class="section-head">
         <div><div class="kicker">Marketing plan</div><h2>Що реально платимо і що показуємо як value</h2></div>
-        <p>Партнеру показуємо повний пакет. У P&L Bolt cash — лише public launch, якщо DF не відкритий на всіх.</p>
+        <p>Партнеру показуємо повний пакет. Public launch cost = €10k; other marketing tools = €12.4k in-kind media. DF campaign відображаємо окремо як demand incentives.</p>
       </div>
       <div class="grid three">
-        <article class="card warning"><div class="label">Cash</div><div class="value">€10.0k</div><div class="sub">Public launch, 1 раз</div></article>
-        <article class="card"><div class="label">In-kind media</div><div class="value">€12.4k</div><div class="sub">банери, push/email, hero, modal</div></article>
+        <article class="card warning"><div class="label">Public launch cost</div><div class="value">€10.0k</div><div class="sub">1 раз · cash</div></article>
+        <article class="card"><div class="label">Other marketing tools</div><div class="value">€12.4k</div><div class="sub">банери, push/email, hero, modal · in-kind</div></article>
         <article class="card warning"><div class="label">DF 6 міс.</div><div class="value compact">€21.8k–€87.9k</div><div class="sub">Plus-only proxy → усі замовлення</div></article>
       </div>
       <div class="table-wrap" style="margin-top:16px">
@@ -361,8 +377,8 @@
       </div>
 
       <div class="section-head">
-        <div><div class="kicker">Bolt Plus</div><h2>14% + безкоштовна DF лише для Plus</h2></div>
-        <p>Зараз жоден Silpo-family provider не enrolled у Plus. 24.8% — proxy частки Plus-замовлень у dark kitchen / resto.</p>
+        <div><div class="kicker">Bolt Plus</div><h2>14%: 12% base + 2 в.п. за безкоштовну доставку для Plus users</h2></div>
+        <p>Йдеться не про безкоштовну підписку Bolt Plus. Bolt фінансує delivery fee для чинних Plus subscribers. Зараз Silpo-family не enrolled; 24.8% — proxy eligible share.</p>
       </div>
       <div class="grid two">
         <article class="card">
@@ -372,7 +388,8 @@
           <ul>
             <li>+2 в.п. комісії ≈ €28.5k на base GMV</li>
             <li>6-міс. DF cost на 24.8% orders ≈ €21.8k</li>
-            <li>Uplift GMV треба міряти pilot/control, не закладати як гарантію</li>
+            <li>Покриття DF уже при 0% uplift: +€6.7k до Public launch</li>
+            <li>Uplift GMV треба міряти pilot/control, не подавати як гарантію</li>
           </ul>
         </article>
         <div class="table-wrap">
@@ -380,31 +397,35 @@
             <thead>
               <tr>
                 <th>GMV uplift</th>
+                <th class="num">Orders</th>
+                <th class="num">Дод. orders</th>
                 <th class="num">Річний GMV</th>
+                <th class="num">Дод. GMV</th>
                 <th class="num">6-міс. DF</th>
+                <th class="num">CP L1</th>
                 <th class="num">Після DF + cash</th>
               </tr>
             </thead>
             <tbody>
-              <tr><td>0%</td><td class="num">€1.426m</td><td class="num">€21.8k</td><td class="num profit">€23.2k</td></tr>
-              <tr><td>+5%</td><td class="num">€1.497m</td><td class="num">€22.9k</td><td class="num profit">€24.9k</td></tr>
-              <tr class="ok"><td>+10%</td><td class="num">€1.569m</td><td class="num">€24.0k</td><td class="num profit">€26.5k</td></tr>
-              <tr><td>+15%</td><td class="num">€1.640m</td><td class="num">€25.1k</td><td class="num profit">€28.2k</td></tr>
+              <tr><td>0%</td><td class="num">95,076</td><td class="num">—</td><td class="num">€1.426m</td><td class="num">—</td><td class="num">€21.8k</td><td class="num">€81.0k</td><td class="num profit">€23.2k</td></tr>
+              <tr><td>+5%</td><td class="num">99,830</td><td class="num profit">+4,754</td><td class="num">€1.497m</td><td class="num profit">+€71.3k</td><td class="num">€22.9k</td><td class="num">€85.1k</td><td class="num profit">€24.8k</td></tr>
+              <tr class="ok"><td>+10%</td><td class="num">104,584</td><td class="num profit">+9,508</td><td class="num">€1.569m</td><td class="num profit">+€142.6k</td><td class="num">€24.0k</td><td class="num">€89.1k</td><td class="num profit">€26.5k</td></tr>
+              <tr><td>+15%</td><td class="num">109,337</td><td class="num profit">+14,261</td><td class="num">€1.640m</td><td class="num profit">+€213.9k</td><td class="num">€25.1k</td><td class="num">€93.2k</td><td class="num profit">€28.1k</td></tr>
             </tbody>
           </table>
         </div>
       </div>
-      <p class="fine">Припущення: 14% commission, DF €1.85, Plus share 24.8%, campaign 6 місяців. Джерело: Databricks fact_order_delivery, Silpo-family, 01.03–31.08.2026.</p>
+      <p class="fine">Sensitivity, не forecast. Припущення: 14% commission, DF €1.85, Plus share 24.8%, campaign 6 місяців; uplift пропорційно збільшує orders та GMV. “Після DF + cash” = Pre-HQ EBITDA після Plus DF і Public launch cost €10k, до other marketing tools. Джерело: Databricks fact_order_delivery, Silpo-family, 01.03–31.08.2026.</p>
 
       <div class="section-head">
         <div><div class="kicker">Факт dark kitchen</div><h2>Що вже інвестуємо в resto / DK</h2></div>
         <p>DARK KITCHEN SILPO + SILPO DARKKITCHEN + SILPO RESTO · березень–серпень 2026.</p>
       </div>
       <div class="grid four">
+        <article class="card"><div class="label">Orders · 12-міс. run-rate</div><div class="value compact">61,530</div></article>
         <article class="card"><div class="label">GMV · 6 міс.</div><div class="value compact">€537.9k</div></article>
         <article class="card"><div class="label">CP L1 · 6 міс.</div><div class="value green compact">€77.7k</div></article>
-        <article class="card"><div class="label">CP L1 margin</div><div class="value green">14.45%</div></article>
-        <article class="card warning"><div class="label">Demand incentives</div><div class="value compact">€49.5k</div><div class="sub">9.2% GMV</div></article>
+        <article class="card warning"><div class="label">Demand incentives · 6 міс.</div><div class="value compact">€49.5k</div><div class="sub">9.2% GMV</div></article>
       </div>
       <div class="bar-chart" style="margin-top:14px">
         <div class="label">Delivered orders by month</div>
@@ -424,7 +445,13 @@
     <section class="panel" id="blend">
       <div class="section-head">
         <div><div class="kicker">Сценарій 3</div><h2>Одна комісія: кулінарія магазину + dark kitchen / resto</h2></div>
-        <p>Комбінований річний товарний GMV ≈ €2.502m: нова кулінарія €1.426m + DK/resto run-rate €1.076m.</p>
+        <p>Показуємо окремо фактичний 12-міс. run-rate DK/resto, прогноз Stores та результат об’єднаного портфеля.</p>
+      </div>
+      <div class="grid four">
+        <article class="card"><div class="label">Dark kitchen GMV · 12 міс.</div><div class="value compact">€1.076m</div><div class="sub">61,530 orders · annualized actual</div></article>
+        <article class="card"><div class="label">Dark kitchen CP L1 · 12 міс.</div><div class="value compact green">€155.4k</div><div class="sub">14.45% GMV</div></article>
+        <article class="card"><div class="label">Stores GMV · прогноз</div><div class="value compact">€1.426m</div><div class="sub">95,076 orders · AOV €15</div></article>
+        <article class="card"><div class="label">Combined GMV</div><div class="value compact">€2.502m</div><div class="sub">156,606 orders · без volume uplift</div></article>
       </div>
       <div class="callout">
         <span class="dot"></span>
@@ -456,22 +483,29 @@
         <table>
           <thead>
             <tr>
-              <th>Common rate</th>
-              <th class="num">Delta vs own-courier baseline</th>
-              <th class="num">Delta vs Bolt-courier baseline</th>
-              <th>Читання</th>
+              <th>Portfolio scenario</th>
+              <th class="num">Orders</th>
+              <th class="num">GMV</th>
+              <th class="num">CP L1</th>
+              <th class="num">CP L1 margin</th>
+              <th class="num">Pre-HQ EBITDA</th>
+              <th class="num">Δ CP / EBITDA</th>
+              <th>Чи є вигода?</th>
             </tr>
           </thead>
           <tbody>
-            <tr class="bad"><td>13%</td><td class="num neg">−€4.5k</td><td class="num neg">−€61.6k</td><td>Нижче neutral для обох</td></tr>
-            <tr><td>14%</td><td class="num profit">+€20.5k</td><td class="num neg">−€36.5k</td><td>Ок лише якщо кулінарія на курʼєрах Сільпо</td></tr>
-            <tr class="warn"><td>15%</td><td class="num profit">+€45.5k</td><td class="num neg">−€11.5k</td><td>Ще не покриває Bolt courier baseline</td></tr>
-            <tr class="ok"><td>15.5%</td><td class="num profit">+€58.0k</td><td class="num">+€1.0k</td><td>Neutral для Bolt courier</td></tr>
-            <tr class="ok"><td>16%</td><td class="num profit">+€70.5k</td><td class="num profit">+€13.5k</td><td>Рекомендований headline для Bolt</td></tr>
+            <tr><td>Окремі ставки · Stores own 8% + DK current</td><td class="num">156,606</td><td class="num">€2.502m</td><td class="num">€199.1k</td><td class="num">7.96%</td><td class="num">≈€168.1k</td><td class="num">Baseline</td><td>Базова прозора структура</td></tr>
+            <tr class="ok"><td>Common 14% · Stores own courier</td><td class="num">156,606</td><td class="num">€2.502m</td><td class="num profit">€219.6k</td><td class="num profit">8.78%</td><td class="num profit">≈€188.6k</td><td class="num profit">+€20.5k</td><td>Так, фінансово; volume не зростає автоматично</td></tr>
+            <tr><td>Окремі ставки · Stores Bolt 12% + DK current</td><td class="num">156,606</td><td class="num">€2.502m</td><td class="num">€208.0k</td><td class="num">8.31%</td><td class="num">≈€165.7k</td><td class="num">Baseline</td><td>Базова прозора структура</td></tr>
+            <tr class="ok"><td>Common 16% · Stores Bolt courier</td><td class="num">156,606</td><td class="num">€2.502m</td><td class="num profit">€221.5k</td><td class="num profit">8.85%</td><td class="num profit">≈€179.2k</td><td class="num profit">+€13.5k</td><td>Так, фінансово; volume не зростає автоматично</td></tr>
           </tbody>
         </table>
       </div>
-      <p class="fine">Джерела: SILPO business model.xlsx · <a href="https://yuliianikolaieva.github.io/silpo-gm-brief/#case">GM brief</a> · Databricks fact_order_delivery + fact_provider_weekly, 01.03–31.08.2026. DK/resto annualized ×2. Pre-HQ EBITDA не включає Partner Enablement Investment.</p>
+      <div class="callout green">
+        <span class="dot"></span>
+        <div><b>Що реально покращується:</b> CP L1 та Pre-HQ EBITDA — через вищу blended commission. <b>Що не покращується без додаткового припущення:</b> GMV та orders. Одна ставка сама по собі не створює попит, тому у base case вони залишені незмінними. Якщо угода купує exclusivity, Plus або маркетинговий uplift, його треба показувати окремою sensitivity, а не приписувати common rate.</div>
+      </div>
+      <p class="fine">Dark kitchen actual: 61,530 orders, GMV €1.076m, CP L1 €155.4k у 12-міс. annualized run-rate. Pre-HQ EBITDA DK/resto ≈€139.2k — estimate: CP L1 мінус €0.264/order below-CP costs із Silpo model, не audited actual. Джерела: SILPO business model.xlsx · <a href="https://yuliianikolaieva.github.io/silpo-gm-brief/#case">GM brief</a> · Databricks fact_order_delivery + fact_provider_weekly, 01.03–31.08.2026.</p>
     </section>
 
     <div class="source-line">
