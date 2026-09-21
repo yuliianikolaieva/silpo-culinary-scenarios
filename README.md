@@ -7,12 +7,12 @@ Internal decision page for Silpo ready-meals / culinary launch: own couriers, Bo
 
 ## Recommendation
 
-Recalculated on `SILPO business model (4).xlsx`: AOV €13, 50,040 orders (own courier) and 40,032 orders (Bolt courier).
+Recalculated on `SILPO business model (5).xlsx`: AOV €13, 40,032 orders and OSPD 0.8 on both courier routes. Own-courier product GMV is €520.4k.
 
-- Own couriers: **8%**, ask 9–10%. No DF campaign on this route, so demand incentives are €0.
+- Own couriers: **8%**, ask 10–11%. No DF campaign on this route, so demand incentives are €0. After the €10k public launch only €1.0k remains at 8%.
 - Bolt couriers: **13%**. 12% turns negative once the €10k public launch is counted; 10–11% is loss-making before marketing.
 - Bolt Plus: **15%** (12% + 3 p.p.). At 14% the package is ≈−€2k together with the launch cost.
-- One rate for stores + DK/resto: **17%** if Silpo delivers, **19%** if Bolt delivers. Dark kitchen and resto already pay 22.5% of product GMV, so 13–16% would destroy value.
+- One rate for stores + DK/resto: **18%** if Silpo delivers, **19%** if Bolt delivers. Dark kitchen and resto already pay 22.5% of product GMV, so 13–17% would destroy value.
 
 ## Sources
 
