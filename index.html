@@ -104,7 +104,7 @@
     .value.red { color:var(--red); }
     .sub { margin-top:7px; color:var(--muted); font-size:13px; line-height:1.4; }
     .table-wrap { overflow-x:auto; border:1px solid var(--line); border-radius:17px; background:var(--paper); }
-    table { width:100%; min-width:980px; border-collapse:collapse; font-size:13px; }
+    table { width:100%; min-width:820px; border-collapse:collapse; font-size:13px; }
     th, td { padding:11px 14px; border-bottom:1px solid var(--line); text-align:left; vertical-align:middle; }
     th { color:var(--muted); background:#f7f9f8; font-size:10px; letter-spacing:.05em; text-transform:uppercase; }
     th.num, td.num { text-align:right; white-space:nowrap; font-variant-numeric:tabular-nums; }
@@ -196,17 +196,17 @@
         <div>
           <div class="kicker">Позиція для переговорів</div>
           <div class="headline">8% на курʼєрах Сільпо. На курʼєрах Bolt — 13%, а не 12%.</div>
-          <p>На новій моделі обсяг майже втричі менший, тому буфер зник. <b>8%</b> на власних курʼєрах залишає лише €1.0k після Public launch cost. <b>12%</b> на курʼєрах Bolt дає €5.7k core і йде в мінус після launch, тому робоча ставка — <b>13%</b>.</p>
+          <p>Метрика рішення — Contribution Profit L2. На курʼєрах Сільпо <b>8%</b> дає CP L2 €15.9k (3.06%). На курʼєрах Bolt <b>12%</b> дає лише €16.3k (2.72%) після DI €14.0k, тому робоча ставка — <b>13%</b> з CP L2 €22.3k (3.72%).</p>
         </div>
         <div class="talk-track">
           <strong>Одним реченням</strong>
-          <p>Просимо 10–11% на власних курʼєрах або 13–14% на курʼєрах Bolt, якщо маркетинговий пакет має окупитись.</p>
+          <p>Просимо 9–10% на власних курʼєрах або 13–14% на курʼєрах Bolt, щоб CP L2 був не тоншим за ~4%.</p>
         </div>
       </div>
 
       <div class="callout red">
         <span class="dot"></span>
-        <div><b>Модель v5 вирівняла обсяг на курʼєрах Сільпо з маршрутом Bolt:</b> 40,032 замовлення, OSPD 0.8, GMV €520.4k. Unit-економіка 8% не змінилась (€0.274 EBITDA / order), але річний буфер після launch стиснувся до €1.0k. Фактична комісія dark kitchen — <b>22.5%</b> товарного GMV; Pre-HQ EBITDA DK ≈ <b>€40k</b> після demand incentives.</div>
+        <div><b>Модель v5 вирівняла обсяг на курʼєрах Сільпо з маршрутом Bolt:</b> 40,032 замовлення, OSPD 0.8, GMV €520.4k. На own-courier CP L1 = CP L2, бо demand incentives = €0. На Bolt CP L2 = CP L1 − €0.35/замовлення. Фактична комісія dark kitchen — <b>22.5%</b> товарного GMV, CP L2 після incentives — <b>6.02%</b>.</div>
       </div>
 
       <div class="section-head">
@@ -214,10 +214,10 @@
         <p>База: 139 локацій, старт січень 2027, горизонт 12 місяців, без ПДВ. Комісія — на товарну частину замовлення.</p>
       </div>
       <div class="grid four">
-        <article class="card"><div class="label">Own courier breakeven</div><div class="value">5.89%</div><div class="sub">до маркетингу</div></article>
-        <article class="card"><div class="label">Bolt courier breakeven</div><div class="value">11.05%</div><div class="sub">до маркетингу, з CPO €2.10</div></article>
-        <article class="card warning"><div class="label">Own: покрити launch</div><div class="value">7.81%</div><div class="sub">мінімум, щоб окупити €10k</div></article>
-        <article class="card warning"><div class="label">Bolt: покрити launch</div><div class="value">12.72%</div><div class="sub">мінімум, щоб окупити €10k</div></article>
+        <article class="card"><div class="label">Own 8% · CP L2</div><div class="value">3.06%</div><div class="sub">€15.9k · L1 = L2</div></article>
+        <article class="card"><div class="label">Bolt 13% · CP L2</div><div class="value">3.72%</div><div class="sub">€22.3k після DI €14.0k</div></article>
+        <article class="card"><div class="label">Bolt 12% · CP L2</div><div class="value">2.72%</div><div class="sub">€16.3k · модельна ставка</div></article>
+        <article class="card"><div class="label">DK + resto · CP L2</div><div class="value">6.02%</div><div class="sub">€56.4k після фактичних incentives</div></article>
       </div>
 
       <div class="section-head">
@@ -233,9 +233,9 @@
             </tr>
           </thead>
           <tbody>
-            <tr class="ok"><td>Курʼєри Сільпо</td><td class="profit">8%, ask 10–11%</td><td>Не нижче 8%: 7% уже мінус після launch; 10% ще не покриває весь пакет</td></tr>
-            <tr class="ok"><td>Курʼєри Bolt</td><td class="profit">13%</td><td>12% лише якщо launch не за наш рахунок. 10–11% збиткові</td></tr>
-            <tr class="warn"><td>Bolt Plus</td><td>15% (12% + 3 в.п.)</td><td>При 14% пакет із launch виходить у −€2k</td></tr>
+            <tr class="ok"><td>Курʼєри Сільпо</td><td class="profit">8%, ask 9–10%</td><td>Не нижче 8% за CP L2 3.06%. 6–7% лишають L2 1–2%</td></tr>
+            <tr class="ok"><td>Курʼєри Bolt</td><td class="profit">13%</td><td>12% дає CP L2 лише 2.72%. 10% — L2 0.72%</td></tr>
+            <tr class="warn"><td>Bolt Plus</td><td>14% (12% + 2 в.п.)</td><td>CP L2 4.72% / €28.3k; DI моделі €14.0k уже всередині</td></tr>
             <tr class="warn"><td>Одна ставка · stores own courier</td><td>18%</td><td>Revenue-neutral 17.33%</td></tr>
             <tr class="warn"><td>Одна ставка · stores Bolt courier</td><td>19%</td><td>Revenue-neutral 18.41%</td></tr>
           </tbody>
@@ -253,17 +253,17 @@
         <article class="card recommended">
           <div class="label">Робочий anchor</div>
           <div class="value green">8%</div>
-          <div class="sub">CP L1 = CP L2 €15.9k (3.06%) · EBITDA €11.0k · €1.0k після Public launch cost</div>
+          <div class="sub">CP L1 = CP L2 €15.9k (3.06%)</div>
         </article>
         <article class="card warning">
-          <div class="label">Нижня межа</div>
-          <div class="value">7.81%</div>
-          <div class="sub">Точка, де Public launch cost €10k саме окупається</div>
+          <div class="label">Слабкий L2</div>
+          <div class="value">7%</div>
+          <div class="sub">CP L2 €10.7k (2.06%)</div>
         </article>
         <article class="card">
-          <div class="label">Якщо рахувати весь пакет</div>
-          <div class="value">10.20%</div>
-          <div class="sub">Потрібно, щоб покрити launch + other marketing tools</div>
+          <div class="label">Ціль переговорів</div>
+          <div class="value">10%</div>
+          <div class="sub">CP L2 €26.3k (5.06%)</div>
         </article>
       </div>
       <div class="table-wrap" style="margin-top:16px">
@@ -278,19 +278,16 @@
               <th class="num">CP L2</th>
               <th class="num">CP L2 %</th>
               <th class="num">Demand incentives</th>
-              <th class="num">Core EBITDA</th>
-              <th class="num">З Public launch cost</th>
-              <th class="num">З Public launch + other marketing tools</th>
               <th>Рішення</th>
             </tr>
           </thead>
           <tbody>
-            <tr class="bad"><td>6%</td><td class="num">40,032</td><td class="num">€520.4k</td><td class="num">€5.5k</td><td class="num">1.06%</td><td class="num">€5.5k</td><td class="num">1.06%</td><td class="num">€0</td><td class="num">€0.6k</td><td class="num neg">−€9.4k</td><td class="num neg">−€21.8k</td><td>Нижче floor</td></tr>
-            <tr class="bad"><td>7%</td><td class="num">40,032</td><td class="num">€520.4k</td><td class="num">€10.7k</td><td class="num">2.06%</td><td class="num">€10.7k</td><td class="num">2.06%</td><td class="num">€0</td><td class="num">€5.8k</td><td class="num neg">−€4.2k</td><td class="num neg">−€16.6k</td><td>Не окупає launch</td></tr>
-            <tr class="ok"><td>8%</td><td class="num">40,032</td><td class="num">€520.4k</td><td class="num profit">€15.9k</td><td class="num profit">3.06%</td><td class="num profit">€15.9k</td><td class="num profit">3.06%</td><td class="num">€0</td><td class="num profit">€11.0k</td><td class="num profit">€1.0k</td><td class="num neg">−€11.4k</td><td>Робочий anchor</td></tr>
-            <tr class="ok"><td>9%</td><td class="num">40,032</td><td class="num">€520.4k</td><td class="num profit">€21.1k</td><td class="num profit">4.06%</td><td class="num profit">€21.1k</td><td class="num profit">4.06%</td><td class="num">€0</td><td class="num profit">€16.2k</td><td class="num profit">€6.2k</td><td class="num neg">−€6.2k</td><td>Ціль переговорів</td></tr>
-            <tr class="ok"><td>10%</td><td class="num">40,032</td><td class="num">€520.4k</td><td class="num profit">€26.3k</td><td class="num profit">5.06%</td><td class="num profit">€26.3k</td><td class="num profit">5.06%</td><td class="num">€0</td><td class="num profit">€21.4k</td><td class="num profit">€11.4k</td><td class="num neg">−€1.0k</td><td>Майже покриває весь пакет</td></tr>
-            <tr class="ok"><td>11%</td><td class="num">40,032</td><td class="num">€520.4k</td><td class="num profit">€31.5k</td><td class="num profit">6.06%</td><td class="num profit">€31.5k</td><td class="num profit">6.06%</td><td class="num">€0</td><td class="num profit">€26.6k</td><td class="num profit">€16.6k</td><td class="num profit">€4.2k</td><td>Покриває весь пакет</td></tr>
+            <tr class="bad"><td>6%</td><td class="num">40,032</td><td class="num">€520.4k</td><td class="num">€5.5k</td><td class="num">1.06%</td><td class="num">€5.5k</td><td class="num">1.06%</td><td class="num">€0</td><td>Тонкий L2</td></tr>
+            <tr class="warn"><td>7%</td><td class="num">40,032</td><td class="num">€520.4k</td><td class="num">€10.7k</td><td class="num">2.06%</td><td class="num">€10.7k</td><td class="num">2.06%</td><td class="num">€0</td><td>Слабкий L2</td></tr>
+            <tr class="ok"><td>8%</td><td class="num">40,032</td><td class="num">€520.4k</td><td class="num profit">€15.9k</td><td class="num profit">3.06%</td><td class="num profit">€15.9k</td><td class="num profit">3.06%</td><td class="num">€0</td><td>Робочий anchor</td></tr>
+            <tr class="ok"><td>9%</td><td class="num">40,032</td><td class="num">€520.4k</td><td class="num profit">€21.1k</td><td class="num profit">4.06%</td><td class="num profit">€21.1k</td><td class="num profit">4.06%</td><td class="num">€0</td><td>Ціль переговорів</td></tr>
+            <tr class="ok"><td>10%</td><td class="num">40,032</td><td class="num">€520.4k</td><td class="num profit">€26.3k</td><td class="num profit">5.06%</td><td class="num profit">€26.3k</td><td class="num profit">5.06%</td><td class="num">€0</td><td>Сильний L2</td></tr>
+            <tr class="ok"><td>11%</td><td class="num">40,032</td><td class="num">€520.4k</td><td class="num profit">€31.5k</td><td class="num profit">6.06%</td><td class="num profit">€31.5k</td><td class="num profit">6.06%</td><td class="num">€0</td><td>Upside</td></tr>
           </tbody>
         </table>
       </div>
@@ -298,7 +295,7 @@
         <span class="dot"></span>
         <div><b>DF campaign на цьому маршруті не існує.</b> Demand incentives = €0, тому CP L1 = CP L2. Маркетинг тут — лише Public launch cost і other marketing tools.</div>
       </div>
-      <p class="fine">Кожен 1 в.п. комісії = €0.13 на замовлення, або €5.2k річної Pre-HQ EBITDA. Модель: Pre-HQ EBITDA €0.274/замовлення при 8%, CP L1 = CP L2 €0.398/замовлення (3.06% товарного GMV).</p>
+      <p class="fine">Кожен 1 в.п. комісії = €0.13 на замовлення, або €5.2k CP L2. Модель: Contribution Profit = Contribution Profit L2 = €0.398/замовлення (3.06% товарного GMV) при 8%.</p>
     </section>
 
     <section class="panel" id="bolt">
@@ -310,17 +307,17 @@
         <article class="card recommended">
           <div class="label">Робочий anchor</div>
           <div class="value green">13%</div>
-          <div class="sub">CP L1 €36.3k (6.05%) · CP L2 €22.3k (3.72%) · €1.7k після launch</div>
+          <div class="sub">CP L1 €36.3k (6.05%) · CP L2 €22.3k (3.72%)</div>
         </article>
         <article class="card warning">
           <div class="label">Модельна ставка</div>
           <div class="value">12%</div>
-          <div class="sub">€5.7k core, але −€4.3k після launch</div>
+          <div class="sub">CP L2 €16.3k (2.72%) після DI €14.0k</div>
         </article>
         <article class="card danger">
           <div class="label">Не погоджувати</div>
           <div class="value red">10–11%</div>
-          <div class="sub">Збиткові ще до маркетингу</div>
+          <div class="sub">CP L2 0.72–1.72% — занадто тонкий</div>
         </article>
       </div>
       <div class="table-wrap" style="margin-top:16px">
@@ -335,24 +332,21 @@
               <th class="num">CP L2</th>
               <th class="num">CP L2 %</th>
               <th class="num">Demand incentives</th>
-              <th class="num">Core EBITDA</th>
-              <th class="num">З Public launch cost</th>
-              <th class="num">З Public launch + other marketing tools</th>
               <th>Рішення</th>
             </tr>
           </thead>
           <tbody>
-            <tr class="bad"><td>10%</td><td class="num">40,032</td><td class="num">€600.5k</td><td class="num">€18.3k</td><td class="num">3.05%</td><td class="num">€4.3k</td><td class="num">0.72%</td><td class="num">€14.0k</td><td class="num neg">−€6.3k</td><td class="num neg">−€16.3k</td><td class="num neg">−€28.7k</td><td>Не погоджувати</td></tr>
-            <tr class="bad"><td>11%</td><td class="num">40,032</td><td class="num">€600.5k</td><td class="num">€24.3k</td><td class="num">4.05%</td><td class="num">€10.3k</td><td class="num">1.72%</td><td class="num">€14.0k</td><td class="num neg">−€0.3k</td><td class="num neg">−€10.3k</td><td class="num neg">−€22.7k</td><td>Нижче breakeven</td></tr>
-            <tr class="warn"><td>12%</td><td class="num">40,032</td><td class="num">€600.5k</td><td class="num">€30.3k</td><td class="num">5.05%</td><td class="num">€16.3k</td><td class="num">2.72%</td><td class="num">€14.0k</td><td class="num profit">€5.7k</td><td class="num neg">−€4.3k</td><td class="num neg">−€16.7k</td><td>Лише без launch за наш рахунок</td></tr>
-            <tr class="ok"><td>13%</td><td class="num">40,032</td><td class="num">€600.5k</td><td class="num profit">€36.3k</td><td class="num profit">6.05%</td><td class="num profit">€22.3k</td><td class="num profit">3.72%</td><td class="num">€14.0k</td><td class="num profit">€11.7k</td><td class="num profit">€1.7k</td><td class="num neg">−€10.7k</td><td>Робочий anchor</td></tr>
-            <tr class="ok"><td>14%</td><td class="num">40,032</td><td class="num">€600.5k</td><td class="num profit">€42.3k</td><td class="num profit">7.05%</td><td class="num profit">€28.3k</td><td class="num profit">4.72%</td><td class="num">€14.0k</td><td class="num profit">€17.7k</td><td class="num profit">€7.7k</td><td class="num neg">−€4.7k</td><td>Ціль переговорів</td></tr>
+            <tr class="bad"><td>10%</td><td class="num">40,032</td><td class="num">€600.5k</td><td class="num">€18.3k</td><td class="num">3.05%</td><td class="num">€4.3k</td><td class="num">0.72%</td><td class="num">€14.0k</td><td>L2 майже нуль</td></tr>
+            <tr class="warn"><td>11%</td><td class="num">40,032</td><td class="num">€600.5k</td><td class="num">€24.3k</td><td class="num">4.05%</td><td class="num">€10.3k</td><td class="num">1.72%</td><td class="num">€14.0k</td><td>Тонкий L2</td></tr>
+            <tr class="warn"><td>12%</td><td class="num">40,032</td><td class="num">€600.5k</td><td class="num">€30.3k</td><td class="num">5.05%</td><td class="num">€16.3k</td><td class="num">2.72%</td><td class="num">€14.0k</td><td>Модельна ставка</td></tr>
+            <tr class="ok"><td>13%</td><td class="num">40,032</td><td class="num">€600.5k</td><td class="num profit">€36.3k</td><td class="num profit">6.05%</td><td class="num profit">€22.3k</td><td class="num profit">3.72%</td><td class="num">€14.0k</td><td>Робочий anchor</td></tr>
+            <tr class="ok"><td>14%</td><td class="num">40,032</td><td class="num">€600.5k</td><td class="num profit">€42.3k</td><td class="num profit">7.05%</td><td class="num profit">€28.3k</td><td class="num profit">4.72%</td><td class="num">€14.0k</td><td>Ціль переговорів</td></tr>
           </tbody>
         </table>
       </div>
       <div class="callout">
         <span class="dot"></span>
-        <div><b>Demand incentives €14.0k уже всередині моделі:</b> €0.35 на замовлення. CP L2 = CP L1 − DI. При 12% це €16.3k (2.72%) проти CP L1 €30.3k (5.05%). Public launch cost €10k у моделі не закладений, тому ми віднімаємо його окремо.</div>
+        <div><b>Demand incentives €14.0k уже всередині моделі:</b> €0.35 на замовлення. CP L2 = CP L1 − DI. При 12% це €16.3k (2.72%) проти CP L1 €30.3k (5.05%). Робочий якорь 13% піднімає L2 до €22.3k (3.72%).</div>
       </div>
       <p class="fine">Кожен 1 в.п. = €0.15 на замовлення, або €6.0k на рік. CP L1 / L2 % рахуються від товарного GMV €600.5k. У моделі GMV маршруту €678.9k включає DF €1.96, комісія — від товарної частини.</p>
     </section>
@@ -420,8 +414,8 @@
           <div class="sub">Revenue-neutral. Рекомендація: 18%</div>
           <ul>
             <li>100,168 orders · GMV €1.458m</li>
-            <li>Baseline: комісія €252.7k · CP L1 €171.4k (11.8%) · CP L2 €72.3k (5.0%) · EBITDA ≈€51.4k</li>
-            <li>18% → CP L1 €181.1k (12.4%) · CP L2 €82.0k (5.6%) · EBITDA ≈€61.1k (+€9.7k)</li>
+            <li>Baseline: комісія €252.7k · CP L1 €171.4k (11.8%) · CP L2 €72.3k (5.0%)</li>
+            <li>18% → CP L1 €181.1k (12.4%) · CP L2 €82.0k (5.6%) (+€9.7k L2)</li>
           </ul>
         </article>
         <article class="card recommended">
@@ -430,8 +424,8 @@
           <div class="sub">Revenue-neutral. Рекомендація: 19%</div>
           <ul>
             <li>100,168 orders · GMV €1.538m</li>
-            <li>Baseline: комісія €283.1k · CP L1 €185.8k (12.1%) · CP L2 €72.7k (4.7%) · EBITDA ≈€46.1k</li>
-            <li>19% → CP L1 €194.8k (12.7%) · CP L2 €81.8k (5.3%) · EBITDA ≈€55.1k (+€9.1k)</li>
+            <li>Baseline: комісія €283.1k · CP L1 €185.8k (12.1%) · CP L2 €72.7k (4.7%)</li>
+            <li>19% → CP L1 €194.8k (12.7%) · CP L2 €81.8k (5.3%) (+€9.1k L2)</li>
           </ul>
         </article>
       </div>
@@ -445,28 +439,26 @@
               <th class="num">GMV</th>
               <th class="num">CP L1 / L2 · A</th>
               <th class="num">L1 / L2 % · A</th>
-              <th class="num">EBITDA · A</th>
               <th class="num">CP L1 / L2 · B</th>
               <th class="num">L1 / L2 % · B</th>
-              <th class="num">EBITDA · B</th>
-              <th>Чи є вигода?</th>
+              <th>Вигода vs baseline L2</th>
             </tr>
           </thead>
           <tbody>
-            <tr><td>Окремі ставки · baseline</td><td class="num">100,168 / 100,168</td><td class="num">€1.458m / €1.538m</td><td class="num">€171.4k / €72.3k</td><td class="num">11.8% / 5.0%</td><td class="num">€51.4k</td><td class="num">€185.8k / €72.7k</td><td class="num">12.1% / 4.7%</td><td class="num">€46.1k</td><td>Точка відліку</td></tr>
-            <tr class="bad"><td>14%</td><td class="num">без змін</td><td class="num">без змін</td><td class="num neg">€122.8k / €23.7k</td><td class="num neg">8.4% / 1.6%</td><td class="num neg">€2.8k</td><td class="num neg">€117.9k / €4.9k</td><td class="num neg">7.7% / 0.3%</td><td class="num neg">−€21.7k</td><td>Ні: −€48.6k / −€67.8k</td></tr>
-            <tr class="bad"><td>16%</td><td class="num">без змін</td><td class="num">без змін</td><td class="num neg">€151.9k / €52.8k</td><td class="num neg">10.4% / 3.6%</td><td class="num neg">€31.9k</td><td class="num neg">€148.7k / €35.6k</td><td class="num neg">9.7% / 2.3%</td><td class="num neg">€9.0k</td><td>Ні: −€19.5k / −€37.1k</td></tr>
-            <tr class="warn"><td>17%</td><td class="num">без змін</td><td class="num">без змін</td><td class="num neg">€166.5k / €67.4k</td><td class="num neg">11.4% / 4.6%</td><td class="num neg">€46.5k</td><td class="num neg">€164.1k / €51.0k</td><td class="num neg">10.7% / 3.3%</td><td class="num neg">€24.4k</td><td>Ні: −€4.9k / −€21.7k</td></tr>
-            <tr class="warn"><td>18%</td><td class="num">без змін</td><td class="num">без змін</td><td class="num profit">€181.1k / €82.0k</td><td class="num profit">12.4% / 5.6%</td><td class="num profit">€61.1k</td><td class="num neg">€179.5k / €66.4k</td><td class="num neg">11.7% / 4.3%</td><td class="num neg">€39.8k</td><td>Лише для A: +€9.7k / −€6.3k</td></tr>
-            <tr class="ok"><td>19%</td><td class="num">без змін</td><td class="num">без змін</td><td class="num profit">€195.6k / €96.6k</td><td class="num profit">13.4% / 6.6%</td><td class="num profit">€75.7k</td><td class="num profit">€194.8k / €81.8k</td><td class="num profit">12.7% / 5.3%</td><td class="num profit">€55.1k</td><td>Так: +€24.3k / +€9.1k</td></tr>
-            <tr class="ok"><td>20%</td><td class="num">без змін</td><td class="num">без змін</td><td class="num profit">€210.2k / €111.2k</td><td class="num profit">14.4% / 7.6%</td><td class="num profit">€90.2k</td><td class="num profit">€210.2k / €97.1k</td><td class="num profit">13.7% / 6.3%</td><td class="num profit">€70.5k</td><td>Так: +€38.9k / +€24.4k</td></tr>
+            <tr><td>Окремі ставки · baseline</td><td class="num">100,168 / 100,168</td><td class="num">€1.458m / €1.538m</td><td class="num">€171.4k / €72.3k</td><td class="num">11.8% / 5.0%</td><td class="num">€185.8k / €72.7k</td><td class="num">12.1% / 4.7%</td><td>Точка відліку</td></tr>
+            <tr class="bad"><td>14%</td><td class="num">без змін</td><td class="num">без змін</td><td class="num neg">€122.8k / €23.7k</td><td class="num neg">8.4% / 1.6%</td><td class="num neg">€117.9k / €4.9k</td><td class="num neg">7.7% / 0.3%</td><td>Ні: −€48.6k / −€67.8k</td></tr>
+            <tr class="bad"><td>16%</td><td class="num">без змін</td><td class="num">без змін</td><td class="num neg">€151.9k / €52.8k</td><td class="num neg">10.4% / 3.6%</td><td class="num neg">€148.7k / €35.6k</td><td class="num neg">9.7% / 2.3%</td><td>Ні: −€19.5k / −€37.1k</td></tr>
+            <tr class="warn"><td>17%</td><td class="num">без змін</td><td class="num">без змін</td><td class="num neg">€166.5k / €67.4k</td><td class="num neg">11.4% / 4.6%</td><td class="num neg">€164.1k / €51.0k</td><td class="num neg">10.7% / 3.3%</td><td>Ні: −€4.9k / −€21.7k</td></tr>
+            <tr class="warn"><td>18%</td><td class="num">без змін</td><td class="num">без змін</td><td class="num profit">€181.1k / €82.0k</td><td class="num profit">12.4% / 5.6%</td><td class="num neg">€179.5k / €66.4k</td><td class="num neg">11.7% / 4.3%</td><td>Лише для A: +€9.7k / −€6.3k</td></tr>
+            <tr class="ok"><td>19%</td><td class="num">без змін</td><td class="num">без змін</td><td class="num profit">€195.6k / €96.6k</td><td class="num profit">13.4% / 6.6%</td><td class="num profit">€194.8k / €81.8k</td><td class="num profit">12.7% / 5.3%</td><td>Так: +€24.3k / +€9.1k</td></tr>
+            <tr class="ok"><td>20%</td><td class="num">без змін</td><td class="num">без змін</td><td class="num profit">€210.2k / €111.2k</td><td class="num profit">14.4% / 7.6%</td><td class="num profit">€210.2k / €97.1k</td><td class="num profit">13.7% / 6.3%</td><td>Так: +€38.9k / +€24.4k</td></tr>
           </tbody>
         </table>
       </div>
 
       <div class="callout">
         <span class="dot"></span>
-        <div><b>Що змінюється і що ні.</b> Покращуються CP L1, CP L2 та Pre-HQ EBITDA — і тільки вище revenue-neutral точки. GMV та orders не змінюються: сама по собі спільна ставка не створює попиту.</div>
+        <div><b>Що змінюється і що ні.</b> Покращуються CP L1 і CP L2 — і тільки вище revenue-neutral точки. GMV та orders не змінюються: сама по собі спільна ставка не створює попиту.</div>
       </div>
       <p class="fine">DK / resto: Databricks 01.03–31.08.2026, ×2 до 12 міс. CP L1 = contribution до demand incentives; CP L2 = після incentives (fact_provider_weekly: total_contribution_profit_eur vs without_demand_incentives). Stores: SILPO business model (5).xlsx, рядки Contribution Profit та Contribution Profit L2. Відсотки — від товарного GMV.</p>
     </section>
@@ -517,7 +509,7 @@
             <li>2 в.п. на AOV €15 = €12.0k на рік</li>
             <li>DF для Plus на 6 місяців ≈ €9.7k</li>
             <li>Механіка себе окупає із запасом €2.3k</li>
-            <li>Але разом із Public launch cost пакет виходить у −€2.1k</li>
+            <li>CP L2 при 14% — €28.3k (4.72%)</li>
           </ul>
         </article>
         <div class="table-wrap">
@@ -534,21 +526,20 @@
                 <th class="num">CP L1 %</th>
                 <th class="num">CP L2</th>
                 <th class="num">CP L2 %</th>
-                <th class="num">EBITDA після DF + launch</th>
               </tr>
             </thead>
             <tbody>
-              <tr><td>0%</td><td class="num">40,032</td><td class="num">—</td><td class="num">€600.5k</td><td class="num">—</td><td class="num">€9.7k</td><td class="num">€42.3k</td><td class="num">7.05%</td><td class="num">€28.3k</td><td class="num">4.72%</td><td class="num neg">−€2.1k</td></tr>
-              <tr><td>+5%</td><td class="num">42,034</td><td class="num profit">+2,002</td><td class="num">€630.5k</td><td class="num profit">+€30.0k</td><td class="num">€10.2k</td><td class="num">€44.4k</td><td class="num">7.05%</td><td class="num">€29.7k</td><td class="num">4.72%</td><td class="num neg">−€1.7k</td></tr>
-              <tr><td>+10%</td><td class="num">44,035</td><td class="num profit">+4,003</td><td class="num">€660.5k</td><td class="num profit">+€60.0k</td><td class="num">€10.7k</td><td class="num">€46.6k</td><td class="num">7.05%</td><td class="num">€31.2k</td><td class="num">4.72%</td><td class="num neg">−€1.3k</td></tr>
-              <tr><td>+15%</td><td class="num">46,037</td><td class="num profit">+6,005</td><td class="num">€690.6k</td><td class="num profit">+€90.1k</td><td class="num">€11.2k</td><td class="num">€48.7k</td><td class="num">7.05%</td><td class="num">€32.6k</td><td class="num">4.72%</td><td class="num neg">−€0.9k</td></tr>
+              <tr><td>0%</td><td class="num">40,032</td><td class="num">—</td><td class="num">€600.5k</td><td class="num">—</td><td class="num">€9.7k</td><td class="num">€42.3k</td><td class="num">7.05%</td><td class="num">€28.3k</td><td class="num">4.72%</td></tr>
+              <tr><td>+5%</td><td class="num">42,034</td><td class="num profit">+2,002</td><td class="num">€630.5k</td><td class="num profit">+€30.0k</td><td class="num">€10.2k</td><td class="num">€44.4k</td><td class="num">7.05%</td><td class="num">€29.7k</td><td class="num">4.72%</td></tr>
+              <tr><td>+10%</td><td class="num">44,035</td><td class="num profit">+4,003</td><td class="num">€660.5k</td><td class="num profit">+€60.0k</td><td class="num">€10.7k</td><td class="num">€46.6k</td><td class="num">7.05%</td><td class="num">€31.2k</td><td class="num">4.72%</td></tr>
+              <tr><td>+15%</td><td class="num">46,037</td><td class="num profit">+6,005</td><td class="num">€690.6k</td><td class="num profit">+€90.1k</td><td class="num">€11.2k</td><td class="num">€48.7k</td><td class="num">7.05%</td><td class="num">€32.6k</td><td class="num">4.72%</td></tr>
             </tbody>
           </table>
         </div>
       </div>
-      <div class="callout red">
+      <div class="callout">
         <span class="dot"></span>
-        <div><b>При 14% пакет із Plus не окуповується навіть за +15% GMV.</b> Приріст обсягу дає лише €0.4k на кожні 5 в.п. uplift, бо маржа на замовлення тонка. Щоб Plus-пакет був позитивним разом із launch, потрібні <b>15%</b>: EBITDA €23.7k мінус DF €9.7k мінус launch €10k = +€3.9k.</div>
+        <div><b>На Contribution Profit L2 механіка 14% працює.</b> 2 в.п. покривають DF для Plus (€9.7k проти €12.0k комісії). CP L2 лишається 4.72%: €28.3k без uplift і €32.6k при +15% GMV. Public launch cost — окремий cash-пакет, не частина L2.</div>
       </div>
       <p class="fine">Sensitivity, не forecast: Plus share 24.8%, DF €1.96, кампанія 6 із 12 місяців, uplift пропорційно збільшує orders і GMV. DF cost на Plus рахується окремо від €0.35/замовлення demand incentives, уже закладених у модель. Джерело Plus share: Databricks fact_order_delivery, Silpo-family, 01.03–31.08.2026.</p>
     </section>
