@@ -276,7 +276,7 @@
         </table>
       </div>
       <div class="grid two" style="margin-top:16px">
-        <article class="card"><div class="label">Коефіцієнт бренду Сільпо</div><div class="value green">1.10×</div><p class="sub">Застосований до base OSPD: на зрілій локації 0.73 generic OSPD → 0.80 для відомого бренду Сільпо. Це припущення, яке треба калібрувати на факті пілота.</p></article>
+        <article class="card"><div class="label">Коефіцієнт бренду Сільпо</div><div class="value green">1.20×</div><p class="sub">Застосований до base OSPD: на зрілій локації 0.67 generic OSPD → 0.80 для відомого бренду Сільпо. Це припущення, яке треба калібрувати на факті пілота.</p></article>
         <article class="card warning"><div class="label">Факт · Café Rynok, серпень 2026</div><div class="value">4.48 OSPD</div><p class="sub">12 локацій · 1,667 delivered orders · AOV €14.19. Це готова їжа / stores benchmark; тому базовий план 0.80 OSPD залишено як консервативний старт, а не як очікуваний рівень зрілої мережі.</p></article>
       </div>
       <div class="grid two" style="margin-top:16px">
@@ -440,7 +440,7 @@
             <tr><td>Resto · факт</td><td class="num">1,982</td><td class="num">€32.0k</td><td class="num">€16.16</td><td class="num">€8.0k</td><td class="num">25.03%</td><td class="num">€3.0k</td><td class="num">€5.9k</td><td class="num">18.31%</td><td class="num">€2.7k</td><td class="num">8.55%</td></tr>
             <tr class="ok"><td>Разом DK + resto</td><td class="num">60,136</td><td class="num">€937.3k</td><td class="num">€15.59</td><td class="num">€211.1k</td><td class="num profit">22.52%</td><td class="num">€99.1k</td><td class="num">€155.4k</td><td class="num profit">16.58%</td><td class="num">€56.4k</td><td class="num profit">6.02%</td></tr>
             <tr><td>Stores · own courier 8%</td><td class="num">40,032</td><td class="num">€520.4k</td><td class="num">€13.00</td><td class="num">€41.6k</td><td class="num">8.00%</td><td class="num">€0</td><td class="num">€15.9k</td><td class="num">3.06%</td><td class="num">€15.9k</td><td class="num">3.06%</td></tr>
-            <tr><td>Stores · Bolt courier 12%</td><td class="num">40,032</td><td class="num">€600.5k</td><td class="num">€15.00</td><td class="num">€72.1k</td><td class="num">12.00%</td><td class="num">€14.0k</td><td class="num">€30.3k</td><td class="num">5.05%</td><td class="num">€16.3k</td><td class="num">2.72%</td></tr>
+            <tr><td>Stores · Bolt courier 12%</td><td class="num">40,032</td><td class="num">€600.5k</td><td class="num">€13.00</td><td class="num">€72.1k</td><td class="num">12.00%</td><td class="num">€14.0k</td><td class="num">€30.3k</td><td class="num">5.05%</td><td class="num">€16.3k</td><td class="num">2.72%</td></tr>
           </tbody>
         </table>
       </div>
@@ -458,7 +458,8 @@
           <ul>
             <li>100,168 orders · GMV €1.458m</li>
             <li>Baseline: комісія €252.7k · CP L1 €171.4k (11.8%) · CP L2 €72.3k (5.0%)</li>
-            <li>18% → CP L1 €181.1k (12.4%) · CP L2 €82.0k (5.6%) (+€9.7k L2)</li>
+            <li>18% → CP L1 €181.1k (12.4%) · CP L2 €82.0k (5.6%) до Bolt Plus</li>
+            <li>Після безкоштовного Bolt Plus: CP L2 €45.2k (−€36.8k)</li>
           </ul>
         </article>
         <article class="card recommended">
@@ -468,7 +469,8 @@
           <ul>
             <li>100,168 orders · GMV €1.538m</li>
             <li>Baseline: комісія €283.1k · CP L1 €185.8k (12.1%) · CP L2 €72.7k (4.7%)</li>
-            <li>19% → CP L1 €194.8k (12.7%) · CP L2 €81.8k (5.3%) (+€9.1k L2)</li>
+            <li>19% → CP L1 €194.8k (12.7%) · CP L2 €81.8k (5.3%) до Bolt Plus</li>
+            <li>Після безкоштовного Bolt Plus: CP L2 €45.0k (−€36.8k)</li>
           </ul>
         </article>
       </div>
@@ -480,10 +482,10 @@
               <th>Спільна ставка</th>
               <th class="num">Orders</th>
               <th class="num">GMV</th>
-              <th class="num">CP L1 / L2 · A</th>
-              <th class="num">L1 / L2 % · A</th>
-              <th class="num">CP L1 / L2 · B</th>
-              <th class="num">L1 / L2 % · B</th>
+              <th class="num">CP L1 / L2 до Plus · A</th>
+              <th class="num">L1 / L2 % до Plus · A</th>
+              <th class="num">CP L1 / L2 до Plus · B</th>
+              <th class="num">L1 / L2 % до Plus · B</th>
               <th>Вигода vs baseline L2</th>
             </tr>
           </thead>
@@ -499,6 +501,11 @@
         </table>
       </div>
 
+      <div class="callout red">
+        <span class="dot"></span>
+        <div><b>Bolt Plus — окремий L2 cost портфеля.</b> До таблиці вище не змішано €36.8k вартості безкоштовної підписки: DK/resto €29.2k + магазини €7.6k (18% Plus share). Тому фінальний CP L2 після Plus: A / B — baseline €35.5k / €35.9k; за рекомендованих 18% / 19% — €45.2k / €45.0k.</div>
+      </div>
+
       <div class="callout">
         <span class="dot"></span>
         <div><b>Що змінюється і що ні.</b> Покращуються CP L1 і CP L2 — і тільки вище revenue-neutral точки. GMV та orders не змінюються: сама по собі спільна ставка не створює попиту.</div>
@@ -509,7 +516,7 @@
     <section class="panel" id="mkt">
       <div class="section-head">
         <div><div class="kicker">Marketing plan</div><h2>Що реально платимо і що показуємо як value</h2></div>
-        <p>Партнеру показуємо повний пакет. У P&amp;L Bolt cash — лише Public launch cost; решта інструментів — власний інвентар.</p>
+        <p>Партнеру показуємо повний пакет. У P&amp;L Bolt cash — Public launch і free delivery для Bolt Plus; решта інструментів — власний інвентар.</p>
       </div>
       <div class="grid three">
         <article class="card warning"><div class="label">Public launch cost</div><div class="value">€10.0k</div><div class="sub">1 раз · cash</div></article>
@@ -535,6 +542,7 @@
             <tr><td>Hero banner</td><td>2× / рік</td><td class="num">€2,000</td><td>In-kind</td><td>Так</td><td>Так</td></tr>
             <tr><td>Modal</td><td>1× / квартал</td><td class="num">€2,400</td><td>In-kind</td><td>Так</td><td>Так</td></tr>
             <tr class="warn"><td>DF campaign</td><td>6 із 12 міс.</td><td class="num">€14.0k</td><td>Demand incentives</td><td class="neg">Ні</td><td>Так</td></tr>
+            <tr class="warn"><td>Bolt Plus · магазини Сільпо</td><td>12 міс.</td><td class="num">€7.6k</td><td>Bolt cost · free delivery</td><td>Так</td><td>Так</td></tr>
           </tbody>
         </table>
       </div>
@@ -545,29 +553,29 @@
       </div>
       <div class="grid three">
         <article class="card">
-          <div class="label">Plus share · факт</div>
-          <div class="value">24.8%</div>
-          <div class="sub">Silpo-family delivered orders · бер–сер 2026</div>
+          <div class="label">Plus share · магазини</div>
+          <div class="value">18.0%</div>
+          <div class="sub">Planning input для Сільпо; нижче 24.8% факту Silpo-family</div>
         </article>
         <article class="card warning">
           <div class="label">DK + resto · cost Bolt</div><div class="value">€29.2k</div>
           <div class="sub">60,136 orders × 24.8% × €1.96 DF × 12 міс.</div>
         </article>
         <article class="card warning">
-          <div class="label">Магазини · cost Bolt</div><div class="value">€10.5k</div>
-          <div class="sub">21,549 orders × 24.8% × €1.96 DF × 12 міс.</div>
+          <div class="label">Магазини · cost Bolt</div><div class="value">€7.6k</div>
+          <div class="sub">21,549 orders × 18.0% × €1.96 DF × 12 міс.</div>
         </article>
       </div>
-      <div class="table-wrap" style="margin-top:16px"><table><thead><tr><th>Напрямок</th><th class="num">Orders</th><th class="num">Plus share</th><th class="num">DF / order</th><th class="num">Період</th><th class="num">Витрати Bolt</th><th>Партнер платить?</th></tr></thead><tbody><tr><td>Dark kitchen + resto</td><td class="num">60,136</td><td class="num">24.8%</td><td class="num">€1.96</td><td class="num">12 міс.</td><td class="num">€29.2k</td><td class="profit">Ні</td></tr><tr><td>Магазини Сільпо</td><td class="num">21,549</td><td class="num">24.8%</td><td class="num">€1.96</td><td class="num">12 міс.</td><td class="num">€10.5k</td><td class="profit">Ні</td></tr><tr class="warn"><td>Разом</td><td class="num">81,685</td><td class="num">24.8%</td><td class="num">—</td><td class="num">12 міс.</td><td class="num profit">€39.7k</td><td class="profit">Ні</td></tr></tbody></table></div>
+      <div class="table-wrap" style="margin-top:16px"><table><thead><tr><th>Напрямок</th><th class="num">Orders</th><th class="num">Plus share</th><th class="num">DF / order</th><th class="num">Період</th><th class="num">Витрати Bolt</th><th>Партнер платить?</th></tr></thead><tbody><tr><td>Dark kitchen + resto</td><td class="num">60,136</td><td class="num">24.8%</td><td class="num">€1.96</td><td class="num">12 міс.</td><td class="num">€29.2k</td><td class="profit">Ні</td></tr><tr><td>Магазини Сільпо</td><td class="num">21,549</td><td class="num">18.0%</td><td class="num">€1.96</td><td class="num">12 міс.</td><td class="num">€7.6k</td><td class="profit">Ні</td></tr><tr class="warn"><td>Разом</td><td class="num">81,685</td><td class="num">—</td><td class="num">—</td><td class="num">12 міс.</td><td class="num profit">€36.8k</td><td class="profit">Ні</td></tr></tbody></table></div>
       <div class="callout">
         <span class="dot"></span>
-        <div><b>Це витрати Bolt, а не дохід від партнера.</b> Безкоштовний Plus зменшує CP L2 портфеля на €39.7k: €29.2k для DK/resto та €10.5k для магазинів. Public launch cost лишається окремим cash-пакетом.</div>
+        <div><b>Це витрати Bolt, а не дохід від партнера.</b> Безкоштовний Plus зменшує CP L2 портфеля на €36.8k: €29.2k для DK/resto та €7.6k для магазинів. Public launch cost лишається окремим cash-пакетом.</div>
       </div>
-      <p class="fine">Forecast: Plus share 24.8%, DF €1.96, безкоштовний Plus діє 12 місяців у двох потоках. Це окрема витрата від €0.35/замовлення demand incentives у Bolt-маршруті. Джерело Plus share: Databricks fact_order_delivery, Silpo-family, 01.03–31.08.2026.</p>
+      <p class="fine">Forecast: Plus share 24.8% для DK/resto (факт Silpo-family, Databricks 01.03–31.08.2026) та 18.0% для магазинів (planning input), DF €1.96. Безкоштовний Plus діє 12 місяців у двох потоках. Це окрема витрата від €0.35/замовлення demand incentives у Bolt-маршруті.</p>
     </section>
 
     <div class="source-line">
-      <span>Internal only · Yuliia Nikolaieva · оновлено 21 Sep 2026</span>
+      <span>Internal only · Yuliia Nikolaieva · оновлено 24 Sep 2026</span>
       <span><a href="https://yuliianikolaieva.github.io/silpo-gm-brief/#case">GM brief</a> · SILPO business model (5).xlsx · Databricks Silpo-family groups</span>
     </div>
   </main>
