@@ -248,39 +248,43 @@
     <section class="panel" id="volume">
       <div class="section-head">
         <div><div class="kicker">New input tab</div><h2>Товарообіг, асортимент і план на 12 місяців</h2></div>
-        <p>Пілот триває тільки в січні. Із лютого запускаємо всі 100 локацій, а SKU та попит нарощуємо поетапно.</p>
+        <p>Пілот триває тільки в січні. Із лютого запускаємо всі 100 локацій; core SKU ростуть 80 → 100 → 120 → 150.</p>
       </div>
       <div class="grid three">
-        <article class="card recommended"><div class="label">Січень · пілот</div><div class="value green">4</div><div class="sub">локації · 75 SKU · 0.25 OSPD</div></article>
-        <article class="card"><div class="label">З лютого</div><div class="value">100</div><div class="sub">локацій · 78 SKU на старті rollout</div></article>
-        <article class="card"><div class="label">Кінець року</div><div class="value">145</div><div class="sub">SKU · 0.80 OSPD</div></article>
+        <article class="card recommended"><div class="label">Січень · пілот</div><div class="value green">4</div><div class="sub">локації · 80 SKU · 0.25 OSPD</div></article>
+        <article class="card"><div class="label">З лютого</div><div class="value">100</div><div class="sub">локацій · 80 SKU на старті rollout</div></article>
+        <article class="card"><div class="label">З вересня · alcohol test</div><div class="value">+25</div><div class="sub">SKU до 150 core SKU · 4 місяці</div></article>
       </div>
       <div class="table-wrap" style="margin-top:16px">
         <table>
-          <thead><tr><th>Місяць</th><th class="num">Локації</th><th class="num">SKU</th><th class="num">OSPD</th><th class="num">Orders</th><th class="num">Товарний GMV*</th></tr></thead>
+          <thead><tr><th>Місяць</th><th class="num">Локації</th><th class="num">Core SKU</th><th class="num">Alcohol SKU</th><th class="num">OSPD</th><th class="num">Orders</th><th class="num">Base GMV*</th><th class="num">Alcohol GMV</th></tr></thead>
           <tbody>
-            <tr><td>Січ</td><td class="num">4</td><td class="num">75</td><td class="num">0.25</td><td class="num">31</td><td class="num">€0.4k</td></tr>
-            <tr><td>Лют</td><td class="num">100</td><td class="num">78</td><td class="num">0.32</td><td class="num">896</td><td class="num">€11.2k</td></tr>
-            <tr><td>Бер</td><td class="num">100</td><td class="num">82</td><td class="num">0.40</td><td class="num">1,240</td><td class="num">€15.5k</td></tr>
-            <tr><td>Кві</td><td class="num">100</td><td class="num">88</td><td class="num">0.50</td><td class="num">1,500</td><td class="num">€18.8k</td></tr>
-            <tr><td>Тра</td><td class="num">100</td><td class="num">95</td><td class="num">0.58</td><td class="num">1,798</td><td class="num">€22.5k</td></tr>
-            <tr><td>Чер</td><td class="num">100</td><td class="num">102</td><td class="num">0.64</td><td class="num">1,920</td><td class="num">€24.0k</td></tr>
-            <tr><td>Лип</td><td class="num">100</td><td class="num">110</td><td class="num">0.70</td><td class="num">2,170</td><td class="num">€27.1k</td></tr>
-            <tr><td>Сер</td><td class="num">100</td><td class="num">118</td><td class="num">0.74</td><td class="num">2,294</td><td class="num">€28.7k</td></tr>
-            <tr><td>Вер</td><td class="num">100</td><td class="num">125</td><td class="num">0.78</td><td class="num">2,340</td><td class="num">€29.3k</td></tr>
-            <tr><td>Жов</td><td class="num">100</td><td class="num">132</td><td class="num">0.80</td><td class="num">2,480</td><td class="num">€31.0k</td></tr>
-            <tr><td>Лис</td><td class="num">100</td><td class="num">140</td><td class="num">0.80</td><td class="num">2,400</td><td class="num">€30.0k</td></tr>
-            <tr><td>Гру</td><td class="num">100</td><td class="num">145</td><td class="num">0.80</td><td class="num">2,480</td><td class="num">€31.0k</td></tr>
-            <tr class="ok"><td>Разом</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num profit">21,549</td><td class="num profit">€269.4k</td></tr>
+            <tr><td>Січ</td><td class="num">4</td><td class="num">80</td><td class="num">—</td><td class="num">0.25</td><td class="num">31</td><td class="num">€0.4k</td><td class="num">—</td></tr>
+            <tr><td>Лют</td><td class="num">100</td><td class="num">80</td><td class="num">—</td><td class="num">0.32</td><td class="num">896</td><td class="num">€11.2k</td><td class="num">—</td></tr>
+            <tr><td>Бер</td><td class="num">100</td><td class="num">100</td><td class="num">—</td><td class="num">0.40</td><td class="num">1,240</td><td class="num">€15.5k</td><td class="num">—</td></tr>
+            <tr><td>Кві</td><td class="num">100</td><td class="num">100</td><td class="num">—</td><td class="num">0.50</td><td class="num">1,500</td><td class="num">€18.8k</td><td class="num">—</td></tr>
+            <tr><td>Тра</td><td class="num">100</td><td class="num">120</td><td class="num">—</td><td class="num">0.58</td><td class="num">1,798</td><td class="num">€22.5k</td><td class="num">—</td></tr>
+            <tr><td>Чер</td><td class="num">100</td><td class="num">120</td><td class="num">—</td><td class="num">0.64</td><td class="num">1,920</td><td class="num">€24.0k</td><td class="num">—</td></tr>
+            <tr><td>Лип</td><td class="num">100</td><td class="num">150</td><td class="num">—</td><td class="num">0.70</td><td class="num">2,170</td><td class="num">€27.1k</td><td class="num">—</td></tr>
+            <tr><td>Сер</td><td class="num">100</td><td class="num">150</td><td class="num">—</td><td class="num">0.74</td><td class="num">2,294</td><td class="num">€28.7k</td><td class="num">—</td></tr>
+            <tr><td>Вер</td><td class="num">100</td><td class="num">150</td><td class="num">25</td><td class="num">0.78</td><td class="num">2,340</td><td class="num">€29.3k</td><td class="num">€1.7k</td></tr>
+            <tr><td>Жов</td><td class="num">100</td><td class="num">150</td><td class="num">25</td><td class="num">0.80</td><td class="num">2,480</td><td class="num">€31.0k</td><td class="num">€1.8k</td></tr>
+            <tr><td>Лис</td><td class="num">100</td><td class="num">150</td><td class="num">25</td><td class="num">0.80</td><td class="num">2,400</td><td class="num">€30.0k</td><td class="num">€1.7k</td></tr>
+            <tr><td>Гру</td><td class="num">100</td><td class="num">150</td><td class="num">25</td><td class="num">0.80</td><td class="num">2,480</td><td class="num">€31.0k</td><td class="num">€1.8k</td></tr>
+            <tr class="ok"><td>Разом</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num profit">21,549</td><td class="num profit">€269.4k</td><td class="num profit">€7.0k</td></tr>
           </tbody>
         </table>
       </div>
       <div class="grid two" style="margin-top:16px">
-        <article class="card"><div class="label">Асортимент 70–150 SKU</div><ul><li>35–40%: готові основні страви й гарніри</li><li>20–25%: салати, закуски, супи</li><li>15–20%: піца, суші, бургери</li><li>10–15%: десерти й bakery</li><li>10–15%: напої; алкоголь — окремий трек</li></ul></article>
-        <article class="card warning"><div class="label">Cafe Rynok benchmark</div><p class="sub">Потрібна окрема DBX-вибірка за схожими SKU: салати, супи, гарячі страви, піца/бургери, десерти й напої. У цій сесії DBX-конектор недоступний, тому поточний AOV €12.50 — робоче припущення на базі ресторанного AOV €15.59 × 80%.</p></article>
+        <article class="card"><div class="label">Коефіцієнт бренду Сільпо</div><div class="value green">1.10×</div><p class="sub">Застосований до base OSPD: на зрілій локації 0.73 generic OSPD → 0.80 для відомого бренду Сільпо. Це припущення, яке треба калібрувати на факті пілота.</p></article>
+        <article class="card warning"><div class="label">Cafe Rynok benchmark</div><p class="sub">Looker-конектор у поточній сесії не надано, тому я не можу чесно витягти продажі Cafe Rynok. Для калібрування потрібні orders, AOV, dishes/order і SKU sales за 1 січня — 31 серпня 2026 (8 повних місяців) на рівні категорій.</p></article>
+      </div>
+      <div class="grid two" style="margin-top:16px">
+        <article class="card recommended"><div class="label">Сценарій 1 · core culinary</div><div class="value green">€269.4k</div><div class="sub">21,549 orders · 150 core SKU з липня · без алкоголю</div></article>
+        <article class="card warning"><div class="label">Сценарій 2 · core + алкоголь</div><div class="value">€276.4k</div><div class="sub">+€7.0k GMV у вересні–грудні: 25 SKU, 8% attach rate, €9.0 average alcohol add-on</div></article>
       </div>
       <div class="callout green"><span class="dot"></span><div><b>Комісія own / Bolt.</b> Це не додаткові ставки в цьому плані: own означає замовлення на курʼєрах Сільпо, Bolt — на курʼєрах Bolt. У решті вкладок залишені попередні сценарні ставки 8% і 13% відповідно.</div></div>
-      <p class="fine">* У новій вкладці GMV рахується від AOV €12.50, тобто 20% нижче ресторанного бенчмарку. В існуючих вкладках збережено їхню попередню логіку AOV та ставок; оновлено лише orders і GMV.</p>
+      <p class="fine">* Base GMV рахується від AOV €12.50, тобто 20% нижче ресторанного бенчмарку. Alcohol scenario: вино 20 SKU + міцний алкоголь 5 SKU в останні 4 місяці; 8% attach rate та €9.0 add-on — planning assumption, а не підтверджені продажі Varus/LOKO. В існуючих вкладках збережено попередню логіку AOV та ставок; оновлено лише orders і GMV.</p>
     </section>
 
     <section class="panel" id="own">
