@@ -64,7 +64,7 @@
     .hero p { max-width:860px; margin:18px 0 0; color:rgba(255,255,255,.72); font-size:17px; line-height:1.55; }
     .tabs-wrap { margin:18px 0 26px; }
     .tabs {
-      display:grid; grid-template-columns:repeat(5,1fr); gap:8px; padding:7px;
+      display:grid; grid-template-columns:repeat(6,1fr); gap:8px; padding:7px;
       border:1px solid var(--line); border-radius:16px; background:var(--paper);
     }
     .tab {
@@ -184,6 +184,7 @@
     <nav class="tabs-wrap" aria-label="Розділи">
       <div class="tabs" role="tablist">
         <button class="tab" role="tab" aria-selected="true" data-tab="rec">Рекомендація</button>
+        <button class="tab" role="tab" aria-selected="false" data-tab="volume">Товарообіг і SKU</button>
         <button class="tab" role="tab" aria-selected="false" data-tab="own">1. Курʼєри Сільпо</button>
         <button class="tab" role="tab" aria-selected="false" data-tab="bolt">2. Курʼєри Bolt</button>
         <button class="tab" role="tab" aria-selected="false" data-tab="blend">3. Спільна ставка</button>
@@ -242,6 +243,44 @@
         </table>
       </div>
       <p class="fine">Джерело моделі: SILPO business model (5).xlsx, лист Silpo, стовпці SILPO OWN courier та SILPO + BF couriers.</p>
+    </section>
+
+    <section class="panel" id="volume">
+      <div class="section-head">
+        <div><div class="kicker">New input tab</div><h2>Товарообіг, асортимент і план на 12 місяців</h2></div>
+        <p>Пілот триває тільки в січні. Із лютого запускаємо всі 100 локацій, а SKU та попит нарощуємо поетапно.</p>
+      </div>
+      <div class="grid three">
+        <article class="card recommended"><div class="label">Січень · пілот</div><div class="value green">4</div><div class="sub">локації · 75 SKU · 0.25 OSPD</div></article>
+        <article class="card"><div class="label">З лютого</div><div class="value">100</div><div class="sub">локацій · 78 SKU на старті rollout</div></article>
+        <article class="card"><div class="label">Кінець року</div><div class="value">145</div><div class="sub">SKU · 0.80 OSPD</div></article>
+      </div>
+      <div class="table-wrap" style="margin-top:16px">
+        <table>
+          <thead><tr><th>Місяць</th><th class="num">Локації</th><th class="num">SKU</th><th class="num">OSPD</th><th class="num">Orders</th><th class="num">Товарний GMV*</th></tr></thead>
+          <tbody>
+            <tr><td>Січ</td><td class="num">4</td><td class="num">75</td><td class="num">0.25</td><td class="num">31</td><td class="num">€0.4k</td></tr>
+            <tr><td>Лют</td><td class="num">100</td><td class="num">78</td><td class="num">0.32</td><td class="num">896</td><td class="num">€11.2k</td></tr>
+            <tr><td>Бер</td><td class="num">100</td><td class="num">82</td><td class="num">0.40</td><td class="num">1,240</td><td class="num">€15.5k</td></tr>
+            <tr><td>Кві</td><td class="num">100</td><td class="num">88</td><td class="num">0.50</td><td class="num">1,500</td><td class="num">€18.8k</td></tr>
+            <tr><td>Тра</td><td class="num">100</td><td class="num">95</td><td class="num">0.58</td><td class="num">1,798</td><td class="num">€22.5k</td></tr>
+            <tr><td>Чер</td><td class="num">100</td><td class="num">102</td><td class="num">0.64</td><td class="num">1,920</td><td class="num">€24.0k</td></tr>
+            <tr><td>Лип</td><td class="num">100</td><td class="num">110</td><td class="num">0.70</td><td class="num">2,170</td><td class="num">€27.1k</td></tr>
+            <tr><td>Сер</td><td class="num">100</td><td class="num">118</td><td class="num">0.74</td><td class="num">2,294</td><td class="num">€28.7k</td></tr>
+            <tr><td>Вер</td><td class="num">100</td><td class="num">125</td><td class="num">0.78</td><td class="num">2,340</td><td class="num">€29.3k</td></tr>
+            <tr><td>Жов</td><td class="num">100</td><td class="num">132</td><td class="num">0.80</td><td class="num">2,480</td><td class="num">€31.0k</td></tr>
+            <tr><td>Лис</td><td class="num">100</td><td class="num">140</td><td class="num">0.80</td><td class="num">2,400</td><td class="num">€30.0k</td></tr>
+            <tr><td>Гру</td><td class="num">100</td><td class="num">145</td><td class="num">0.80</td><td class="num">2,480</td><td class="num">€31.0k</td></tr>
+            <tr class="ok"><td>Разом</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num profit">21,549</td><td class="num profit">€269.4k</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="grid two" style="margin-top:16px">
+        <article class="card"><div class="label">Асортимент 70–150 SKU</div><ul><li>35–40%: готові основні страви й гарніри</li><li>20–25%: салати, закуски, супи</li><li>15–20%: піца, суші, бургери</li><li>10–15%: десерти й bakery</li><li>10–15%: напої; алкоголь — окремий трек</li></ul></article>
+        <article class="card warning"><div class="label">Cafe Rynok benchmark</div><p class="sub">Потрібна окрема DBX-вибірка за схожими SKU: салати, супи, гарячі страви, піца/бургери, десерти й напої. У цій сесії DBX-конектор недоступний, тому поточний AOV €12.50 — робоче припущення на базі ресторанного AOV €15.59 × 80%.</p></article>
+      </div>
+      <div class="callout green"><span class="dot"></span><div><b>Комісія own / Bolt.</b> Це не додаткові ставки в цьому плані: own означає замовлення на курʼєрах Сільпо, Bolt — на курʼєрах Bolt. У решті вкладок залишені попередні сценарні ставки 8% і 13% відповідно.</div></div>
+      <p class="fine">* У новій вкладці GMV рахується від AOV €12.50, тобто 20% нижче ресторанного бенчмарку. В існуючих вкладках збережено їхню попередню логіку AOV та ставок; оновлено лише orders і GMV.</p>
     </section>
 
     <section class="panel" id="own">
@@ -551,6 +590,22 @@
   </main>
 
   <script>
+    const volumeUpdates = [
+      ["40,032", "21,549"],
+      ["€520.4k", "€280.1k"],
+      ["€600.5k", "€323.2k"],
+      ["€678.9k", "€365.5k"],
+      ["100,168", "81,685"],
+      ["€1.458m", "€1.217m"],
+      ["€1.538m", "€1.260m"],
+      ["139 локацій", "100 локацій (4 у січні, 100 із лютого)"]
+    ];
+    const textWalker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+    const textNodes = [];
+    while (textWalker.nextNode()) textNodes.push(textWalker.currentNode);
+    textNodes.forEach((node) => {
+      volumeUpdates.forEach(([from, to]) => { node.nodeValue = node.nodeValue.split(from).join(to); });
+    });
     const tabs = document.querySelectorAll(".tab");
     const panels = document.querySelectorAll(".panel");
     tabs.forEach((tab) => {
