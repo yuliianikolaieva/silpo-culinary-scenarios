@@ -426,9 +426,10 @@
         </article>
       </div>
 
-      <div class="section-head" style="margin-top:22px"><div><div class="kicker">Фінальний L2 · з Bolt Plus</div><h3>Спільна ставка: 100 vs 160 локацій</h3></div><p>У кожному рядку повністю враховано Bolt Plus для DK/resto та stores; алкоголь додає товарний GMV.</p></div>
-      <div class="table-wrap" style="margin-top:16px"><table><thead><tr><th>Сценарій</th><th class="num">Orders · DK/resto + stores</th><th class="num">Товарний GMV A / B</th><th class="num">Bolt Plus у L2</th><th class="num">CP L2 baseline A / B</th><th class="num">CP L2 за 18% / 19% A / B</th></tr></thead><tbody><tr><td>1 · 100 локацій + алкоголь</td><td class="num">81,685</td><td class="num">€1.228m / €1.228m</td><td class="num">−€36.8k</td><td class="num">€35.5k / €35.9k</td><td class="num profit">€47.1k / €47.0k</td></tr><tr class="ok"><td>2 · 160 локацій + алкоголь</td><td class="num">94,596</td><td class="num">€1.402m / €1.402m</td><td class="num">−€41.4k</td><td class="num">€41.7k / €43.1k</td><td class="num profit">€58.9k / €58.8k</td></tr></tbody></table></div>
-      <p class="fine">A — stores на курʼєрах Сільпо, B — stores на курʼєрах Bolt. L2 включає €29.2k Bolt Plus для DK/resto та €7.6k / €12.2k для stores. Для алкогольного GMV застосована комісія сценарію; додатковий demand incentive не закладено.</p>
+      <div class="section-head" style="margin-top:22px"><div><div class="kicker">Фінальний P&amp;L · L2 уже після витрат</div><h3>Спільна ставка: 100 vs 160 локацій</h3></div><p>Scenario A — own courier без DF campaign і Bolt Plus. Scenario B — Bolt courier: L2 уже після €14k DF campaign та Bolt Plus для stores.</p></div>
+      <div class="table-wrap" style="margin-top:16px"><table><thead><tr><th>Сценарій</th><th class="num">Orders</th><th class="num">Товарний GMV</th><th class="num">CP L1 € / %</th><th class="num">L2 spend</th><th class="num">Фінальний CP L2 € / %</th><th>Value vs поточні окремі ставки</th></tr></thead><tbody><tr><td><b>S1 A · 100 · own courier · 18%</b></td><td class="num">81,685</td><td class="num">€1.228m</td><td class="num">€181.1k / 14.9%</td><td class="num">—</td><td class="num profit">€82.0k / 6.7%</td><td class="profit">+€8.9k</td></tr><tr><td><b>S1 B · 100 · Bolt courier · 19%</b></td><td class="num">81,685</td><td class="num">€1.228m</td><td class="num">€194.8k / 15.9%</td><td class="num">−€14.0k DF − €7.6k Plus</td><td class="num profit">€74.2k / 6.0%</td><td class="profit">+€7.8k</td></tr><tr class="ok"><td><b>S2 A · 160 · own courier · 18%</b></td><td class="num">94,596</td><td class="num">€1.402m</td><td class="num">€199.5k / 14.2%</td><td class="num">—</td><td class="num profit">€100.4k / 7.2%</td><td class="profit">+€17.2k</td></tr><tr class="ok"><td><b>S2 B · 160 · Bolt courier · 19%</b></td><td class="num">94,596</td><td class="num">€1.402m</td><td class="num">€221.6k / 15.8%</td><td class="num">−€14.0k DF − €12.2k Plus</td><td class="num profit">€96.3k / 6.9%</td><td class="profit">+€24.0k</td></tr></tbody></table></div>
+      <p class="fine">У всіх рядках L2 також уже містить €99.1k фактичних demand incentives DK/resto. DF campaign та Bolt Plus додаються тільки в B: €21.6k у S1 і €26.2k у S2. Value порівнює фінальний L2 зі збереженням поточних окремих ставок (DK/resto 22.5%, stores 8% / 12%).</p>
+      <div class="callout green"><span class="dot"></span><div><b>Висновок:</b> за цих припущень спільна ставка додає, а не віднімає value від поточної конструкції з вищою комісією DK/resto: від +€7.8k до +€24.0k фінального CP L2. Найменший запас — S1 B; його треба погоджувати лише з чітким контролем DF і Bolt Plus.</div></div>
 
       <div class="table-wrap" style="margin-top:16px">
         <table>
@@ -470,8 +471,8 @@
           <ul>
             <li>100,168 orders · GMV €1.458m</li>
             <li>Baseline: комісія €252.7k · CP L1 €171.4k (11.8%) · CP L2 €72.3k (5.0%)</li>
-            <li>18% → CP L1 €181.1k (12.4%) · CP L2 €82.0k (5.6%) до Bolt Plus</li>
-            <li>Після безкоштовного Bolt Plus: CP L2 €45.2k (−€36.8k)</li>
+            <li>18% → CP L1 €181.1k (12.4%) · CP L2 €82.0k (5.6%)</li>
+            <li>Scenario A: DF campaign і Bolt Plus не застосовуються</li>
           </ul>
         </article>
         <article class="card recommended">
@@ -481,8 +482,8 @@
           <ul>
             <li>100,168 orders · GMV €1.538m</li>
             <li>Baseline: комісія €283.1k · CP L1 €185.8k (12.1%) · CP L2 €72.7k (4.7%)</li>
-            <li>19% → CP L1 €194.8k (12.7%) · CP L2 €81.8k (5.3%) до Bolt Plus</li>
-            <li>Після безкоштовного Bolt Plus: CP L2 €45.0k (−€36.8k)</li>
+            <li>19% → CP L1 €194.8k (12.7%) · CP L2 €81.8k (5.3%) до нового Bolt Plus</li>
+            <li>Scenario B: фінальний L2 €74.2k після €14.0k DF + €7.6k Bolt Plus</li>
           </ul>
         </article>
       </div>
@@ -494,10 +495,10 @@
               <th>Спільна ставка</th>
               <th class="num">Orders</th>
               <th class="num">GMV</th>
-              <th class="num">CP L1 / L2 до Plus · A</th>
-              <th class="num">L1 / L2 % до Plus · A</th>
-              <th class="num">CP L1 / L2 до Plus · B</th>
-              <th class="num">L1 / L2 % до Plus · B</th>
+              <th class="num">CP L1 / L2 до фінальних B costs · A</th>
+              <th class="num">L1 / L2 % до фінальних B costs · A</th>
+              <th class="num">CP L1 / L2 до фінальних B costs · B</th>
+              <th class="num">L1 / L2 % до фінальних B costs · B</th>
               <th>Вигода vs baseline L2</th>
             </tr>
           </thead>
@@ -515,7 +516,7 @@
 
       <div class="callout red">
         <span class="dot"></span>
-        <div><b>Bolt Plus — окремий L2 cost портфеля.</b> До таблиці вище не змішано €36.8k вартості безкоштовної підписки: DK/resto €29.2k + магазини €7.6k (18% Plus share). Тому фінальний CP L2 після Plus: A / B — baseline €35.5k / €35.9k; за рекомендованих 18% / 19% — €45.2k / €45.0k.</div>
+        <div><b>Фінальна таблиця вище — рішення.</b> У Scenario A відсутні DF campaign і Bolt Plus. У Scenario B CP L2 одразу включає €14.0k DF campaign + €7.6k / €12.2k Bolt Plus для stores. Не додаємо €29.2k до L2: DK/resto Plus у цей сценарій не закладено.</div>
       </div>
 
       <div class="callout">
@@ -555,14 +556,14 @@
             <tr><td>Hero banner</td><td>2× / рік</td><td class="num">€2,000</td><td>In-kind</td><td>Так</td><td>Так</td><td>Так</td></tr>
             <tr><td>Modal</td><td>1× / квартал</td><td class="num">€2,400</td><td>In-kind</td><td>Так</td><td>Так</td><td>Так</td></tr>
             <tr class="warn"><td>DF campaign</td><td>6 із 12 міс.</td><td class="num">€14.0k</td><td>Demand incentives</td><td class="neg">Ні</td><td>Так</td><td>Так · лише Bolt-маршрут</td></tr>
-            <tr class="warn"><td>Bolt Plus · DK/resto + stores</td><td>12 міс.</td><td class="num">€36.8k / €41.4k</td><td>Bolt cost · free delivery</td><td>Так</td><td>Так</td><td>Так · у L2 повністю</td></tr>
+            <tr class="warn"><td>Bolt route · DF campaign + Plus stores</td><td>12 міс.</td><td class="num">€21.6k / €26.2k</td><td>L2 cost</td><td class="neg">Ні</td><td>Так</td><td>Так · лише Scenario B</td></tr>
           </tbody>
         </table>
       </div>
 
       <div class="section-head">
-        <div><div class="kicker">Bolt Plus</div><h2>Безкоштовний Bolt Plus для DK/resto та магазинів</h2></div>
-        <p>Партнер не платить +2 в.п. комісії. Bolt бере на себе вартість free delivery для Plus users у двох потоках і показує її окремою витратою.</p>
+        <div><div class="kicker">Bolt route costs</div><h2>DF campaign + безкоштовний Bolt Plus для магазинів</h2></div>
+        <p>Партнер не платить за DF campaign чи Bolt Plus. Витрати діють лише в Scenario B (Bolt courier) і віднімаються з CP L2.</p>
       </div>
       <div class="grid three">
         <article class="card">
@@ -571,20 +572,20 @@
           <div class="sub">Planning input для Сільпо; нижче 24.8% факту Silpo-family</div>
         </article>
         <article class="card warning">
-          <div class="label">DK + resto · cost Bolt</div><div class="value">€29.2k</div>
-          <div class="sub">60,136 orders × 24.8% × €1.96 DF × 12 міс.</div>
+          <div class="label">DF campaign · Scenario B</div><div class="value">€14.0k</div>
+          <div class="sub">Demand incentives у Bolt-маршруті · L2 cost</div>
         </article>
         <article class="card warning">
           <div class="label">Магазини · cost Bolt</div><div class="value">€7.6k / €12.2k</div>
           <div class="sub">S1 / S2: 21,549 / 34,460 orders × 18.0% × €1.96 DF</div>
         </article>
       </div>
-      <div class="table-wrap" style="margin-top:16px"><table><thead><tr><th>Напрямок</th><th class="num">Orders</th><th class="num">Plus share</th><th class="num">DF / order</th><th class="num">Період</th><th class="num">Витрати Bolt</th><th>Партнер платить?</th></tr></thead><tbody><tr><td>Dark kitchen + resto</td><td class="num">60,136</td><td class="num">24.8%</td><td class="num">€1.96</td><td class="num">12 міс.</td><td class="num">€29.2k</td><td class="profit">Ні</td></tr><tr><td>Магазини Сільпо · S1 100</td><td class="num">21,549</td><td class="num">18.0%</td><td class="num">€1.96</td><td class="num">12 міс.</td><td class="num">€7.6k</td><td class="profit">Ні</td></tr><tr><td>Магазини Сільпо · S2 160</td><td class="num">34,460</td><td class="num">18.0%</td><td class="num">€1.96</td><td class="num">12 міс.</td><td class="num">€12.2k</td><td class="profit">Ні</td></tr><tr class="warn"><td>Разом · S1 / S2</td><td class="num">81,685 / 94,596</td><td class="num">—</td><td class="num">—</td><td class="num">12 міс.</td><td class="num profit">€36.8k / €41.4k</td><td class="profit">Ні</td></tr></tbody></table></div>
+      <div class="table-wrap" style="margin-top:16px"><table><thead><tr><th>Напрямок</th><th class="num">Orders</th><th class="num">Plus share</th><th class="num">DF / order</th><th class="num">Період</th><th class="num">L2 cost Bolt</th><th>Партнер платить?</th></tr></thead><tbody><tr><td>DF campaign · Scenario B</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">12 міс.</td><td class="num">€14.0k</td><td class="profit">Ні</td></tr><tr><td>Магазини Сільпо · S1 100</td><td class="num">21,549</td><td class="num">18.0%</td><td class="num">€1.96</td><td class="num">12 міс.</td><td class="num">€7.6k</td><td class="profit">Ні</td></tr><tr><td>Магазини Сільпо · S2 160</td><td class="num">34,460</td><td class="num">18.0%</td><td class="num">€1.96</td><td class="num">12 міс.</td><td class="num">€12.2k</td><td class="profit">Ні</td></tr><tr class="warn"><td>Разом Scenario B · S1 / S2</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">12 міс.</td><td class="num profit">€21.6k / €26.2k</td><td class="profit">Ні</td></tr></tbody></table></div>
       <div class="callout">
         <span class="dot"></span>
-        <div><b>Це витрати Bolt, а не дохід від партнера.</b> Безкоштовний Plus зменшує CP L2 портфеля на €36.8k / €41.4k: €29.2k для DK/resto та €7.6k / €12.2k для магазинів у S1 / S2. Public launch cost лишається окремим cash-пакетом.</div>
+        <div><b>Це витрати Bolt, а не дохід від партнера.</b> У Scenario B L2 зменшується на €14.0k DF campaign + €7.6k / €12.2k Bolt Plus для stores, тобто €21.6k / €26.2k у S1 / S2. Scenario A їх не містить.</div>
       </div>
-      <p class="fine">Forecast: Plus share 24.8% для DK/resto (факт Silpo-family, Databricks 01.03–31.08.2026) та 18.0% для магазинів (planning input), DF €1.96. Безкоштовний Plus діє 12 місяців у двох потоках. Це окрема витрата від €0.35/замовлення demand incentives у Bolt-маршруті.</p>
+      <p class="fine">Forecast: Plus share 18.0% для магазинів (planning input), DF €1.96. Безкоштовний Plus діє 12 місяців лише для stores у Scenario B. Це окрема витрата від €14.0k DF campaign у Bolt-маршруті.</p>
     </section>
 
     <div class="source-line">
