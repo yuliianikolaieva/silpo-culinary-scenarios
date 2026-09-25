@@ -493,23 +493,19 @@
           <thead>
             <tr>
               <th>Спільна ставка</th>
-              <th class="num">Orders</th>
-              <th class="num">GMV</th>
-              <th class="num">CP L1 / L2 до фінальних B costs · A</th>
-              <th class="num">L1 / L2 % до фінальних B costs · A</th>
-              <th class="num">CP L1 / L2 до фінальних B costs · B</th>
-              <th class="num">L1 / L2 % до фінальних B costs · B</th>
-              <th>Вигода vs baseline L2</th>
+              <th class="num">A · CP L1 / L2</th>
+              <th class="num">B · CP L1 / L2</th>
+              <th>Висновок</th>
             </tr>
           </thead>
           <tbody>
-            <tr><td>Окремі ставки · baseline</td><td class="num">100,168 / 100,168</td><td class="num">€1.458m / €1.538m</td><td class="num">€171.4k / €72.3k</td><td class="num">11.8% / 5.0%</td><td class="num">€185.8k / €72.7k</td><td class="num">12.1% / 4.7%</td><td>Точка відліку</td></tr>
-            <tr class="bad"><td>14%</td><td class="num">без змін</td><td class="num">без змін</td><td class="num neg">€122.8k / €23.7k</td><td class="num neg">8.4% / 1.6%</td><td class="num neg">€117.9k / €4.9k</td><td class="num neg">7.7% / 0.3%</td><td>Ні: −€48.6k / −€67.8k</td></tr>
-            <tr class="bad"><td>16%</td><td class="num">без змін</td><td class="num">без змін</td><td class="num neg">€151.9k / €52.8k</td><td class="num neg">10.4% / 3.6%</td><td class="num neg">€148.7k / €35.6k</td><td class="num neg">9.7% / 2.3%</td><td>Ні: −€19.5k / −€37.1k</td></tr>
-            <tr class="warn"><td>17%</td><td class="num">без змін</td><td class="num">без змін</td><td class="num neg">€166.5k / €67.4k</td><td class="num neg">11.4% / 4.6%</td><td class="num neg">€164.1k / €51.0k</td><td class="num neg">10.7% / 3.3%</td><td>Ні: −€4.9k / −€21.7k</td></tr>
-            <tr class="warn"><td>18%</td><td class="num">без змін</td><td class="num">без змін</td><td class="num profit">€181.1k / €82.0k</td><td class="num profit">12.4% / 5.6%</td><td class="num neg">€179.5k / €66.4k</td><td class="num neg">11.7% / 4.3%</td><td>Лише для A: +€9.7k / −€6.3k</td></tr>
-            <tr class="ok"><td>19%</td><td class="num">без змін</td><td class="num">без змін</td><td class="num profit">€195.6k / €96.6k</td><td class="num profit">13.4% / 6.6%</td><td class="num profit">€194.8k / €81.8k</td><td class="num profit">12.7% / 5.3%</td><td>Так: +€24.3k / +€9.1k</td></tr>
-            <tr class="ok"><td>20%</td><td class="num">без змін</td><td class="num">без змін</td><td class="num profit">€210.2k / €111.2k</td><td class="num profit">14.4% / 7.6%</td><td class="num profit">€210.2k / €97.1k</td><td class="num profit">13.7% / 6.3%</td><td>Так: +€38.9k / +€24.4k</td></tr>
+            <tr><td>Окремі ставки · baseline</td><td class="num">€171.4k / €72.3k</td><td class="num">€185.8k / €72.7k</td><td>Точка відліку</td></tr>
+            <tr class="bad"><td>14%</td><td class="num neg">€122.8k / €23.7k</td><td class="num neg">€117.9k / €4.9k</td><td>Не підходить</td></tr>
+            <tr class="bad"><td>16%</td><td class="num neg">€151.9k / €52.8k</td><td class="num neg">€148.7k / €35.6k</td><td>Нижче baseline</td></tr>
+            <tr class="warn"><td>17%</td><td class="num neg">€166.5k / €67.4k</td><td class="num neg">€164.1k / €51.0k</td><td>Ще нижче baseline</td></tr>
+            <tr class="warn"><td>18%</td><td class="num profit">€181.1k / €82.0k</td><td class="num neg">€179.5k / €66.4k</td><td>Працює лише для A</td></tr>
+            <tr class="ok"><td>19%</td><td class="num profit">€195.6k / €96.6k</td><td class="num profit">€194.8k / €81.8k</td><td>Працює для A і B</td></tr>
+            <tr class="ok"><td>20%</td><td class="num profit">€210.2k / €111.2k</td><td class="num profit">€210.2k / €97.1k</td><td>Додатковий upside</td></tr>
           </tbody>
         </table>
       </div>
