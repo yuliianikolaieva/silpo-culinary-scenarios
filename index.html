@@ -188,6 +188,7 @@
         <button class="tab" role="tab" aria-selected="false" data-tab="own">1. Курʼєри Сільпо</button>
         <button class="tab" role="tab" aria-selected="false" data-tab="bolt">2. Курʼєри Bolt</button>
         <button class="tab" role="tab" aria-selected="false" data-tab="blend">3. Спільна ставка</button>
+        <button class="tab" role="tab" aria-selected="false" data-tab="bolt12">4. Bolt 12% + DK/resto</button>
         <button class="tab" role="tab" aria-selected="false" data-tab="mkt">Маркетинг і Plus</button>
       </div>
     </nav>
@@ -524,6 +525,25 @@
         <div><b>Що змінюється і що ні.</b> Покращуються CP L1 і CP L2 — і тільки вище revenue-neutral точки. GMV та orders не змінюються: сама по собі спільна ставка не створює попиту.</div>
       </div>
       <p class="fine">DK / resto: Databricks 01.03–31.08.2026, ×2 до 12 міс. CP L1 = contribution до demand incentives; CP L2 = після incentives (fact_provider_weekly: total_contribution_profit_eur vs without_demand_incentives). Stores: SILPO business model (5).xlsx, рядки Contribution Profit та Contribution Profit L2. Відсотки — від товарного GMV.</p>
+    </section>
+
+    <section class="panel" id="bolt12">
+      <div class="section-head">
+        <div><div class="kicker">Новий переговорний сценарій</div><h2>Bolt courier 12% · поточна або 19% ставка DK/resto</h2></div>
+        <p>Scenario 1: 100 локацій, €427.8k stores GMV. Bolt Plus безкоштовний для stores, dark kitchen і resto; Sponsored Listing дешевший на 30–50%.</p>
+      </div>
+      <div class="grid three">
+        <article class="card"><div class="label">Stores · Bolt courier</div><div class="value">12%</div><div class="sub">30,610 orders · €427.8k GMV · €14.0k DI + €10.8k Plus</div></article>
+        <article class="card warning"><div class="label">DK + resto · поточна комісія</div><div class="value">22.52%</div><div class="sub">€211.1k комісії на €937.3k GMV</div></article>
+        <article class="card danger"><div class="label">DK + resto · запропонована комісія</div><div class="value red">19%</div><div class="sub">€178.1k комісії · €33.0k річна економія Сільпо</div></article>
+      </div>
+
+      <div class="table-wrap" style="margin-top:16px"><table><thead><tr><th>Умова</th><th class="num">Економія Сільпо · комісія</th><th class="num">Економія Сільпо · Sponsored Listing</th><th class="num">Фінальний CP L2 Bolt*</th><th>Рентабельність для Bolt</th></tr></thead><tbody><tr><td>12% stores + поточна комісія DK/resto + free Plus</td><td class="num">€0</td><td class="num">30–50% × поточний SL spend</td><td class="num profit">€24.0k − 30–50% × SL spend</td><td>Позитивна, якщо SL spend ≤ €80.0k при −30% або ≤ €48.0k при −50%</td></tr><tr class="bad"><td>12% stores + 19% DK/resto + free Plus</td><td class="num profit">€33.0k</td><td class="num profit">30–50% × поточний SL spend</td><td class="num neg">−€9.0k − 30–50% × SL spend</td><td><b>Нерентабельна</b> ще до знижки Sponsored Listing</td></tr></tbody></table></div>
+
+      <div class="table-wrap" style="margin-top:16px"><table><thead><tr><th>Водоспад CP L2 · Bolt</th><th class="num">€</th><th class="num">% від €1.365m portfolio GMV</th></tr></thead><tbody><tr><td>DK + resto CP L2 після demand incentives</td><td class="num">€56.4k</td><td class="num">4.1%</td></tr><tr><td>Stores CP L2 · Bolt 12%, після DI + stores Plus</td><td class="num neg">−€3.2k</td><td class="num neg">−0.2%</td></tr><tr><td>DK/resto Bolt Plus · безкоштовний</td><td class="num neg">−€29.2k</td><td class="num neg">−2.1%</td></tr><tr class="ok"><td>CP L2 до знижки Sponsored Listing та зміни ставки DK/resto</td><td class="num profit">€24.0k</td><td class="num profit">1.8%</td></tr><tr><td>Зниження ставки DK/resto 22.52% → 19%</td><td class="num neg">−€33.0k</td><td class="num neg">−2.4%</td></tr><tr class="bad"><td>CP L2 після 19% · до Sponsored Listing discount</td><td class="num neg">−€9.0k</td><td class="num neg">−0.7%</td></tr></tbody></table></div>
+
+      <div class="callout red"><span class="dot"></span><div><b>Рекомендація: не поєднувати 12% для stores, free Bolt Plus і 19% для DK/resto.</b> Уже на цих трьох умовах L2 стає −€9.0k; будь-яка знижка Sponsored Listing погіршує результат. Без зниження комісії DK/resto пакет ще має €24.0k L2 до Sponsored Listing discount.</div></div>
+      <p class="fine">* Sponsored Listing — окремий рекламний дохід Bolt, якого немає у поточному CP extract. Тому показано точну формулу: при річному поточному SL spend = S, знижка дає Сільпо 0.30S / 0.50S економії та зменшує CP L2 Bolt на ту саму суму. Факт DK/resto: €937.3k GMV, €211.1k комісії, €56.4k CP L2 після DI. Free Bolt Plus: €29.2k DK/resto + €10.8k stores.</p>
     </section>
 
     <section class="panel" id="mkt">
