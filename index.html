@@ -229,22 +229,26 @@
         <table>
           <thead>
             <tr>
-              <th>Питання</th>
-              <th>Рекомендація</th>
-              <th>Hard guardrail</th>
+              <th>Сценарій</th>
+              <th class="num">Orders</th>
+              <th class="num">GMV</th>
+              <th class="num">CP L1 € / %</th>
+              <th class="num">CP L2 € / %</th>
+              <th class="num">DI € / %</th>
+              <th class="num">DF campaign € / %</th>
+              <th class="num">Bolt Plus € / %</th>
+              <th>Висновок</th>
             </tr>
           </thead>
           <tbody>
-            <tr class="ok"><td>Курʼєри Сільпо</td><td class="profit">8%, ask 9–10%</td><td>Не нижче 8% за CP L2 3.06%. 6–7% лишають L2 1–2%</td></tr>
-            <tr class="ok"><td>Курʼєри Bolt</td><td class="profit">13%</td><td>12% дає S1 CP L2 €2.2k / 0.51% після DI та Plus на 6 міс.</td></tr>
-            <tr class="warn"><td>Bolt Plus · DK/resto + магазини</td><td>Безкоштовно для партнера · 6 міс.</td><td>€20.0k S1 витрат Bolt: DF discount; SF та SOF залишаються</td></tr>
-            <tr class="warn"><td>Bolt courier 12% · DK/resto</td><td>Один пакет: поточна ставка / 20%</td><td>У L2: DF campaign для всього portfolio + Bolt Plus 6 міс.; 20% — нижня межа</td></tr>
-            <tr class="warn"><td>Одна ставка · stores own courier</td><td>18%</td><td>Revenue-neutral 17.33%</td></tr>
-            <tr class="warn"><td>Одна ставка · stores Bolt courier</td><td>19%</td><td>Revenue-neutral 18.41%</td></tr>
+            <tr class="ok"><td><b>Курʼєри Сільпо · stores 8%</b></td><td class="num">30,610</td><td class="num">€427.8k</td><td class="num">€13.1k / 3.1%</td><td class="num profit">€13.1k / 3.1%</td><td class="num">€0 / 0.0%</td><td class="num">€0 / 0.0%</td><td class="num">€0 / 0.0%</td><td><b>Йти.</b> Стабільний позитивний L2.</td></tr>
+            <tr class="bad"><td><b>Курʼєри Bolt · stores 12%</b></td><td class="num">30,610</td><td class="num">€427.8k</td><td class="num">€21.6k / 5.1%</td><td class="num neg">€2.2k / 0.5%</td><td class="num">€0 / 0.0%</td><td class="num">€14.0k / 3.3%</td><td class="num">€5.4k / 1.3%</td><td><b>Не йти окремо.</b> L2 надто тонкий.</td></tr>
+            <tr class="ok"><td><b>Спільна ставка · Bolt route 19%</b></td><td class="num">90,746</td><td class="num">€1.365m</td><td class="num">€213.4k / 15.6%</td><td class="num profit">€80.3k / 5.9%</td><td class="num">€99.1k / 7.3%</td><td class="num">€14.0k / 1.0%</td><td class="num">€20.0k / 1.5%</td><td><b>Йти умовно.</b> Найкращий L2, якщо ставка 19% прийнятна.</td></tr>
+            <tr class="warn"><td><b>Bolt courier 12% + DK/resto 20%</b><br>єдиний переговорний пакет</td><td class="num">90,746</td><td class="num">€1.365m</td><td class="num">€153.4k / 11.2%</td><td class="num profit">€2.5k / 0.2%</td><td class="num">€99.1k / 7.3%</td><td class="num">€31.8k / 2.3%</td><td class="num">€20.0k / 1.5%</td><td><b>Не йти з cash launch / SL.</b> Лише межа для переговорів.</td></tr>
           </tbody>
         </table>
       </div>
-      <p class="fine">Джерело моделі: SILPO business model (5).xlsx, лист Silpo, стовпці SILPO OWN courier та SILPO + BF couriers.</p>
+      <p class="fine">S1: 100 локацій. DI — фактичні demand incentives DK/resto; DF campaign показано окремо. Bolt Plus діє 6 місяців, знижує лише DF; SF та SOF залишаються. L2 = CP L1 − DI − DF campaign − Bolt Plus.</p>
     </section>
 
     <section class="panel" id="volume">
