@@ -64,7 +64,7 @@
     .hero p { max-width:860px; margin:18px 0 0; color:rgba(255,255,255,.72); font-size:17px; line-height:1.55; }
     .tabs-wrap { margin:18px 0 26px; }
     .tabs {
-      display:grid; grid-template-columns:repeat(6,1fr); gap:8px; padding:7px;
+      display:grid; grid-template-columns:repeat(4,1fr); gap:8px; padding:7px;
       border:1px solid var(--line); border-radius:16px; background:var(--paper);
     }
     .tab {
@@ -189,6 +189,7 @@
         <button class="tab" role="tab" aria-selected="false" data-tab="bolt">2. Курʼєри Bolt</button>
         <button class="tab" role="tab" aria-selected="false" data-tab="blend">3. Спільна ставка</button>
         <button class="tab" role="tab" aria-selected="false" data-tab="bolt12">4. Bolt 12% + DK/resto</button>
+        <button class="tab" role="tab" aria-selected="false" data-tab="scale">5. 2.5× GMV</button>
         <button class="tab" role="tab" aria-selected="false" data-tab="mkt">Маркетинг і Plus</button>
       </div>
     </nav>
@@ -554,6 +555,72 @@
 
       <div class="callout green"><span class="dot"></span><div><b>Рекомендація для GM: 20% DK/resto можливі без cash marketing і Sponsored Listing discount.</b> Після DI DK/resto, DF campaign лише для stores і free Plus пакет має €20.3k CP L2. €10.0k cash launch знижує його до €10.3k ще до Sponsored Listing discount.</div></div>
       <p class="fine">S = поточний річний spend Сільпо на Sponsored Listing. Bolt Plus у цій моделі діє 6 місяців і знижує лише DF: service fee та small-order fee не віднімаються. Sponsored Listing — рекламний дохід Bolt, тому його знижка зменшує і CP L1, і CP L2 на ту саму суму. CP L1 не містить demand incentives, Bolt Plus або cash launch; CP L2 містить усі ці cash costs. Факт DK/resto: €937.3k GMV, €211.1k комісії, €56.4k CP L2 після DI.</p>
+    </section>
+
+    <section class="panel" id="scale">
+      <div class="section-head">
+        <div><div class="kicker">Сценарій 5 · масштабування</div><h2>2.5× stores GMV: чи працює нижча ставка?</h2></div>
+        <p>Масштабуємо лише stores від базового Scenario 1. Dark kitchen / resto лишаються на фактичному 12-місячному run-rate; маршрут — Bolt couriers.</p>
+      </div>
+
+      <div class="grid four">
+        <article class="card recommended"><div class="label">Stores GMV · 2.5×</div><div class="value green">€1.070m</div><div class="sub">€427.8k × 2.5 · 100 локацій</div></article>
+        <article class="card"><div class="label">Stores orders · 2.5×</div><div class="value">76,525</div><div class="sub">30,610 × 2.5 · AOV €13</div></article>
+        <article class="card"><div class="label">Portfolio GMV</div><div class="value">€2.007m</div><div class="sub">DK/resto €937.3k + stores €1.070m</div></article>
+        <article class="card warning"><div class="label">L2 costs · stores</div><div class="value compact">€48.5k</div><div class="sub">DF €35.0k + Bolt Plus €13.5k · масштабуються з orders</div></article>
+      </div>
+
+      <div class="callout">
+        <span class="dot"></span>
+        <div><b>Принцип розрахунку:</b> разом зі stores GMV у 2.5× ростуть DF campaign (€14.0k → €35.0k) і stores Bolt Plus (€5.4k → €13.5k). DK/resto DI €99.1k та Bolt Plus €14.6k не змінюються, бо їхній обсяг не масштабуємо. Нижче — P&amp;L до cash launch, in-kind marketing і Sponsored Listing discount.</div>
+      </div>
+
+      <div class="section-head" style="margin-top:26px">
+        <div><div class="kicker">Порівняння ставок</div><h3>Спільна 15% vs 17% DK/resto + 12% stores</h3></div>
+        <p>Єдина метрика рішення — фінальний Contribution Profit L2 після DI, DF campaign і Bolt Plus.</p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Сценарій · Bolt route</th><th class="num">Комісія Bolt</th><th class="num">CP L1 € / %</th><th class="num">L2 costs</th><th class="num">CP L2 € / %</th><th class="num">Економія Сільпо vs поточні ставки</th><th>Висновок</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><b>Контрольна база</b><br>22.52% DK/resto + 12% stores</td>
+              <td class="num">€339.4k</td><td class="num">€209.4k / 10.4%</td><td class="num">€162.2k</td><td class="num profit">€47.2k / 2.35%</td><td class="num">—</td><td>Поточна економіка при 2.5× stores GMV</td>
+            </tr>
+            <tr class="warn">
+              <td><b>Спільна ставка 15%</b><br>15% DK/resto + 15% stores</td>
+              <td class="num">€301.0k</td><td class="num">€171.0k / 8.5%</td><td class="num">€162.2k</td><td class="num profit">€8.8k / 0.44%</td><td class="num profit">€38.4k</td><td><b>Позитивний, але тонкий L2.</b> −€38.4k vs контрольна база.</td>
+            </tr>
+            <tr class="bad">
+              <td><b>Гібрид: 17% DK/resto + 12% stores</b></td>
+              <td class="num">€287.7k</td><td class="num">€157.6k / 7.85%</td><td class="num">€162.2k</td><td class="num neg">−€4.6k / −0.23%</td><td class="num profit">€51.8k</td><td><b>Не працює.</b> L2 від’ємний ще до launch / SL.</td>
+            </tr>
+            <tr class="ok">
+              <td><b>Спільна revenue-neutral ставка 16.91%</b><br>16.91% DK/resto + 16.91% stores</td>
+              <td class="num">€339.4k</td><td class="num">€209.4k / 10.4%</td><td class="num">€162.2k</td><td class="num profit">€47.2k / 2.35%</td><td class="num">€0</td><td><b>Мінімум без втрати L2.</b> Перерозподіл ставки без зниження загальної виручки.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="grid two" style="margin-top:16px">
+        <article class="card warning">
+          <div class="label">15% спільна ставка · відповідь</div>
+          <div class="value">€8.8k L2</div>
+          <div class="sub">Так, формально прибуткова: 0.44% від portfolio GMV. Але це на <b>€38.4k менше</b> за контрольну базу та не залишає запасу на €10k cash launch або Sponsored Listing discount.</div>
+        </article>
+        <article class="card danger">
+          <div class="label">17% DK/resto + 12% stores · відповідь</div>
+          <div class="value red">−€4.6k L2</div>
+          <div class="sub">Ні, не прибуткова за scaled DF / Plus costs. Для Сільпо це €51.8k економії на комісії, але її повністю фінансує Bolt у від’ємному L2.</div>
+        </article>
+      </div>
+
+      <div class="callout green">
+        <span class="dot"></span>
+        <div><b>Рекомендація для переговорів:</b> якщо 2.5× stores GMV підтверджується, 15% можна розглядати лише як свідомо субсидований growth case без cash launch і Sponsored Listing discount. Для збереження поточного CP L2 спільна ставка має бути не нижче <b>16.91%</b>. Гібрид 17% DK/resto + 12% stores не компенсує витрати Bolt навіть за вищого stores GMV.</div>
+      </div>
+      <p class="fine">Розрахунок: stores CP L1 масштабується від S1 Bolt 12% (€21.6k на €427.8k GMV); DF campaign та stores Bolt Plus масштабовані у 2.5×. DK/resto: фактичний run-rate €937.3k GMV, DI €99.1k, Plus €14.6k. Округлення можуть давати ±€0.1k.</p>
     </section>
 
     <section class="panel" id="mkt">
