@@ -126,11 +126,11 @@ def build_inputs(wb):
     section(ws, 5, "Global incremental investment assumptions", 4)
     header_row(ws, 6, ["Input", "Value", "Unit / calculation", "Comment"])
     globals_ = [
-        ("DF campaign cost · stores", 28000, "€ / year", "Cash cost; editable"),
+        ("DF campaign cost · stores", 28000, "€ / year", "Cash activation; 6 of 12 months"),
         ("Bolt+ duration", 6 / 12, "% of year", "6 months = 50%"),
         ("Bolt+ share · DK/resto", 0.248, "% of orders", "Historical planning assumption"),
         ("Bolt+ share · stores", 0.18, "% of orders", "Planning assumption"),
-        ("DF discount per Bolt+ order", 1.96, "€ / order", "Discount only; SF/SOF not discounted"),
+        ("DF discount per Bolt+ order", 1.96, "€ / order", "Delivery base only; excludes SF and SOF"),
         ("Public Launch cash", 10000, "€ / year", "Allocated by GMV"),
         ("In-kind marketing", 11200, "€ / year", "Allocated by GMV; not deducted from cash P&L"),
         ("Sponsored Listing discount", 0, "€ / year", "Manual input; allocated by GMV"),
@@ -142,6 +142,10 @@ def build_inputs(wb):
         input_cell(ws, row, 2, value, fmt)
         normal(ws, ws.cell(row, 3), unit)
         normal(ws, ws.cell(row, 4), comment)
+    normal(ws, ws.cell(16, 1), "Historical DF campaign · DK + resto")
+    input_cell(ws, 16, 2, 14411.34, '€#,##0')
+    normal(ws, ws.cell(16, 3), "€ / year")
+    normal(ws, ws.cell(16, 4), "Visibility only; already included in historical demand incentives")
 
     section(ws, 18, "Annual base P&L by vertical", 6)
     header_row(ws, 19, ["Metric", "Dark kitchen", "Resto", "Stores", "Portfolio", "Source / note"])
@@ -187,6 +191,12 @@ def build_inputs(wb):
     ws["A33"].alignment = Alignment(wrap_text=True, vertical="top")
     ws["A33"].fill = PatternFill("solid", fgColor=AMBER)
     ws["A33"].border = border
+    normal(ws, ws.cell(30, 1), "Eater-fee revenue (informational)", bold=True)
+    input_cell(ws, 30, 2, 115473.31, '€#,##0')
+    input_cell(ws, 30, 3, 3810.16, '€#,##0')
+    input_cell(ws, 30, 4, 0, '€#,##0')
+    formula_cell(ws, 30, 5, "=SUM(B30:D30)", '€#,##0', LIGHT_GREEN, True)
+    normal(ws, ws.cell(30, 6), "Historical source; included in unit economics, not added again to CP")
     set_widths(ws, {"A": 35, "B": 17, "C": 17, "D": 17, "E": 17, "F": 34})
     ws.sheet_view.showGridLines = False
     ws.freeze_panes = "B20"
@@ -201,16 +211,18 @@ def build_scenarios(wb):
     headers = [
         "Scenario", "DK rate", "Resto rate", "Stores rate", "Use DF",
         "Use Bolt+", "Use PL cash", "Use in-kind", "Use SL / other",
-        "Commission revenue", "CP L1", "CP L2 before investments",
-        "Cash P&L after investment", "Cash P&L % GMV", "Partner saving vs baseline",
+        "Commission revenue", "CP L1 €", "CP L1 % GMV", "CP L2 €",
+        "CP L2 % GMV", "Cash P&L after investment", "Cash P&L % GMV", "Partner saving vs baseline",
     ]
     header_row(ws, 5, headers)
     scenarios = [
         ("Baseline current", 0.2243, 0.2503, 0.12, 1, 1, 1, 1, 1),
         ("Tier 1 — stores 12% / DK-resto 25%", 0.25, 0.25, 0.12, 1, 1, 1, 1, 1),
-        ("Tier 2 — stores 12% / DK-resto 20%", 0.20, 0.20, 0.12, 1, 1, 1, 1, 1),
-        ("Tier 3a — stores 12% / DK-resto 16%", 0.16, 0.16, 0.12, 1, 1, 1, 1, 1),
-        ("Tier 3b — shared 16%", 0.16, 0.16, 0.16, 1, 1, 1, 1, 1),
+        ("Tier 2 — 6m 25% → 6m 20%", 0.225, 0.225, 0.12, 1, 1, 1, 1, 1),
+        ("Tier 3a — 6m 20% → 6m 16%", 0.18, 0.18, 0.12, 1, 1, 1, 1, 1),
+        ("Tier 3a — 12m stores 12% / DK-resto 16%", 0.16, 0.16, 0.12, 1, 1, 1, 1, 1),
+        ("Tier 3b — 6m tier 2 → 6m shared 16%", 0.18, 0.18, 0.14, 1, 1, 1, 1, 1),
+        ("Tier 3b — 12m shared 16%", 0.16, 0.16, 0.16, 1, 1, 1, 1, 1),
         ("Revenue-neutral shared 17.50%", 0.175, 0.175, 0.175, 1, 1, 1, 1, 1),
     ]
     for row, values in enumerate(scenarios, 6):
@@ -223,19 +235,21 @@ def build_scenarios(wb):
         # Portfolio formulas: Inputs annual GMV B21:D21, direct costs B24:D24, DI B26:D26.
         formula_cell(ws, row, 10, f"=SUMPRODUCT($B{row}:$D{row},Inputs!$B$21:$D$21)", '€#,##0')
         formula_cell(ws, row, 11, f"=J{row}-SUM(Inputs!$B$24:$D$24)", '€#,##0')
-        formula_cell(ws, row, 12, f"=K{row}-SUM(Inputs!$B$26:$D$26)", '€#,##0')
+        formula_cell(ws, row, 12, f"=K{row}/SUM(Inputs!$B$21:$D$21)", '0.00%')
+        formula_cell(ws, row, 13, f"=K{row}-SUM(Inputs!$B$26:$D$26)", '€#,##0')
+        formula_cell(ws, row, 14, f"=M{row}/SUM(Inputs!$B$21:$D$21)", '0.00%')
         investments = (
             f"($E{row}*Inputs!$B$7)+($F{row}*SUM(Inputs!$B$28:$D$28))"
             f"+($G{row}*Inputs!$B$12)+($I{row}*(Inputs!$B$14+Inputs!$B$15))"
         )
-        formula_cell(ws, row, 13, f"=L{row}-{investments}", '€#,##0', LIGHT_GREEN if row == 6 else None, row == 6)
-        formula_cell(ws, row, 14, f"=M{row}/SUM(Inputs!$B$21:$D$21)", '0.00%')
-        formula_cell(ws, row, 15, f"=$J$6-J{row}", '€#,##0')
-    ws.conditional_formatting.add("M6:M11", CellIsRule(operator="lessThan", formula=["0"], fill=PatternFill("solid", fgColor=RED)))
-    ws.conditional_formatting.add("M6:M11", CellIsRule(operator="greaterThan", formula=["0"], fill=PatternFill("solid", fgColor=LIGHT_GREEN)))
-    ws.auto_filter.ref = "A5:O11"
+        formula_cell(ws, row, 15, f"=M{row}-({investments})", '€#,##0', LIGHT_GREEN if row == 6 else None, row == 6)
+        formula_cell(ws, row, 16, f"=O{row}/SUM(Inputs!$B$21:$D$21)", '0.00%')
+        formula_cell(ws, row, 17, f"=$J$6-J{row}", '€#,##0')
+    ws.conditional_formatting.add("O6:O13", CellIsRule(operator="lessThan", formula=["0"], fill=PatternFill("solid", fgColor=RED)))
+    ws.conditional_formatting.add("O6:O13", CellIsRule(operator="greaterThan", formula=["0"], fill=PatternFill("solid", fgColor=LIGHT_GREEN)))
+    ws.auto_filter.ref = "A5:Q13"
     ws.freeze_panes = "J6"
-    set_widths(ws, {"A": 38, "B": 12, "C": 12, "D": 12, "E": 10, "F": 11, "G": 12, "H": 12, "I": 13, "J": 17, "K": 15, "L": 21, "M": 24, "N": 18, "O": 24})
+    set_widths(ws, {"A": 38, "B": 12, "C": 12, "D": 12, "E": 10, "F": 11, "G": 12, "H": 12, "I": 13, "J": 17, "K": 15, "L": 13, "M": 15, "N": 13, "O": 24, "P": 18, "Q": 24})
     ws.sheet_view.showGridLines = False
 
 
@@ -243,11 +257,11 @@ def build_pnl(wb):
     ws = wb.create_sheet("P&L by vertical")
     style_title(ws, ws["A1"], "P&L by vertical — selected scenario", 6)
     normal(ws, ws["A3"], "Selected scenario", bold=True)
-    input_cell(ws, 3, 2, "Tier 3b — shared 16%")
+    input_cell(ws, 3, 2, "Tier 3b — 12m shared 16%")
     ws.merge_cells("C3:G3")
     ws["C3"] = "Select a scenario to compare Dark kitchen, resto, stores and portfolio. Yellow cells are editable."
     ws["C3"].font = Font(name="Aptos", italic=True, color=MUTED)
-    dv = DataValidation(type="list", formula1="=Scenarios!$A$6:$A$11", allow_blank=False)
+    dv = DataValidation(type="list", formula1="=Scenarios!$A$6:$A$13", allow_blank=False)
     ws.add_data_validation(dv)
     dv.add(ws["B3"])
     headers = ["P&L item", "Dark kitchen", "Resto", "Stores", "Portfolio", "Formula / treatment"]
@@ -281,8 +295,8 @@ def build_pnl(wb):
     for col, input_col in entity_inputs.items():
         col_letter = get_column_letter(col)
         rate_col = rate_cols[col]
-        rate_lookup = f'=INDEX(Scenarios!${rate_col}$6:${rate_col}$11,MATCH($B$3,Scenarios!$A$6:$A$11,0))'
-        flag = lambda flag_col: f'=INDEX(Scenarios!${flag_col}$6:${flag_col}$11,MATCH($B$3,Scenarios!$A$6:$A$11,0))'
+        rate_lookup = f'=INDEX(Scenarios!${rate_col}$6:${rate_col}$13,MATCH($B$3,Scenarios!$A$6:$A$13,0))'
+        flag = lambda flag_col: f'=INDEX(Scenarios!${flag_col}$6:${flag_col}$13,MATCH($B$3,Scenarios!$A$6:$A$13,0))'
         formula_cell(ws, 6, col, f"=Inputs!{input_col}20", '#,##0')
         formula_cell(ws, 7, col, f"=Inputs!{input_col}21", '€#,##0')
         formula_cell(ws, 8, col, f"={col_letter}7/{col_letter}6", '€0.00')
@@ -334,9 +348,81 @@ def build_pnl(wb):
             23: "Cash + in-kind",
             24: "Baseline commission − selected commission",
         }[row])
+    normal(ws, ws.cell(25, 1), "Eater-fee revenue (informational)", bold=True)
+    for col, input_col in entity_inputs.items():
+        formula_cell(ws, 25, col, f"=Inputs!{input_col}30", '€#,##0')
+    formula_cell(ws, 25, 5, "=SUM(B25:D25)", '€#,##0', LIGHT_GREEN, True)
+    normal(ws, ws.cell(25, 6), "Historical reference only; already included in CP unit economics")
     ws.conditional_formatting.add("B19:E19", CellIsRule(operator="lessThan", formula=["0"], fill=PatternFill("solid", fgColor=RED)))
     set_widths(ws, {"A": 38, "B": 18, "C": 18, "D": 18, "E": 18, "F": 28})
     ws.freeze_panes = "B6"
+    ws.sheet_view.showGridLines = False
+
+
+def build_quarterly_scenarios(wb):
+    ws = wb.create_sheet("Quarterly scenarios")
+    style_title(ws, ws["A1"], "Quarterly rate scenarios — editable commission & eater fees", 20)
+    ws["A3"] = "Quarter GMV share"
+    normal(ws, ws["A3"], bold=True)
+    for col, quarter in enumerate(["Q1", "Q2", "Q3", "Q4"], 2):
+        normal(ws, ws.cell(3, col), quarter, DARK, True, "center")
+        ws.cell(3, col).font = Font(name="Aptos", size=10, bold=True, color=WHITE)
+        input_cell(ws, 4, col, 0.25, "0.0%")
+    ws["F3"] = "Edit yellow cells: quarterly GMV shares and commission rates. Eater fees are editable on Inputs row 30."
+    ws.merge_cells("F3:U4")
+    ws["F3"].font = Font(name="Aptos", italic=True, color=MUTED)
+    ws["F3"].alignment = Alignment(wrap_text=True, vertical="center")
+
+    headers = [
+        "Scenario", "Quarter", "DK rate", "Resto rate", "Stores rate", "Orders", "GMV",
+        "Eater fees\ninfo only", "Commission", "Direct costs", "CP L1", "CP L1 %",
+        "Existing DI", "Historical DF DK/resto\ninside DI", "CP L2", "CP L2 %",
+        "DF campaign\nstores cash", "Bolt+ cash", "PL cash", "Final cash P&L", "Final %",
+    ]
+    header_row(ws, 6, headers)
+    schedules = [
+        ("Tier 1 — 12m 25%", [(0.25, 0.25, 0.12)] * 4),
+        ("Tier 2 — 6m 25% → 6m 20%", [(0.25, 0.25, 0.12)] * 2 + [(0.20, 0.20, 0.12)] * 2),
+        ("Tier 3a — 6m 20% → 6m 16%", [(0.20, 0.20, 0.12)] * 2 + [(0.16, 0.16, 0.12)] * 2),
+        ("Tier 3a — 12m DK/resto 16%", [(0.16, 0.16, 0.12)] * 4),
+        ("Tier 3b — 6m tier 2 → 6m shared 16%", [(0.20, 0.20, 0.12)] * 2 + [(0.16, 0.16, 0.16)] * 2),
+        ("Tier 3b — 12m shared 16%", [(0.16, 0.16, 0.16)] * 4),
+    ]
+    row = 7
+    for scenario, rates in schedules:
+        for q_index, (dk_rate, resto_rate, stores_rate) in enumerate(rates, 1):
+            share_cell = f"${get_column_letter(q_index + 1)}$4"
+            normal(ws, ws.cell(row, 1), scenario, LIGHT_GREEN if q_index == 1 else None, q_index == 1)
+            normal(ws, ws.cell(row, 2), f"Q{q_index}", None, False, "center")
+            for col, rate in zip([3, 4, 5], [dk_rate, resto_rate, stores_rate]):
+                input_cell(ws, row, col, rate, "0.00%")
+            formula_cell(ws, row, 6, f"=SUM(Inputs!$B$20:$D$20)*{share_cell}", '#,##0')
+            formula_cell(ws, row, 7, f"=SUM(Inputs!$B$21:$D$21)*{share_cell}", '€#,##0')
+            formula_cell(ws, row, 8, f"=SUM(Inputs!$B$30:$D$30)*{share_cell}", '€#,##0')
+            formula_cell(ws, row, 9, f"=C{row}*Inputs!$B$21*{share_cell}+D{row}*Inputs!$C$21*{share_cell}+E{row}*Inputs!$D$21*{share_cell}", '€#,##0')
+            formula_cell(ws, row, 10, f"=SUM(Inputs!$B$24:$D$24)*{share_cell}", '€#,##0')
+            formula_cell(ws, row, 11, f"=I{row}-J{row}", '€#,##0', LIGHT_GREEN, True)
+            formula_cell(ws, row, 12, f"=K{row}/G{row}", '0.00%', LIGHT_GREEN)
+            formula_cell(ws, row, 13, f"=SUM(Inputs!$B$26:$D$26)*{share_cell}", '€#,##0')
+            formula_cell(ws, row, 14, f"=Inputs!$B$16*{share_cell}", '€#,##0', AMBER)
+            formula_cell(ws, row, 15, f"=K{row}-M{row}", '€#,##0', LIGHT_GREEN, True)
+            formula_cell(ws, row, 16, f"=O{row}/G{row}", '0.00%', LIGHT_GREEN)
+            formula_cell(ws, row, 17, f"=IF(B{row}=\"Q1\",Inputs!$B$7/2,IF(B{row}=\"Q2\",Inputs!$B$7/2,0))", '€#,##0', AMBER)
+            formula_cell(ws, row, 18, f"=IF(B{row}=\"Q1\",SUM(Inputs!$B$28:$D$28)/2,IF(B{row}=\"Q2\",SUM(Inputs!$B$28:$D$28)/2,0))", '€#,##0', AMBER)
+            formula_cell(ws, row, 19, f"=IF(B{row}=\"Q1\",Inputs!$B$12,0)", '€#,##0', AMBER)
+            formula_cell(ws, row, 20, f"=O{row}-SUM(Q{row}:S{row})", '€#,##0', LIGHT_GREEN, True)
+            formula_cell(ws, row, 21, f"=T{row}/G{row}", '0.00%', LIGHT_GREEN)
+            row += 1
+        row += 1
+    ws.conditional_formatting.add(f"T7:T{row - 2}", CellIsRule(operator="lessThan", formula=["0"], fill=PatternFill("solid", fgColor=RED)))
+    ws.conditional_formatting.add(f"T7:T{row - 2}", CellIsRule(operator="greaterThan", formula=["0"], fill=PatternFill("solid", fgColor=LIGHT_GREEN)))
+    ws.auto_filter.ref = f"A6:U{row - 2}"
+    ws.freeze_panes = "F7"
+    set_widths(ws, {
+        "A": 37, "B": 10, "C": 11, "D": 12, "E": 12, "F": 13, "G": 15, "H": 15,
+        "I": 15, "J": 15, "K": 15, "L": 11, "M": 15, "N": 17, "O": 15, "P": 11,
+        "Q": 15, "R": 14, "S": 13, "T": 17, "U": 11,
+    })
     ws.sheet_view.showGridLines = False
 
 
@@ -397,6 +483,7 @@ def build_workbook():
     build_inputs(wb)
     build_scenarios(wb)
     build_pnl(wb)
+    build_quarterly_scenarios(wb)
     build_investments(wb)
     build_source(wb)
     for ws in wb.worksheets:
