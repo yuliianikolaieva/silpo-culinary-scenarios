@@ -667,7 +667,7 @@
         <div><div class="kicker">Логіка оферу</div><h3>Ставка знижується лише після досягнення обсягу</h3></div>
         <p>Stores у всіх щаблях стартують на 12%. Зміна ставки DK/resto не застосовується авансом.</p>
       </div>
-      <div class="grid three">
+      <div class="grid four">
         <article class="card">
           <div class="label">Щабель 1 · launch</div>
           <div class="value">12% / 25%</div>
@@ -677,6 +677,11 @@
           <div class="label">Щабель 2 · €33k GMV / міс.</div>
           <div class="value">12% / 20%</div>
           <div class="sub">За delivered stores GMV <b>від €33k / міс.</b> DK/resto знижується до 20%; stores лишається 12%.</div>
+        </article>
+        <article class="card danger">
+          <div class="label">Опція · €65k GMV / міс.</div>
+          <div class="value red">12% / 16%</div>
+          <div class="sub">За delivered stores GMV <b>від €65k / міс.</b> DK/resto знижується до 16%; stores лишається 12%.</div>
         </article>
         <article class="card recommended">
           <div class="label">Щабель 3 · €65k GMV / міс.</div>
@@ -695,8 +700,11 @@
             <tr class="warn">
               <td><b>2 · поріг €33k / міс.</b><br>stores GMV ≥ €33k / міс.</td><td class="num">12%</td><td class="num">20%</td><td class="num">€290.1k</td><td class="num">€175.0k / 9.76%</td><td class="num">€152.4k</td><td class="num profit">€22.5k / 1.26%</td><td class="num profit">€46.9k</td><td>Працює без додаткового cash launch / SL</td>
             </tr>
+            <tr class="bad">
+              <td><b>3a · опція при €65k / міс.</b><br>stores GMV ≥ €65k / міс.</td><td class="num">12%</td><td class="num">16%</td><td class="num">€252.6k</td><td class="num">€137.5k / 7.67%</td><td class="num">€152.4k</td><td class="num neg">−€14.9k / −0.83%</td><td class="num profit">€84.4k</td><td><b>Не працює.</b> Зниження DK/resto до 16% не компенсується 12% stores.</td>
+            </tr>
             <tr class="ok">
-              <td><b>3 · поріг €65k / міс.</b><br>stores GMV ≥ €65k / міс.</td><td class="num">16%</td><td class="num">16%</td><td class="num">€286.9k</td><td class="num">€171.7k / 9.58%</td><td class="num">€152.4k</td><td class="num profit">€19.3k / 1.08%</td><td class="num profit">€50.1k</td><td>Працює умовно; L2 нижче щабля 2</td>
+              <td><b>3b · поріг €65k / міс.</b><br>stores GMV ≥ €65k / міс.</td><td class="num">16%</td><td class="num">16%</td><td class="num">€286.9k</td><td class="num">€171.7k / 9.58%</td><td class="num">€152.4k</td><td class="num profit">€19.3k / 1.08%</td><td class="num profit">€50.1k</td><td>Працює умовно; L2 нижче щабля 2</td>
             </tr>
           </tbody>
         </table>
@@ -704,7 +712,7 @@
 
       <div class="callout green">
         <span class="dot"></span>
-        <div><b>Висновок:</b> 2× stores GMV дає €71.3k / міс., тому за цим forecast активується щабель 3 — спільні 16%. Він залишається позитивним (€19.3k L2), але дає Bolt на €50.1k менше CP L2, ніж стартова конфігурація 12% stores + 25% DK/resto. Щабель 2 (12% / 20%) дає вищий L2 — €22.5k.</div>
+        <div><b>Висновок:</b> 2× stores GMV дає €71.3k / міс., тому за цим forecast досягається поріг €65k. Опція <b>12% stores + 16% DK/resto</b> не працює: CP L2 <b>−€14.9k</b>. Спільні <b>16% / 16%</b> залишаються позитивними (€19.3k L2), але щабель 2 (12% / 20%) дає вищий L2 — €22.5k.</div>
       </div>
       <p class="fine">P&amp;L: stores €855.6k GMV / 61,220 orders, DK/resto €937.3k GMV / 60,136 orders. L2 costs: €99.0k DI DK/resto + €14.6k DK/resto Plus + €28.0k stores DF campaign + €10.8k stores Plus. Cash launch, in-kind marketing і Sponsored Listing discount не включені.</p>
     </section>
