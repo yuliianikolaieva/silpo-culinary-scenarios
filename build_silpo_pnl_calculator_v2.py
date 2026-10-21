@@ -17,13 +17,13 @@ for data in verticals.values():
     data["rate"] = data["commission"] / data["gmv"]
 
 SCENARIOS = [
-    ("Current effective rates", verticals["DK"]["rate"], verticals["DK"]["rate"], verticals["Resto"]["rate"], verticals["Resto"]["rate"], 0.16, 0.16, "Current historical / Shared16 stores", 0),
-    ("Tier 1 · launch", 0.25, 0.25, 0.25, 0.25, 0.12, 0.12, "12 months at launch rates", 0),
-    ("Tier 2 · €33k stores GMV / month", 0.25, 0.20, 0.25, 0.20, 0.12, 0.12, "6m DK/resto 25%, then 6m 20%; threshold €33k", 33000),
-    ("Tier 3a · step-down to 16%", 0.20, 0.16, 0.20, 0.16, 0.12, 0.12, "6m DK/resto 20%, then 6m 16%; stores stays 12%", 65000),
-    ("Tier 3a · 12m DK/resto 16%", 0.16, 0.16, 0.16, 0.16, 0.12, 0.12, "12 months: stores 12%, DK/resto 16%", 65000),
-    ("Tier 3b · step to shared 16%", 0.20, 0.16, 0.20, 0.16, 0.12, 0.16, "6m tier 2, then 6m shared 16%", 65000),
-    ("Tier 3b · 12m shared 16%", 0.16, 0.16, 0.16, 0.16, 0.16, 0.16, "12 months shared 16%", 65000),
+    ("Current effective rates", verticals["DK"]["rate"], verticals["DK"]["rate"], verticals["Resto"]["rate"], verticals["Resto"]["rate"], 0.16, 0.16, "Current historical / Shared16 stores", 0, 50400, 852768, 28000, 10800),
+    ("Tier 1 · launch", 0.25, 0.25, 0.25, 0.25, 0.12, 0.12, "12m launch. Фіксувати комісію на 2 роки.", 0, 30610, 427800, 14000, 5400),
+    ("Tier 2 · €33k stores GMV / month", 0.25, 0.20, 0.25, 0.20, 0.12, 0.12, "6m DK/resto 25%, 6m 20%; поріг €33k. E-zoo activation: commission ≥15% + Біла ромашка.", 33000, 30610, 427800, 14000, 5400),
+    ("Tier 3a · step-down to 16%", 0.20, 0.16, 0.20, 0.16, 0.12, 0.12, "6m DK/resto 20%, then 6m 16%; stores 12%. Resto буде неприбутковим і не зможе інвестувати в smart promo.", 65000, 50400, 852768, 28000, 10800),
+    ("Tier 3a · 12m DK/resto 16%", 0.16, 0.16, 0.16, 0.16, 0.12, 0.12, "12m stores 12% / DK-resto 16%. Resto буде неприбутковим і не зможе інвестувати в smart promo.", 65000, 50400, 852768, 28000, 10800),
+    ("Tier 3b · step to shared 16%", 0.20, 0.16, 0.20, 0.16, 0.12, 0.16, "6m Tier 2, then 6m shared 16%. Resto буде неприбутковим і не зможе інвестувати в smart promo.", 65000, 50400, 852768, 28000, 10800),
+    ("Tier 3b · 12m shared 16%", 0.16, 0.16, 0.16, 0.16, 0.16, 0.16, "12m shared 16%. Resto буде неприбутковим і не зможе інвестувати в smart promo.", 65000, 50400, 852768, 28000, 10800),
 ]
 
 
@@ -139,42 +139,48 @@ def build():
     ws.hide_gridlines(2)
     ws.merge_range("A1:Z1", "Scenarios — annual total, H1/H2 rate schedule and GMV thresholds", fmt["title"])
     ws.merge_range("A3:Z3", "Rate cells are yellow and editable. Threshold is a commercial trigger; current Stores average monthly GMV is visible in Inputs / 2027 projected GMV.", fmt["note"])
-    headers = ["Scenario", "DK H1", "DK H2", "Resto H1", "Resto H2", "Stores H1", "Stores H2", "GMV threshold / month", "Model comment", "Orders", "GMV", "Eater fees", "Commission", "Direct costs", "CP L1 €", "CP L1 %", "Existing DI", "Historical DF DK/resto\ninside DI", "CP L2 €", "CP L2 %", "DF Stores", "Bolt+", "PL cash", "Final CP L2", "Final %", "In-kind", "Partner saving"]
+    headers = ["Scenario", "DK H1", "DK H2", "Resto H1", "Resto H2", "Stores H1", "Stores H2", "GMV threshold / month", "Model comment", "Orders", "GMV", "Eater fees", "Commission", "Direct costs", "CP L1 €", "CP L1 %", "Existing DI", "Historical DF DK/resto\ninside DI", "CP L2 €", "CP L2 %", "DF Stores", "Bolt+", "PL cash", "Final CP L2", "Final %", "In-kind", "Partner saving", "Eater fee € / order", "Eater fee % GMV", "Direct costs include", "Stores orders", "Stores GMV"]
     ws.write_row("A5", headers, fmt["header"])
-    total_orders = sum(v["orders"] for v in verticals.values())
-    total_gmv = sum(v["gmv"] for v in verticals.values())
-    total_eater = sum(v["eater"] for v in verticals.values())
-    total_direct = sum(v["direct"] for v in verticals.values())
-    total_di = sum(v["di"] for v in verticals.values())
+    dk_resto_orders = verticals["DK"]["orders"] + verticals["Resto"]["orders"]
+    dk_resto_gmv = verticals["DK"]["gmv"] + verticals["Resto"]["gmv"]
+    dk_resto_eater = verticals["DK"]["eater"] + verticals["Resto"]["eater"]
+    dk_resto_direct = verticals["DK"]["direct"] + verticals["Resto"]["direct"]
+    dk_resto_di = verticals["DK"]["di"] + verticals["Resto"]["di"]
     baseline_commission = sum(v["commission"] for v in verticals.values())
     for r, scenario in enumerate(SCENARIOS, 6):
-        name, dkh1, dkh2, rh1, rh2, sh1, sh2, comment, threshold = scenario
+        name, dkh1, dkh2, rh1, rh2, sh1, sh2, comment, threshold, store_orders, store_gmv, df_stores, plus_stores = scenario
         values = [name, dkh1, dkh2, rh1, rh2, sh1, sh2, threshold, comment]
         for c, value in enumerate(values):
             style = fmt["input_pct"] if 1 <= c <= 6 else (fmt["input_eur"] if c == 7 else fmt["text"])
             ws.write(r - 1, c, value, style)
         # Inputs sheet 2027 rows: orders 28, GMV 29, eater 30, direct 31, DI 32
+        total_orders = dk_resto_orders + store_orders
+        total_gmv = dk_resto_gmv + store_gmv
+        store_factor = store_orders / verticals["Stores"]["orders"]
+        total_eater = dk_resto_eater + verticals["Stores"]["eater"] * store_factor
+        total_direct = dk_resto_direct + verticals["Stores"]["direct"] * store_factor
+        total_di = dk_resto_di + verticals["Stores"]["di"] * store_factor
         commission = (verticals["DK"]["gmv"] * (dkh1 + dkh2) / 2 +
                       verticals["Resto"]["gmv"] * (rh1 + rh2) / 2 +
-                      verticals["Stores"]["gmv"] * (sh1 + sh2) / 2)
+                      store_gmv * (sh1 + sh2) / 2)
         cpl1 = commission + total_eater - total_direct
         cpl2 = cpl1 - total_di
-        final = cpl2 - 28000 - 25415.45 - 10000
+        final = cpl2 - df_stores - 14615.45 - plus_stores - 10000
         partner_saving = baseline_commission - commission
         formulas = [
-            ("=SUM(Inputs!$B$28:$D$28)", total_orders, fmt["num"]),
-            ("=SUM(Inputs!$B$29:$D$29)", total_gmv, fmt["eur"]),
-            ("=SUM(Inputs!$B$30:$D$30)", total_eater, fmt["eur"]),
-            (f"=Inputs!$B$29*(B{r}+C{r})/2+Inputs!$C$29*(D{r}+E{r})/2+Inputs!$D$29*(F{r}+G{r})/2", commission, fmt["eur"]),
-            ("=SUM(Inputs!$B$31:$D$31)", total_direct, fmt["eur"]),
+            (f"=SUM(Inputs!$B$28:$C$28)+AE{r}", total_orders, fmt["num"]),
+            (f"=SUM(Inputs!$B$29:$C$29)+AF{r}", total_gmv, fmt["eur"]),
+            (f"=SUM(Inputs!$B$30:$C$30)+Inputs!$D$30*AE{r}/Inputs!$D$28", total_eater, fmt["eur"]),
+            (f"=Inputs!$B$29*(B{r}+C{r})/2+Inputs!$C$29*(D{r}+E{r})/2+AF{r}*(F{r}+G{r})/2", commission, fmt["eur"]),
+            (f"=SUM(Inputs!$B$31:$C$31)+Inputs!$D$31*AE{r}/Inputs!$D$28", total_direct, fmt["eur"]),
             (f"=M{r}-N{r}+L{r}", cpl1, fmt["green_eur"]),
             (f"=O{r}/K{r}", cpl1 / total_gmv, fmt["green_pct"]),
-            ("=SUM(Inputs!$B$32:$D$32)", total_di, fmt["eur"]),
+            (f"=SUM(Inputs!$B$32:$C$32)+Inputs!$D$32*AE{r}/Inputs!$D$28", total_di, fmt["eur"]),
             ("=Inputs!$B$8", 14418.17, fmt["amber_eur"]),
             (f"=O{r}-Q{r}", cpl2, fmt["green_eur"]),
             (f"=S{r}/K{r}", cpl2 / total_gmv, fmt["green_pct"]),
-            ("=Inputs!$B$7", 28000, fmt["amber_eur"]),
-            ("=Inputs!$B$9+Inputs!$B$10", 25415.45, fmt["amber_eur"]),
+            (f"=IF(AE{r}=30610,Inputs!$B$7/2,Inputs!$B$7)", df_stores, fmt["amber_eur"]),
+            (f"=Inputs!$B$9+IF(AE{r}=30610,Inputs!$B$10/2,Inputs!$B$10)", 14615.45 + plus_stores, fmt["amber_eur"]),
             ("=Inputs!$B$11", 10000, fmt["amber_eur"]),
             (f"=S{r}-SUM(U{r}:W{r})", final, fmt["green_eur"] if final >= 0 else fmt["bad_eur"]),
             (f"=X{r}/K{r}", final / total_gmv, fmt["green_pct"]),
@@ -183,13 +189,19 @@ def build():
         ]
         for c, (formula, cached, style) in enumerate(formulas, 9):
             ws.write_formula(r - 1, c, formula, style, cached)
-    ws.autofilter(4, 0, 4 + len(SCENARIOS), 26)
+        ws.write_formula(r - 1, 27, f"=L{r}/J{r}", fmt["eur"], total_eater / total_orders)
+        ws.write_formula(r - 1, 28, f"=L{r}/K{r}", fmt["pct"], total_eater / total_gmv)
+        ws.write(r - 1, 29, "CPO / courier; demand, supply & fraud refunds; payment processing; bad debt; operations & customer support. Excludes DI and incremental promo.", fmt["text"])
+        ws.write(r - 1, 30, store_orders, fmt["input"])
+        ws.write(r - 1, 31, store_gmv, fmt["input_eur"])
+    ws.autofilter(4, 0, 4 + len(SCENARIOS), 31)
     ws.freeze_panes(5, 9)
     ws.set_column("A:A", 35)
     ws.set_column("B:G", 11)
     ws.set_column("H:H", 15)
     ws.set_column("I:I", 38)
-    ws.set_column("J:AA", 15)
+    ws.set_column("J:AF", 15)
+    ws.set_column("AD:AD", 52)
 
     # P&L by vertical - all scenarios, no dependent dropdowns
     ws = wb.add_worksheet("P&L by vertical")
@@ -200,38 +212,47 @@ def build():
     ws.write_row("A5", headers, fmt["header"])
     row = 6
     for scenario_index, scenario in enumerate(SCENARIOS):
-        name, dkh1, dkh2, rh1, rh2, sh1, sh2, _, _ = scenario
+        name, dkh1, dkh2, rh1, rh2, sh1, sh2, _, _, store_orders, store_gmv, df_stores, plus_stores = scenario
         source_scenario_row = 6 + scenario_index
         rates = {"DK": (dkh1, dkh2, "B", "C", "B"), "Resto": (rh1, rh2, "D", "E", "C"), "Stores": (sh1, sh2, "F", "G", "D")}
         for key in ["DK", "Resto", "Stores"]:
             data = verticals[key]
             rate1, rate2, h1_col, h2_col, input_col = rates[key]
-            commission = data["gmv"] * (rate1 + rate2) / 2
-            cpl1 = commission + data["eater"] - data["direct"]
-            cpl2 = cpl1 - data["di"]
-            df = 28000 if key == "Stores" else 0
-            plus = 14615.45 * data["gmv"] / (verticals["DK"]["gmv"] + verticals["Resto"]["gmv"]) if key in {"DK", "Resto"} else 10800
-            pl = 10000 * data["gmv"] / total_gmv
+            scenario_orders = store_orders if key == "Stores" else data["orders"]
+            scenario_gmv = store_gmv if key == "Stores" else data["gmv"]
+            volume_factor = scenario_orders / data["orders"]
+            commission = scenario_gmv * (rate1 + rate2) / 2
+            eater = data["eater"] * volume_factor
+            direct = data["direct"] * volume_factor
+            di = data["di"] * volume_factor
+            cpl1 = commission + eater - direct
+            cpl2 = cpl1 - di
+            df = df_stores if key == "Stores" else 0
+            plus = 14615.45 * data["gmv"] / (verticals["DK"]["gmv"] + verticals["Resto"]["gmv"]) if key in {"DK", "Resto"} else plus_stores
+            pl = 10000 * scenario_gmv / (verticals["DK"]["gmv"] + verticals["Resto"]["gmv"] + store_gmv)
             final = cpl2 - df - plus - pl
             ws.write(row - 1, 0, name, fmt["text"])
             ws.write(row - 1, 1, key, fmt["text"])
-            ws.write_formula(row - 1, 2, f"=Inputs!${input_col}$28", fmt["num"], data["orders"])
-            ws.write_formula(row - 1, 3, f"=Inputs!${input_col}$29", fmt["eur"], data["gmv"])
-            ws.write_formula(row - 1, 4, f"=D{row}/C{row}", fmt["eur"], data["gmv"] / data["orders"])
-            ws.write_formula(row - 1, 5, f"=Inputs!${input_col}$30", fmt["eur"], data["eater"])
+            order_formula = f"=Scenarios!$AE${source_scenario_row}" if key == "Stores" else f"=Inputs!${input_col}$28"
+            gmv_formula = f"=Scenarios!$AF${source_scenario_row}" if key == "Stores" else f"=Inputs!${input_col}$29"
+            ws.write_formula(row - 1, 2, order_formula, fmt["num"], scenario_orders)
+            ws.write_formula(row - 1, 3, gmv_formula, fmt["eur"], scenario_gmv)
+            ws.write_formula(row - 1, 4, f"=D{row}/C{row}", fmt["eur"], scenario_gmv / scenario_orders)
+            ws.write_formula(row - 1, 5, f"=Inputs!${input_col}$30*C{row}/Inputs!${input_col}$28", fmt["eur"], eater)
             ws.write_formula(row - 1, 6, f"=Scenarios!${h1_col}${source_scenario_row}", fmt["pct"], rate1)
             ws.write_formula(row - 1, 7, f"=Scenarios!${h2_col}${source_scenario_row}", fmt["pct"], rate2)
             ws.write_formula(row - 1, 8, f"=D{row}*(G{row}+H{row})/2", fmt["eur"], commission)
-            ws.write_formula(row - 1, 9, f"=Inputs!${input_col}$31", fmt["eur"], data["direct"])
+            ws.write_formula(row - 1, 9, f"=Inputs!${input_col}$31*C{row}/Inputs!${input_col}$28", fmt["eur"], direct)
             ws.write_formula(row - 1, 10, f"=I{row}+F{row}-J{row}", fmt["green_eur"], cpl1)
             ws.write_formula(row - 1, 11, f"=K{row}/D{row}", fmt["pct"], cpl1 / data["gmv"])
-            ws.write_formula(row - 1, 12, f"=Inputs!${input_col}$32", fmt["eur"], data["di"])
+            ws.write_formula(row - 1, 12, f"=Inputs!${input_col}$32*C{row}/Inputs!${input_col}$28", fmt["eur"], di)
             hist_df_formula = f"=Inputs!$B$8*D{row}/(Inputs!$B$29+Inputs!$C$29)" if key in {"DK", "Resto"} else "=0"
             ws.write_formula(row - 1, 13, hist_df_formula, fmt["amber_eur"], data["df_hist"])
             ws.write_formula(row - 1, 14, f"=K{row}-M{row}", fmt["green_eur"], cpl2)
             ws.write_formula(row - 1, 15, f"=O{row}/D{row}", fmt["pct"], cpl2 / data["gmv"])
-            ws.write_formula(row - 1, 16, "=Inputs!$B$7" if key == "Stores" else "=0", fmt["amber_eur"], df)
-            plus_formula = f"=Inputs!$B$9*D{row}/(Inputs!$B$29+Inputs!$C$29)" if key in {"DK", "Resto"} else "=Inputs!$B$10"
+            df_formula = f"=IF(C{row}=30610,Inputs!$B$7/2,Inputs!$B$7)" if key == "Stores" else "=0"
+            ws.write_formula(row - 1, 16, df_formula, fmt["amber_eur"], df)
+            plus_formula = f"=Inputs!$B$9*D{row}/(Inputs!$B$29+Inputs!$C$29)" if key in {"DK", "Resto"} else f"=IF(C{row}=30610,Inputs!$B$10/2,Inputs!$B$10)"
             ws.write_formula(row - 1, 17, plus_formula, fmt["amber_eur"], plus)
             ws.write_formula(row - 1, 18, f"=Inputs!$B$11*D{row}/SUM(Inputs!$B$29:$D$29)", fmt["amber_eur"], pl)
             ws.write_formula(row - 1, 19, f"=O{row}-Q{row}-R{row}-S{row}", fmt["bad_eur"] if final < 0 else fmt["green_eur"], final)
