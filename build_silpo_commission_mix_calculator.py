@@ -15,6 +15,8 @@ STORES_DI = 28_728.00
 DK_RESTO_EATER = 119_283.47
 DK_RESTO_DIRECT = 192_081.11
 DK_RESTO_DI = 101_021.60
+PORTFOLIO_GMV = DK_RESTO_GMV + STORES_GMV
+PORTFOLIO_ORDERS = 56_959 + 1_931 + STORES_ORDERS
 
 
 def build() -> None:
@@ -64,7 +66,7 @@ def build() -> None:
     ws.write("A3", "Commission assumptions", fmt["section"])
     ws.write_row("A4", ["Input", "Value", "Unit", "Use in calculation", "Source / note"], fmt["header"])
     inputs = [
-        ("Reference total GMV for mix examples", 1_000_000, "€ / year", "Turns percentage savings into €", "Editable illustrative total"),
+        ("Reference total GMV for mix examples", PORTFOLIO_GMV, "€ / year", "2027 portfolio projection used in sensitivity tables", "DK + Resto + Stores 12-month projection"),
         ("Current DK + resto commission", 0.25, "%", "Partner baseline", "Commercial current rate"),
         ("Current Stores commission", 0.12, "%", "Partner baseline", "Bolt couriers minimum rate"),
         ("Growth DK + resto commission", 0.20, "%", "After €33k Stores GMV / month", "Scenario 1"),
@@ -114,6 +116,38 @@ def build() -> None:
     ws.set_column("C:C", 16)
     ws.set_column("D:E", 34)
 
+    # Projection base: the exact user-provided 12-month table.
+    ws = wb.add_worksheet("Projection base")
+    ws.hide_gridlines(2)
+    ws.merge_range("A1:F1", "Historical 12-month base and 2027 projection", fmt["title"])
+    ws.merge_range("A3:F3", "2027 projection is set to 100% of the provided 12-month DK, Resto and Stores base. All sensitivity sheets use this portfolio GMV as their default.", fmt["note"])
+    ws.write_row("A5", ["Metric", "Dark Kitchen", "Resto", "Stores", "Portfolio", "Source / treatment"], fmt["header"])
+    projection = [
+        ("Historical delivered orders", 56_959, 1_931, 50_400, PORTFOLIO_ORDERS, "Provided DK/resto calculator"),
+        ("Historical GMV", 1_029_023.57, 34_036.47, STORES_GMV, PORTFOLIO_GMV, "Provided DK/resto calculator"),
+        ("Historical eater-fee revenue", 115_473.31, 3_810.16, STORES_EATER, 216_051.47, "Provided DK/resto calculator"),
+        ("Historical commission revenue", 207_245.02, 7_668.47, 120_960.00, 335_873.49, "Provided DK/resto calculator"),
+        ("Historical direct costs before DI", 185_586.06, 6_495.05, STORES_DIRECT, 363_479.82356, "Provided DK/resto calculator"),
+        ("Historical CP L1", 137_132.27, 4_983.58, 46_330.28644, 188_446.13644, "Provided DK/resto calculator"),
+        ("Historical demand incentives", 99_019.71, 2_001.89, STORES_DI, 129_749.60, "Provided DK/resto calculator"),
+        ("Historical CP L2", 38_112.56, 2_981.70, 17_602.28644, 58_696.54644, "Provided DK/resto calculator"),
+        ("2027 volume multiplier", 1.0, 1.0, 1.0, 1.0, "Historical × volume multiplier"),
+        ("2027 projected orders", 56_959, 1_931, 50_400, PORTFOLIO_ORDERS, "Historical × volume multiplier"),
+        ("2027 projected GMV", 1_029_023.57, 34_036.47, STORES_GMV, PORTFOLIO_GMV, "Historical × volume multiplier"),
+        ("2027 projected eater fees", 115_473.31, 3_810.16, STORES_EATER, 216_051.47, "Historical × volume multiplier"),
+        ("2027 projected direct costs", 185_586.06, 6_495.05, STORES_DIRECT, 363_479.82356, "Historical × volume multiplier"),
+        ("2027 projected existing DI", 99_019.71, 2_001.89, STORES_DI, 129_749.60, "Historical × volume multiplier"),
+    ]
+    for row, (metric, dk, resto, stores, portfolio, source) in enumerate(projection, 6):
+        ws.write(row - 1, 0, metric, fmt["label"])
+        is_rate = "multiplier" in metric
+        number_format = fmt["pct"] if is_rate else (fmt["num"] if "orders" in metric.lower() else fmt["eur"])
+        ws.write_row(row - 1, 1, [dk, resto, stores, portfolio], number_format)
+        ws.write(row - 1, 5, source, fmt["text"])
+    ws.set_column("A:A", 34)
+    ws.set_column("B:E", 18)
+    ws.set_column("F:F", 36)
+
     # Mix matrix
     ws = wb.add_worksheet("Mix matrix")
     ws.hide_gridlines(2)
@@ -126,8 +160,8 @@ def build() -> None:
         "Growth commission\n€", "Shared commission\n€", "Read-out",
     ]
     ws.write_row("A5", headers, fmt["header"])
-    shares = [0.10, 0.25, 0.40, 0.50, 0.60, 0.75, 0.90]
-    total = 1_000_000
+    shares = [STORES_GMV / PORTFOLIO_GMV, 0.10, 0.25, 0.40, 0.50, 0.60, 0.75, 0.90]
+    total = PORTFOLIO_GMV
     for row, store_share in enumerate(shares, 6):
         dk_share = 1 - store_share
         current = dk_share * 0.25 + store_share * 0.12
@@ -170,7 +204,7 @@ def build() -> None:
     ]
     ws.write_row("A5", headers, fmt["header"])
     row = 6
-    total = 1_000_000
+    total = PORTFOLIO_GMV
     for store_share in [0.25, 0.50, 0.75, 0.90]:
         for stores_rate in [0.12, 0.13, 0.14, 0.15, 0.16]:
             dk_share = 1 - store_share
