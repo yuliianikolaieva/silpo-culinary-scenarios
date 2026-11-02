@@ -148,6 +148,52 @@ def build() -> None:
     ws.set_column("B:E", 18)
     ws.set_column("F:F", 36)
 
+    # One-line comparison of weighted commission for every named scenario.
+    ws = wb.add_worksheet("Scenario summary")
+    ws.hide_gridlines(2)
+    ws.merge_range("A1:J1", "Scenario summary — weighted average commission", fmt["title"])
+    ws.merge_range("A3:J3", "Weighted commission = (DK + resto GMV × DK/resto rate + Stores GMV × Stores rate) / total portfolio GMV. Default mix comes from the 2027 projection base.", fmt["note"])
+    headers = [
+        "Scenario", "DK + resto\nrate", "Stores\nrate", "DK + resto\nGMV share", "Stores\nGMV share",
+        "Weighted\ncommission", "Commission\nrevenue", "Saving vs\n25% / 12%", "Saving vs\n20% / 12%", "Commercial read-out",
+    ]
+    ws.write_row("A5", headers, fmt["header"])
+    scenarios = [
+        ("Current baseline", 0.25, 0.12, "Reference"),
+        ("Growth step", 0.20, 0.12, "€33k Stores GMV / month"),
+        ("Shared rate", 0.16, 0.16, "The 16% test"),
+        ("DK/resto 16% + Stores 12%", 0.16, 0.12, "Lowest Stores-rate test"),
+        ("DK/resto 16% + Stores 13%", 0.16, 0.13, "Stores rate +1 p.p."),
+        ("DK/resto 16% + Stores 14%", 0.16, 0.14, "Stores rate +2 p.p."),
+        ("DK/resto 16% + Stores 15%", 0.16, 0.15, "Stores rate +3 p.p."),
+        ("DK/resto 16% + Stores 16%", 0.16, 0.16, "Equivalent to shared rate"),
+    ]
+    portfolio = PORTFOLIO_GMV
+    dk_share = DK_RESTO_GMV / portfolio
+    store_share = STORES_GMV / portfolio
+    baseline_rate = dk_share * 0.25 + store_share * 0.12
+    growth_rate = dk_share * 0.20 + store_share * 0.12
+    for row, (name, dk_rate, stores_rate, readout) in enumerate(scenarios, 6):
+        weighted = dk_share * dk_rate + store_share * stores_rate
+        commission = portfolio * weighted
+        vs_baseline = portfolio * (baseline_rate - weighted)
+        vs_growth = portfolio * (growth_rate - weighted)
+        ws.write(row - 1, 0, name, fmt["text"])
+        ws.write(row - 1, 1, dk_rate, fmt["input_pct"])
+        ws.write(row - 1, 2, stores_rate, fmt["input_pct"])
+        ws.write_formula(row - 1, 3, "=Inputs!$B$25/Inputs!$B$5", fmt["pct"], dk_share)
+        ws.write_formula(row - 1, 4, "=Inputs!$B$16/Inputs!$B$5", fmt["pct"], store_share)
+        ws.write_formula(row - 1, 5, f"=B{row}*D{row}+C{row}*E{row}", fmt["pct"], weighted)
+        ws.write_formula(row - 1, 6, f"=F{row}*Inputs!$B$5", fmt["eur"], commission)
+        ws.write_formula(row - 1, 7, f"=($F$6-F{row})*Inputs!$B$5", fmt["green_eur"] if vs_baseline >= 0 else fmt["bad_eur"], vs_baseline)
+        ws.write_formula(row - 1, 8, f"=($F$7-F{row})*Inputs!$B$5", fmt["green_eur"] if vs_growth >= 0 else fmt["bad_eur"], vs_growth)
+        ws.write(row - 1, 9, readout, fmt["text"])
+    ws.merge_range("A15:J15", f"At the current projected mix — {dk_share:.1%} DK + resto / {store_share:.1%} Stores — the Growth step (20% / 12%) is {growth_rate:.2%}; shared 16% is {weighted:.2%}. The mix, not only the headline rate, determines whether the partner saves.", fmt["amber"])
+    ws.set_column("A:A", 31)
+    ws.set_column("B:F", 15)
+    ws.set_column("G:I", 18)
+    ws.set_column("J:J", 31)
+
     # Mix matrix
     ws = wb.add_worksheet("Mix matrix")
     ws.hide_gridlines(2)
