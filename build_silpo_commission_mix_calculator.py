@@ -151,48 +151,54 @@ def build() -> None:
     # One-line comparison of weighted commission for every named scenario.
     ws = wb.add_worksheet("Scenario summary")
     ws.hide_gridlines(2)
-    ws.merge_range("A1:J1", "Scenario summary — weighted average commission", fmt["title"])
-    ws.merge_range("A3:J3", "Weighted commission = (DK + resto GMV × DK/resto rate + Stores GMV × Stores rate) / total portfolio GMV. Default mix comes from the 2027 projection base.", fmt["note"])
+    ws.merge_range("A1:N1", "Scenario summary — weighted average commission", fmt["title"])
+    ws.merge_range("A3:N3", "Weighted commission = (DK + resto GMV × DK/resto rate + Stores GMV × Stores rate) / scenario portfolio GMV. Each scenario has its own GMV base.", fmt["note"])
     headers = [
-        "Scenario", "DK + resto\nrate", "Stores\nrate", "DK + resto\nGMV share", "Stores\nGMV share",
-        "Weighted\ncommission", "Commission\nrevenue", "Saving vs\n25% / 12%", "Saving vs\n20% / 12%", "Commercial read-out",
+        "Scenario", "DK + resto\nrate", "Stores\nrate", "DK\nGMV", "Resto\nGMV", "Stores\nGMV", "Portfolio\nGMV",
+        "DK + resto\nGMV share", "Stores\nGMV share", "Weighted\ncommission", "Commission\nrevenue",
+        "Saving vs\n25% / 12%", "Saving vs\n20% / 12%", "Commercial read-out",
     ]
     ws.write_row("A5", headers, fmt["header"])
     scenarios = [
-        ("Current baseline", 0.25, 0.12, "Reference"),
-        ("Growth step", 0.20, 0.12, "€33k Stores GMV / month"),
-        ("Shared rate", 0.16, 0.16, "The 16% test"),
-        ("DK/resto 16% + Stores 12%", 0.16, 0.12, "Lowest Stores-rate test"),
-        ("DK/resto 16% + Stores 13%", 0.16, 0.13, "Stores rate +1 p.p."),
-        ("DK/resto 16% + Stores 14%", 0.16, 0.14, "Stores rate +2 p.p."),
-        ("DK/resto 16% + Stores 15%", 0.16, 0.15, "Stores rate +3 p.p."),
-        ("DK/resto 16% + Stores 16%", 0.16, 0.16, "Equivalent to shared rate"),
+        ("Current baseline", 0.25, 0.12, 1_029_023.57, 34_036.47, 407_500.00, "DK 2026 RR + Stores launch plan"),
+        ("Growth step", 0.20, 0.12, 1_029_023.57, 34_036.47, 407_500.00, "DK 2026 RR + €407.5k Stores"),
+        ("Shared rate", 0.16, 0.16, 1_029_023.57, 34_036.47, 852_768.00, "DK 2026 RR + €852.8k Stores"),
+        ("DK/resto 16% + Stores 12%", 0.16, 0.12, 1_029_023.57, 34_036.47, 852_768.00, "Lowest Stores-rate test"),
+        ("DK/resto 16% + Stores 13%", 0.16, 0.13, 1_029_023.57, 34_036.47, 852_768.00, "Stores rate +1 p.p."),
+        ("DK/resto 16% + Stores 14%", 0.16, 0.14, 1_029_023.57, 34_036.47, 852_768.00, "Stores rate +2 p.p."),
+        ("DK/resto 16% + Stores 15%", 0.16, 0.15, 1_029_023.57, 34_036.47, 852_768.00, "Stores rate +3 p.p."),
+        ("DK/resto 16% + Stores 16%", 0.16, 0.16, 1_029_023.57, 34_036.47, 852_768.00, "Equivalent to shared rate"),
     ]
-    portfolio = PORTFOLIO_GMV
-    dk_share = DK_RESTO_GMV / portfolio
-    store_share = STORES_GMV / portfolio
-    baseline_rate = dk_share * 0.25 + store_share * 0.12
-    growth_rate = dk_share * 0.20 + store_share * 0.12
-    for row, (name, dk_rate, stores_rate, readout) in enumerate(scenarios, 6):
+    for row, (name, dk_rate, stores_rate, dk_gmv, resto_gmv, stores_gmv, readout) in enumerate(scenarios, 6):
+        dk_resto_gmv = dk_gmv + resto_gmv
+        portfolio = dk_resto_gmv + stores_gmv
+        dk_share = dk_resto_gmv / portfolio
+        store_share = stores_gmv / portfolio
         weighted = dk_share * dk_rate + store_share * stores_rate
         commission = portfolio * weighted
-        vs_baseline = portfolio * (baseline_rate - weighted)
-        vs_growth = portfolio * (growth_rate - weighted)
+        vs_baseline = dk_resto_gmv * 0.25 + stores_gmv * 0.12 - commission
+        vs_growth = dk_resto_gmv * 0.20 + stores_gmv * 0.12 - commission
         ws.write(row - 1, 0, name, fmt["text"])
         ws.write(row - 1, 1, dk_rate, fmt["input_pct"])
         ws.write(row - 1, 2, stores_rate, fmt["input_pct"])
-        ws.write_formula(row - 1, 3, "=Inputs!$B$25/Inputs!$B$5", fmt["pct"], dk_share)
-        ws.write_formula(row - 1, 4, "=Inputs!$B$16/Inputs!$B$5", fmt["pct"], store_share)
-        ws.write_formula(row - 1, 5, f"=B{row}*D{row}+C{row}*E{row}", fmt["pct"], weighted)
-        ws.write_formula(row - 1, 6, f"=F{row}*Inputs!$B$5", fmt["eur"], commission)
-        ws.write_formula(row - 1, 7, f"=($F$6-F{row})*Inputs!$B$5", fmt["green_eur"] if vs_baseline >= 0 else fmt["bad_eur"], vs_baseline)
-        ws.write_formula(row - 1, 8, f"=($F$7-F{row})*Inputs!$B$5", fmt["green_eur"] if vs_growth >= 0 else fmt["bad_eur"], vs_growth)
-        ws.write(row - 1, 9, readout, fmt["text"])
-    ws.merge_range("A15:J15", f"At the current projected mix — {dk_share:.1%} DK + resto / {store_share:.1%} Stores — the Growth step (20% / 12%) is {growth_rate:.2%}; shared 16% is {weighted:.2%}. The mix, not only the headline rate, determines whether the partner saves.", fmt["amber"])
+        ws.write(row - 1, 3, dk_gmv, fmt["input_eur"])
+        ws.write(row - 1, 4, resto_gmv, fmt["input_eur"])
+        ws.write(row - 1, 5, stores_gmv, fmt["input_eur"])
+        ws.write_formula(row - 1, 6, f"=SUM(D{row}:F{row})", fmt["eur"], portfolio)
+        ws.write_formula(row - 1, 7, f"=(D{row}+E{row})/G{row}", fmt["pct"], dk_share)
+        ws.write_formula(row - 1, 8, f"=F{row}/G{row}", fmt["pct"], store_share)
+        ws.write_formula(row - 1, 9, f"=B{row}*H{row}+C{row}*I{row}", fmt["pct"], weighted)
+        ws.write_formula(row - 1, 10, f"=J{row}*G{row}", fmt["eur"], commission)
+        ws.write_formula(row - 1, 11, f"=(D{row}+E{row})*Inputs!$B$6+F{row}*Inputs!$B$7-K{row}", fmt["green_eur"] if vs_baseline >= 0 else fmt["bad_eur"], vs_baseline)
+        ws.write_formula(row - 1, 12, f"=(D{row}+E{row})*Inputs!$B$8+F{row}*Inputs!$B$9-K{row}", fmt["green_eur"] if vs_growth >= 0 else fmt["bad_eur"], vs_growth)
+        ws.write(row - 1, 13, readout, fmt["text"])
+    ws.merge_range("A15:N15", "GMV is scenario-specific: Current baseline and Growth use DK 2026 RR + €407.5k Stores; Shared rate and the alternative rates use DK 2026 RR + €852.8k Stores. Savings compare rates on the same scenario GMV.", fmt["amber"])
     ws.set_column("A:A", 31)
-    ws.set_column("B:F", 15)
-    ws.set_column("G:I", 18)
-    ws.set_column("J:J", 31)
+    ws.set_column("B:C", 13)
+    ws.set_column("D:G", 16)
+    ws.set_column("H:J", 15)
+    ws.set_column("K:M", 18)
+    ws.set_column("N:N", 31)
 
     # Mix matrix
     ws = wb.add_worksheet("Mix matrix")
