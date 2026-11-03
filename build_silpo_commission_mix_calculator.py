@@ -148,57 +148,75 @@ def build() -> None:
     ws.set_column("B:E", 18)
     ws.set_column("F:F", 36)
 
-    # One-line comparison of weighted commission for every named scenario.
+    # Unified partner/Bolt view. Source-scenario values are taken from the
+    # "Scenarios" tab of Silpo_2027_DK_Resto_Stores_PnL_Calculator (6).xlsx.
     ws = wb.add_worksheet("Scenario summary")
     ws.hide_gridlines(2)
-    ws.merge_range("A1:N1", "Scenario summary — weighted average commission", fmt["title"])
-    ws.merge_range("A3:N3", "Weighted commission = (DK + resto GMV × DK/resto rate + Stores GMV × Stores rate) / scenario portfolio GMV. Each scenario has its own GMV base.", fmt["note"])
+    ws.merge_range("A1:S1", "Scenario summary — partner saving and Bolt CP L1 / CP L2", fmt["title"])
+    ws.merge_range("A3:S3", "Source rows replicate the supplied Scenarios tab. The rows “Stores rate test” hold DK/resto GMV and rate at the shared-16% base, then reduce Stores commission from 16% to 5%.", fmt["note"])
     headers = [
-        "Scenario", "DK + resto\nrate", "Stores\nrate", "DK\nGMV", "Resto\nGMV", "Stores\nGMV", "Portfolio\nGMV",
-        "DK + resto\nGMV share", "Stores\nGMV share", "Weighted\ncommission", "Commission\nrevenue",
-        "Saving vs\n25% / 12%", "Saving vs\n20% / 12%", "Commercial read-out",
+        "Scenario", "Type", "DK\nrate", "Resto\nrate", "Stores\nrate", "DK\nGMV", "Resto\nGMV", "Stores\nGMV",
+        "Portfolio\nGMV", "Weighted\ncommission", "Commission\nrevenue", "Eater fees", "Direct costs",
+        "CP L1", "CP L1\n%", "Existing DI", "CP L2", "CP L2\n%", "Partner saving\nvs current",
     ]
     ws.write_row("A5", headers, fmt["header"])
-    scenarios = [
-        ("Current baseline", 0.25, 0.12, 1_029_023.57, 34_036.47, 407_500.00, "DK 2026 RR + Stores launch plan"),
-        ("Growth step", 0.20, 0.12, 1_029_023.57, 34_036.47, 407_500.00, "DK 2026 RR + €407.5k Stores"),
-        ("Shared rate", 0.16, 0.16, 1_029_023.57, 34_036.47, 852_768.00, "DK 2026 RR + €852.8k Stores"),
-        ("DK/resto 16% + Stores 12%", 0.16, 0.12, 1_029_023.57, 34_036.47, 852_768.00, "Lowest Stores-rate test"),
-        ("DK/resto 16% + Stores 13%", 0.16, 0.13, 1_029_023.57, 34_036.47, 852_768.00, "Stores rate +1 p.p."),
-        ("DK/resto 16% + Stores 14%", 0.16, 0.14, 1_029_023.57, 34_036.47, 852_768.00, "Stores rate +2 p.p."),
-        ("DK/resto 16% + Stores 15%", 0.16, 0.15, 1_029_023.57, 34_036.47, 852_768.00, "Stores rate +3 p.p."),
-        ("DK/resto 16% + Stores 16%", 0.16, 0.16, 1_029_023.57, 34_036.47, 852_768.00, "Equivalent to shared rate"),
+
+    source_scenarios = [
+        ("Current effective rates", 0.2013996822, 0.2253015662, 0.16, 852_768.00, 216_051.47, 363_478.8236, 129_749.60),
+        ("Tier 1 · launch", 0.25, 0.25, 0.12, 427_800.00, 178_054.67, 296_178.0150, 118_469.30),
+        ("Tier 2 · €33k stores GMV / month", 0.225, 0.225, 0.12, 427_800.00, 178_054.67, 296_178.0150, 118_469.30),
+        ("Tier 3a · step-down to 16%", 0.18, 0.18, 0.12, 852_768.00, 216_051.47, 363_478.8236, 129_749.60),
+        ("Tier 3a · 12m DK/resto 16%", 0.16, 0.16, 0.14, 852_768.00, 216_051.47, 363_478.8236, 129_749.60),
+        ("Tier 3b · step to shared 16%", 0.18, 0.18, 0.14, 852_768.00, 216_051.47, 363_478.8236, 129_749.60),
+        ("Tier 3b · 12m shared 16%", 0.16, 0.16, 0.16, 852_768.00, 216_051.47, 363_478.8236, 129_749.60),
     ]
-    for row, (name, dk_rate, stores_rate, dk_gmv, resto_gmv, stores_gmv, readout) in enumerate(scenarios, 6):
-        dk_resto_gmv = dk_gmv + resto_gmv
-        portfolio = dk_resto_gmv + stores_gmv
-        dk_share = dk_resto_gmv / portfolio
-        store_share = stores_gmv / portfolio
-        weighted = dk_share * dk_rate + store_share * stores_rate
-        commission = portfolio * weighted
-        vs_baseline = dk_resto_gmv * 0.25 + stores_gmv * 0.12 - commission
-        vs_growth = dk_resto_gmv * 0.20 + stores_gmv * 0.12 - commission
+    scenarios = [(name, "Source · Scenarios", dk, resto, stores, store_gmv, eater, direct, di)
+                 for name, dk, resto, stores, store_gmv, eater, direct, di in source_scenarios]
+    scenarios += [
+        (f"Stores rate test · {rate:.0%}", "Test · DK/resto fixed 16%", 0.16, 0.16, rate,
+         STORES_GMV, 216_051.47, 363_478.8236, 129_749.60)
+        for rate in [0.16, 0.15, 0.14, 0.13, 0.12, 0.11, 0.10, 0.09, 0.08, 0.07, 0.06, 0.05]
+    ]
+    baseline_commission = 351_356.37
+    for row, (name, scenario_type, dk_rate, resto_rate, stores_rate, stores_gmv, eater, direct, di) in enumerate(scenarios, 6):
+        dk_gmv = 1_029_023.57
+        resto_gmv = 34_036.47
+        portfolio = dk_gmv + resto_gmv + stores_gmv
+        commission = dk_gmv * dk_rate + resto_gmv * resto_rate + stores_gmv * stores_rate
+        weighted = commission / portfolio
+        cpl1 = commission + eater - direct
+        cpl2 = cpl1 - di
+        partner_saving = baseline_commission - commission
         ws.write(row - 1, 0, name, fmt["text"])
-        ws.write(row - 1, 1, dk_rate, fmt["input_pct"])
-        ws.write(row - 1, 2, stores_rate, fmt["input_pct"])
-        ws.write(row - 1, 3, dk_gmv, fmt["input_eur"])
-        ws.write(row - 1, 4, resto_gmv, fmt["input_eur"])
-        ws.write(row - 1, 5, stores_gmv, fmt["input_eur"])
-        ws.write_formula(row - 1, 6, f"=SUM(D{row}:F{row})", fmt["eur"], portfolio)
-        ws.write_formula(row - 1, 7, f"=(D{row}+E{row})/G{row}", fmt["pct"], dk_share)
-        ws.write_formula(row - 1, 8, f"=F{row}/G{row}", fmt["pct"], store_share)
-        ws.write_formula(row - 1, 9, f"=B{row}*H{row}+C{row}*I{row}", fmt["pct"], weighted)
-        ws.write_formula(row - 1, 10, f"=J{row}*G{row}", fmt["eur"], commission)
-        ws.write_formula(row - 1, 11, f"=(D{row}+E{row})*Inputs!$B$6+F{row}*Inputs!$B$7-K{row}", fmt["green_eur"] if vs_baseline >= 0 else fmt["bad_eur"], vs_baseline)
-        ws.write_formula(row - 1, 12, f"=(D{row}+E{row})*Inputs!$B$8+F{row}*Inputs!$B$9-K{row}", fmt["green_eur"] if vs_growth >= 0 else fmt["bad_eur"], vs_growth)
-        ws.write(row - 1, 13, readout, fmt["text"])
-    ws.merge_range("A15:N15", "GMV is scenario-specific: Current baseline and Growth use DK 2026 RR + €407.5k Stores; Shared rate and the alternative rates use DK 2026 RR + €852.8k Stores. Savings compare rates on the same scenario GMV.", fmt["amber"])
-    ws.set_column("A:A", 31)
-    ws.set_column("B:C", 13)
-    ws.set_column("D:G", 16)
-    ws.set_column("H:J", 15)
-    ws.set_column("K:M", 18)
-    ws.set_column("N:N", 31)
+        ws.write(row - 1, 1, scenario_type, fmt["text"])
+        ws.write(row - 1, 2, dk_rate, fmt["input_pct"])
+        ws.write(row - 1, 3, resto_rate, fmt["input_pct"])
+        ws.write(row - 1, 4, stores_rate, fmt["input_pct"])
+        ws.write(row - 1, 5, dk_gmv, fmt["input_eur"])
+        ws.write(row - 1, 6, resto_gmv, fmt["input_eur"])
+        ws.write(row - 1, 7, stores_gmv, fmt["input_eur"])
+        ws.write_formula(row - 1, 8, f"=SUM(F{row}:H{row})", fmt["eur"], portfolio)
+        ws.write_formula(row - 1, 9, f"=(F{row}*C{row}+G{row}*D{row}+H{row}*E{row})/I{row}", fmt["pct"], weighted)
+        ws.write_formula(row - 1, 10, f"=F{row}*C{row}+G{row}*D{row}+H{row}*E{row}", fmt["eur"], commission)
+        ws.write(row - 1, 11, eater, fmt["eur"])
+        ws.write(row - 1, 12, direct, fmt["eur"])
+        ws.write_formula(row - 1, 13, f"=K{row}+L{row}-M{row}", fmt["green_eur"] if cpl1 >= 0 else fmt["bad_eur"], cpl1)
+        ws.write_formula(row - 1, 14, f"=N{row}/I{row}", fmt["green_pct"] if cpl1 >= 0 else fmt["bad_pct"], cpl1 / portfolio)
+        ws.write(row - 1, 15, di, fmt["eur"])
+        ws.write_formula(row - 1, 16, f"=N{row}-P{row}", fmt["green_eur"] if cpl2 >= 0 else fmt["bad_eur"], cpl2)
+        ws.write_formula(row - 1, 17, f"=Q{row}/I{row}", fmt["green_pct"] if cpl2 >= 0 else fmt["bad_pct"], cpl2 / portfolio)
+        ws.write_formula(row - 1, 18, f"=$K$6-K{row}", fmt["green_eur"] if partner_saving >= 0 else fmt["bad_eur"], partner_saving)
+    ws.autofilter(4, 0, 4 + len(scenarios), 18)
+    ws.freeze_panes(5, 5)
+    ws.merge_range("A26:S26", "How to read: source rows are the supplied calculator’s Scenarios tab. The Stores rate test keeps DK/resto GMV unchanged at the 2026 annual run-rate and increases Stores GMV independently to €852.8k. CP L1 and CP L2 are Bolt results before any new DF, Bolt+, free-delivery or launch investment.", fmt["amber"])
+    ws.set_column("A:A", 34)
+    ws.set_column("B:B", 25)
+    ws.set_column("C:E", 12)
+    ws.set_column("F:I", 16)
+    ws.set_column("J:J", 14)
+    ws.set_column("K:Q", 16)
+    ws.set_column("R:R", 14)
+    ws.set_column("S:S", 18)
 
     # Mix matrix
     ws = wb.add_worksheet("Mix matrix")
