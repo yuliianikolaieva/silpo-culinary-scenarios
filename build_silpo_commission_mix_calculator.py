@@ -172,7 +172,11 @@ def build() -> None:
         ("Tier 3b · step to shared 16%", 0.18, 0.18, 0.14, 852_768.00, 216_051.47, 363_478.8236, 129_749.60, 0, 0, 3_000, 11_200),
         ("Tier 3b · 12m shared 16%", 0.16, 0.16, 0.16, 852_768.00, 216_051.47, 363_478.8236, 129_749.60, 0, 0, 3_000, 11_200),
     ]
-    scenarios = [(name, "Source · Scenarios", dk, resto, stores, store_gmv, eater, direct, di, df, plus, pl, in_kind)
+    scenarios = [
+        ("Current · DK + resto only", "Actual · 2026 RR", 0.2013996822, 0.2253015662, 0.00,
+         0, 119_283.47, 192_081.11, 101_021.60, 0, 0, 0, 0),
+    ]
+    scenarios += [(name, "Source · Scenarios", dk, resto, stores, store_gmv, eater, direct, di, df, plus, pl, in_kind)
                  for name, dk, resto, stores, store_gmv, eater, direct, di, df, plus, pl, in_kind in source_scenarios]
     scenarios += [
         (f"Stores rate test · {rate:.0%}", "Test · DK/resto fixed 16%", 0.16, 0.16, rate,
@@ -214,7 +218,10 @@ def build() -> None:
         ws.write_formula(row - 1, 21, f"=Q{row}-SUM(S{row}:U{row})", fmt["green_eur"] if final_cpl2 >= 0 else fmt["bad_eur"], final_cpl2)
         ws.write_formula(row - 1, 22, f"=V{row}/I{row}", fmt["green_pct"] if final_cpl2 >= 0 else fmt["bad_pct"], final_cpl2 / portfolio)
         ws.write(row - 1, 23, in_kind, fmt["eur"])
-        ws.write_formula(row - 1, 24, f"=$K$6-K{row}", fmt["green_eur"] if partner_saving >= 0 else fmt["bad_eur"], partner_saving)
+        if stores_gmv == 0:
+            ws.write(row - 1, 24, "—", fmt["label"])
+        else:
+            ws.write_formula(row - 1, 24, f"=351356.37-K{row}", fmt["green_eur"] if partner_saving >= 0 else fmt["bad_eur"], partner_saving)
     ws.autofilter(4, 0, 4 + len(scenarios), 24)
     ws.freeze_panes(5, 5)
     ws.merge_range("A26:Y26", "How to read: source rows are the supplied calculator’s Scenarios tab. Existing DI is historical promo already inside the unit economics. DF Stores, Bolt+ and Public launch cash are additional investments ON TOP, deducted after CP L2 to show Final CP L2. The Stores rate test keeps DK/resto GMV unchanged at the 2026 annual run-rate and increases Stores GMV independently to €852.8k.", fmt["amber"])
