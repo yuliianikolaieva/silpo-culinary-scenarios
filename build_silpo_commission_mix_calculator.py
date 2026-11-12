@@ -235,6 +235,77 @@ def build() -> None:
     ws.set_column("S:X", 16)
     ws.set_column("Y:Y", 18)
 
+    # Same scenarios as the summary, split into DK + resto, Stores and Portfolio.
+    ws = wb.add_worksheet("Scenario by vertical")
+    ws.hide_gridlines(2)
+    ws.merge_range("A1:S1", "Scenario by vertical — DK + resto, Stores and Portfolio P&L", fmt["title"])
+    ws.merge_range("A3:S3", "Use this tab together with Scenario summary: every scenario is split between DK + resto and Stores. Existing DI is already in unit economics; DF, Bolt+, Public Launch and in-kind are shown separately.", fmt["note"])
+    headers = [
+        "Scenario", "Type", "Vertical", "Commission\nrate", "GMV", "Commission", "Eater fees", "Direct costs",
+        "CP L1", "CP L1\n%", "Existing DI", "CP L2", "DF Stores\n(on top)", "Bolt+\n(on top)",
+        "Public launch\ncash (on top)", "Final CP L2", "Final\n%", "In-kind\n(on top)", "Note",
+    ]
+    ws.write_row("A5", headers, fmt["header"])
+    row = 6
+    for name, scenario_type, dk_rate, resto_rate, stores_rate, stores_gmv, eater, direct, di, df, plus, pl, in_kind in scenarios:
+        dk_gmv = 1_029_023.57
+        resto_gmv = 34_036.47
+        dk_resto_gmv = dk_gmv + resto_gmv
+        portfolio_gmv = dk_resto_gmv + stores_gmv
+        store_factor = stores_gmv / STORES_GMV if stores_gmv else 0
+        stores_eater = STORES_EATER * store_factor
+        stores_direct = STORES_DIRECT * store_factor
+        stores_di = STORES_DI * store_factor
+        dk_resto_eater = eater - stores_eater
+        dk_resto_direct = direct - stores_direct
+        dk_resto_di = di - stores_di
+        dk_resto_commission = dk_gmv * dk_rate + resto_gmv * resto_rate
+        stores_commission = stores_gmv * stores_rate
+
+        verticals = [
+            ("DK + resto", dk_resto_commission / dk_resto_gmv, dk_resto_gmv, dk_resto_commission,
+             dk_resto_eater, dk_resto_direct, dk_resto_di, 0, min(plus, 14_615.45), "DK and Resto combined"),
+            ("Stores", stores_rate, stores_gmv, stores_commission, stores_eater, stores_direct, stores_di,
+             df, max(plus - 14_615.45, 0), "Stores; DF applies here"),
+            ("Portfolio", (dk_resto_commission + stores_commission) / portfolio_gmv, portfolio_gmv,
+             dk_resto_commission + stores_commission, eater, direct, di, df, plus, "Total of both verticals"),
+        ]
+        for vertical, rate, gmv, commission, eater_fees, direct_costs, existing_di, df_vertical, plus_vertical, note in verticals:
+            pl_vertical = pl * gmv / portfolio_gmv if portfolio_gmv else 0
+            in_kind_vertical = in_kind * gmv / portfolio_gmv if portfolio_gmv else 0
+            cpl1 = commission + eater_fees - direct_costs
+            cpl2 = cpl1 - existing_di
+            final = cpl2 - df_vertical - plus_vertical - pl_vertical
+            ws.write(row - 1, 0, name, fmt["text"])
+            ws.write(row - 1, 1, scenario_type, fmt["text"])
+            ws.write(row - 1, 2, vertical, fmt["text"])
+            ws.write(row - 1, 3, rate, fmt["input_pct"] if vertical != "Portfolio" else fmt["pct"])
+            ws.write(row - 1, 4, gmv, fmt["eur"])
+            ws.write_formula(row - 1, 5, f"=E{row}*D{row}", fmt["eur"], commission)
+            ws.write(row - 1, 6, eater_fees, fmt["eur"])
+            ws.write(row - 1, 7, direct_costs, fmt["eur"])
+            ws.write_formula(row - 1, 8, f"=F{row}+G{row}-H{row}", fmt["green_eur"] if cpl1 >= 0 else fmt["bad_eur"], cpl1)
+            ws.write_formula(row - 1, 9, f"=I{row}/E{row}", fmt["green_pct"] if cpl1 >= 0 else fmt["bad_pct"], cpl1 / gmv if gmv else 0)
+            ws.write(row - 1, 10, existing_di, fmt["eur"])
+            ws.write_formula(row - 1, 11, f"=I{row}-K{row}", fmt["green_eur"] if cpl2 >= 0 else fmt["bad_eur"], cpl2)
+            ws.write(row - 1, 12, df_vertical, fmt["eur"])
+            ws.write(row - 1, 13, plus_vertical, fmt["eur"])
+            ws.write(row - 1, 14, pl_vertical, fmt["eur"])
+            ws.write_formula(row - 1, 15, f"=L{row}-SUM(M{row}:O{row})", fmt["green_eur"] if final >= 0 else fmt["bad_eur"], final)
+            ws.write_formula(row - 1, 16, f"=P{row}/E{row}", fmt["green_pct"] if final >= 0 else fmt["bad_pct"], final / gmv if gmv else 0)
+            ws.write(row - 1, 17, in_kind_vertical, fmt["eur"])
+            ws.write(row - 1, 18, note, fmt["text"])
+            row += 1
+        row += 1
+    ws.autofilter(4, 0, row - 2, 18)
+    ws.freeze_panes(5, 3)
+    ws.set_column("A:A", 34)
+    ws.set_column("B:B", 25)
+    ws.set_column("C:C", 14)
+    ws.set_column("D:D", 12)
+    ws.set_column("E:R", 16)
+    ws.set_column("S:S", 26)
+
     # Mix matrix
     ws = wb.add_worksheet("Mix matrix")
     ws.hide_gridlines(2)
