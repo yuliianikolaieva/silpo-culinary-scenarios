@@ -247,7 +247,8 @@ def build() -> None:
     ]
     ws.write_row("A5", headers, fmt["header"])
     row = 6
-    for name, scenario_type, dk_rate, resto_rate, stores_rate, stores_gmv, eater, direct, di, df, plus, pl, in_kind in scenarios:
+    for scenario_index, (name, scenario_type, dk_rate, resto_rate, stores_rate, stores_gmv, eater, direct, di, df, plus, pl, in_kind) in enumerate(scenarios):
+        summary_row = 6 + scenario_index
         dk_gmv = 1_029_023.57
         resto_gmv = 34_036.47
         dk_resto_gmv = dk_gmv + resto_gmv
@@ -276,11 +277,20 @@ def build() -> None:
             cpl1 = commission + eater_fees - direct_costs
             cpl2 = cpl1 - existing_di
             final = cpl2 - df_vertical - plus_vertical - pl_vertical
+            if vertical == "DK + resto":
+                rate_formula = f"=('Scenario summary'!C{summary_row}*'Scenario summary'!F{summary_row}+'Scenario summary'!D{summary_row}*'Scenario summary'!G{summary_row})/E{row}"
+                gmv_formula = f"='Scenario summary'!F{summary_row}+'Scenario summary'!G{summary_row}"
+            elif vertical == "Stores":
+                rate_formula = f"='Scenario summary'!E{summary_row}"
+                gmv_formula = f"='Scenario summary'!H{summary_row}"
+            else:
+                rate_formula = f"='Scenario summary'!J{summary_row}"
+                gmv_formula = f"='Scenario summary'!I{summary_row}"
             ws.write(row - 1, 0, name, fmt["text"])
             ws.write(row - 1, 1, scenario_type, fmt["text"])
             ws.write(row - 1, 2, vertical, fmt["text"])
-            ws.write(row - 1, 3, rate, fmt["input_pct"] if vertical != "Portfolio" else fmt["pct"])
-            ws.write(row - 1, 4, gmv, fmt["eur"])
+            ws.write_formula(row - 1, 3, rate_formula, fmt["input_pct"] if vertical != "Portfolio" else fmt["pct"], rate)
+            ws.write_formula(row - 1, 4, gmv_formula, fmt["eur"], gmv)
             ws.write_formula(row - 1, 5, f"=E{row}*D{row}", fmt["eur"], commission)
             ws.write(row - 1, 6, eater_fees, fmt["eur"])
             ws.write(row - 1, 7, direct_costs, fmt["eur"])
